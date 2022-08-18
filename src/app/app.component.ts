@@ -6,5 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'jewellery';
+  isCollapsed = false;
+  width = 60;
+  title: string  = "";
+  updateMenuInlineCollapsed(e: any): void{
+    console.log(e);
+    this.isCollapsed = e;
+  }
+
+  log(s: string): void {
+    console.log('click dropdown button');
+  }
 }

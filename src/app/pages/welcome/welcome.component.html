@@ -1,0 +1,79 @@
+<form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your username!">
+      <nz-input-group nzPrefixIcon="user">
+        <input type="text" nz-input formControlName="userName" placeholder="Username" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your Password!">
+      <nz-input-group nzPrefixIcon="lock">
+        <input type="password" nz-input formControlName="password" placeholder="Password" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <div nz-row class="login-form-margin">
+    <div nz-col [nzSpan]="12">
+    </div>
+    <div nz-col [nzSpan]="12">
+      <a class="login-form-forgot">Forgot password</a>
+    </div>
+  </div>
+  <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
+  Or
+  <a>register now!</a>
+</form>
+
+<div style="background: rgb(190, 200, 200);padding: 26px 16px 16px;">
+  <button nz-button nzType="primary" nzGhost>Primary</button>
+  <button nz-button nzType="default" nzGhost>Default</button>
+  <button nz-button nzType="dashed" nzGhost>Dashed</button>
+  <a nz-button nzType="link" nzGhost>Link</a>
+</div>
+
+
+<nz-result
+  nzStatus="success"
+  nzTitle="Successfully Purchased Cloud Server ECS!"
+  nzSubTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
+>
+  <div nz-result-extra>
+    <button nz-button nzType="primary">Go Console</button>
+    <button nz-button>Buy Again</button>
+  </div>
+
+</nz-result>
+
+<div style="background: rgb(190, 200, 200);padding: 26px 16px 16px;">
+  <button nz-button nzType="primary" nzDanger>Primary</button>
+  <button nz-button nzType="default" nzDanger>Default</button>
+  <button nz-button nzType="dashed" nzDanger>Dashed</button>
+  <button nz-button nzType="text" nzDanger>Text</button>
+  <a nz-button nzType="link" nzDanger>Link</a>
+
+</div>
+
+<nz-result
+  nzStatus="success"
+  nzTitle="Successfully Purchased Cloud Server ECS!"
+  nzSubTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
+>
+  <div nz-result-extra>
+    <button nz-button nzType="primary">Go Console</button>
+    <button nz-button>Buy Again</button>
+  </div>
+
+</nz-result>
+
+<nz-result
+  nzStatus="success"
+  nzTitle="Successfully Purchased Cloud Server ECS!"
+  nzSubTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
+>
+  <div nz-result-extra>
+    <button nz-button nzType="primary">Go Console</button>
+    <button nz-button>Buy Again</button>
+  </div>
+
+</nz-result>
