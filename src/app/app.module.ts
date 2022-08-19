@@ -9,12 +9,11 @@ import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import {NzFormModule} from "ng-zorro-antd/form";
-import {NzBreadcrumb} from "ng-zorro-antd/breadcrumb/breadcrumb";
 import {NzBreadCrumbModule} from "ng-zorro-antd/breadcrumb";
 import {NzIconModule} from "ng-zorro-antd/icon";
 import { NzConfig, NZ_CONFIG } from 'ng-zorro-antd/core/config';
@@ -23,6 +22,7 @@ import {NzDividerModule} from "ng-zorro-antd/divider";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzDropDownModule} from "ng-zorro-antd/dropdown";
 import {NzListModule} from "ng-zorro-antd/list";
+import {NzToolTipModule} from "ng-zorro-antd/tooltip";
 registerLocaleData(zh);
 const ngZorroConfig: NzConfig = {
   // 注意组件名称没有 nz 前缀
@@ -50,6 +50,7 @@ const ngZorroConfig: NzConfig = {
     NzButtonModule,
     NzDropDownModule,
     NzListModule,
+    NzToolTipModule,
     // NoopAnimationsModule,
   ],
   providers: [

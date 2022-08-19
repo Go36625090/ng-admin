@@ -3,9 +3,7 @@
 /*@import "~ng-zorro-antd/ng-zorro-antd.dark.css";*/
 /*@import "~ng-zorro-antd/ng-zorro-antd.compact.css";*/
 /*@import "~ng-zorro-antd/ng-zorro-antd.aliyun.css";*/
-@import "~ng-zorro-antd/ng-zorro-antd.variable.min.css";
-*{
-}
+/*@import "~ng-zorro-antd/ng-zorro-antd.variable.min.css";*/
 html, body{
   overflow: hidden;
 }

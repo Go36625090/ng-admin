@@ -1,0 +1,67 @@
+- Generating browser application bundles (phase: setup)...
+node:internal/process/promises:246
+          triggerUncaughtException(err, true /* fromPromise */);
+          ^
+
+HookWebpackError: Transform failed with 1 error:
+error: Invalid version: "15.2-15.3"
+    at makeWebpackError (/Users/liping/WebstormProjects/jewellery/node_modules/webpack/lib/HookWebpackError.js:48:9)
+    at /Users/liping/WebstormProjects/jewellery/node_modules/webpack/lib/Compilation.js:3055:12
+    at eval (eval at create (/Users/liping/WebstormProjects/jewellery/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:54:1)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+-- inner error --
+Error: Transform failed with 1 error:
+error: Invalid version: "15.2-15.3"
+    at failureErrorWithLog (/Users/liping/WebstormProjects/jewellery/node_modules/esbuild/lib/main.js:1493:15)
+    at /Users/liping/WebstormProjects/jewellery/node_modules/esbuild/lib/main.js:1282:29
+    at /Users/liping/WebstormProjects/jewellery/node_modules/esbuild/lib/main.js:629:9
+    at handleIncomingPacket (/Users/liping/WebstormProjects/jewellery/node_modules/esbuild/lib/main.js:726:9)
+    at Socket.readFromStdout (/Users/liping/WebstormProjects/jewellery/node_modules/esbuild/lib/main.js:596:7)
+    at Socket.emit (node:events:390:28)
+    at addChunk (node:internal/streams/readable:315:12)
+    at readableAddChunk (node:internal/streams/readable:289:9)
+    at Socket.Readable.push (node:internal/streams/readable:228:10)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:199:23) {
+  details: 'caused by plugins in Compilation.hooks.processAssets\n' +
+    'Error: Transform failed with 1 error:\n' +
+    'error: Invalid version: "15.2-15.3"\n' +
+    '    at failureErrorWithLog (/Users/liping/WebstormProjects/jewellery/node_modules/esbuild/lib/main.js:1493:15)\n' +
+    '    at /Users/liping/WebstormProjects/jewellery/node_modules/esbuild/lib/main.js:1282:29\n' +
+    '    at /Users/liping/WebstormProjects/jewellery/node_modules/esbuild/lib/main.js:629:9\n' +
+    '    at handleIncomingPacket (/Users/liping/WebstormProjects/jewellery/node_modules/esbuild/lib/main.js:726:9)\n' +
+    '    at Socket.readFromStdout (/Users/liping/WebstormProjects/jewellery/node_modules/esbuild/lib/main.js:596:7)\n' +
+    '    at Socket.emit (node:events:390:28)\n' +
+    '    at addChunk (node:internal/streams/readable:315:12)\n' +
+    '    at readableAddChunk (node:internal/streams/readable:289:9)\n' +
+    '    at Socket.Readable.push (node:internal/streams/readable:228:10)\n' +
+    '    at Pipe.onStreamRead (node:internal/stream_base_commons:199:23)',
+  module: undefined,
+  loc: undefined,
+  hideStack: true,
+  chunk: undefined,
+  file: undefined,
+  hook: 'Compilation.hooks.processAssets',
+  error: Error: Transform failed with 1 error:
+  error: Invalid version: "15.2-15.3"
+      at failureErrorWithLog (/Users/liping/WebstormProjects/jewellery/node_modules/esbuild/lib/main.js:1493:15)
+      at /Users/liping/WebstormProjects/jewellery/node_modules/esbuild/lib/main.js:1282:29
+      at /Users/liping/WebstormProjects/jewellery/node_modules/esbuild/lib/main.js:629:9
+      at handleIncomingPacket (/Users/liping/WebstormProjects/jewellery/node_modules/esbuild/lib/main.js:726:9)
+      at Socket.readFromStdout (/Users/liping/WebstormProjects/jewellery/node_modules/esbuild/lib/main.js:596:7)
+      at Socket.emit (node:events:390:28)
+      at addChunk (node:internal/streams/readable:315:12)
+      at readableAddChunk (node:internal/streams/readable:289:9)
+      at Socket.Readable.push (node:internal/streams/readable:228:10)
+      at Pipe.onStreamRead (node:internal/stream_base_commons:199:23) {
+    errors: [
+      {
+        detail: undefined,
+        location: null,
+        notes: [],
+        pluginName: '',
+        text: 'Invalid version: "15.2-15.3"'
+      }
+    ],
+    warnings: []
+  }
+}

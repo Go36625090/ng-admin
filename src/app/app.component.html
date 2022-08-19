@@ -4,6 +4,7 @@
       <img width="32" height="32" alt="logo" src="./assets/img/logo.svg">
       <span>NG jewellery</span>
     </div>
+
     <!--    <ul nz-menu nzTheme="dark" nzMode="horizontal">-->
     <!--      <li nz-menu-item [nzSelected]="false">-->
     <!--        <i nz-icon nzType="question-circle" nzTheme="outline"></i>-->
@@ -24,6 +25,11 @@
     <!--      </nz-dropdown-menu>-->
     <!--    </ul>-->
     <ul  nz-menu nzMode="horizontal">
+      <li>
+        <span class="header-trigger" (click)="toggleTheme()">
+          <i class="trigger" nz-icon nzType="skin" nzTheme="outline"></i>
+        </span>
+      </li>
       <li>
         <a  nz-dropdown [nzDropdownMenu]="menuHelp" nzPlacement="bottomRight">
           <i nz-icon nzType="question-circle" nzTheme="outline"></i>
@@ -91,17 +97,16 @@
     </ul>
 
   </nz-header>
-  <nz-layout id="container">
-    <nz-sider nzBreakpoint="xs" nzTheme="light" nzCollapsible [nzCollapsedWidth]="width"
+  <nz-layout class="right-layout">
+    <nz-sider nzBreakpoint="md" nzTheme="light" nzCollapsible [nzCollapsedWidth]="width"
               (nzCollapsedChange)="updateMenuInlineCollapsed($event)">
       <ul nz-menu nzMode="inline">
-        <li nz-submenu nzTitle="Team" nzIcon="team">
-          <ul>
-            <li nz-menu-item>Team 1</li>
-            <li nz-menu-item>Team 2</li>
-          </ul>
+        <li nz-menu-item>
+          <i nz-icon nzType="home" nzTheme="outline"></i>
+          <span>Home</span>
         </li>
-        <li nz-submenu nzTitle="Team" nzIcon="team">
+        <nz-divider class="compact"></nz-divider>
+        <li nz-submenu nzTitle="Dashboard" nzIcon="dashboard">
           <ul>
             <li nz-menu-item>Team 1</li>
             <li nz-menu-item>Team 2</li>
@@ -127,6 +132,13 @@
           </ul>
         </li>
         <li nz-submenu nzTitle="Team" nzIcon="team">
+          <ul>
+            <li nz-menu-item>Team 1</li>
+            <li nz-menu-item>Team 2</li>
+          </ul>
+        </li>
+        <nz-divider></nz-divider>
+        <li nz-submenu nzTitle="Settings" nzIcon="setting">
           <ul>
             <li nz-menu-item>Team 1</li>
             <li nz-menu-item>Team 2</li>
@@ -136,8 +148,19 @@
     </nz-sider>
     <nz-content>
       <div class="inner-content">
+        <nz-breadcrumb>
+          <nz-breadcrumb-item>Home</nz-breadcrumb-item>
+          <nz-breadcrumb-item>
+            <a>Application List</a>
+          </nz-breadcrumb-item>
+          <nz-breadcrumb-item>An Application</nz-breadcrumb-item>
+        </nz-breadcrumb>
         <nz-divider></nz-divider>
-        <router-outlet></router-outlet>
+        <router-outlet
+          (activate)='onActivate($event)'
+          (deactivate)='onDeactivate($event)'
+          (attach)='onAttach($event)'
+          (detach)='onDetach($event)'></router-outlet>
       </div>
     </nz-content>
   </nz-layout>
