@@ -4,31 +4,11 @@
       <img width="32" height="32" alt="logo" src="./assets/img/logo.svg">
       <span>NG jewellery</span>
     </div>
-
-    <!--    <ul nz-menu nzTheme="dark" nzMode="horizontal">-->
-    <!--      <li nz-menu-item [nzSelected]="false">-->
-    <!--        <i nz-icon nzType="question-circle" nzTheme="outline"></i>-->
-    <!--      </li>-->
-    <!--      <li nz-menu-item [nzSelected]="false">-->
-    <!--        <i nz-icon nzType="mail" nzTheme="outline"></i>-->
-    <!--      </li>-->
-    <!--      <li nz-menu-item nz-dropdown [nzDropdownMenu]="menu2" nzPlacement="bottomRight">-->
-    <!--        <i nz-icon nzType="user" nzTheme="outline"></i>-->
-    <!--      </li>-->
-    <!--      <nz-dropdown-menu #menu2="nzDropdownMenu">-->
-    <!--        <ul nz-menu style="width: 180px">-->
-    <!--          <li nz-menu-item>profiles</li>-->
-    <!--          <li nz-menu-item>settings</li>-->
-    <!--          <li nz-menu-divider></li>-->
-    <!--          <li nz-menu-item>logout</li>-->
-    <!--        </ul>-->
-    <!--      </nz-dropdown-menu>-->
-    <!--    </ul>-->
-    <ul  nz-menu nzMode="horizontal">
+    <ul  nz-menu>
       <li>
-        <span class="header-trigger" (click)="toggleTheme()">
+        <a class="header-trigger" (click)="toggleTheme()" href="javascript://">
           <i class="trigger" nz-icon nzType="skin" nzTheme="outline"></i>
-        </span>
+        </a>
       </li>
       <li>
         <a  nz-dropdown [nzDropdownMenu]="menuHelp" nzPlacement="bottomRight">
@@ -98,7 +78,7 @@
 
   </nz-header>
   <nz-layout class="right-layout">
-    <nz-sider nzBreakpoint="md" nzTheme="light" nzCollapsible [nzCollapsedWidth]="width"
+    <nz-sider nzBreakpoint="md"  nzCollapsible [nzCollapsedWidth]="width"
               (nzCollapsedChange)="updateMenuInlineCollapsed($event)">
       <ul nz-menu nzMode="inline">
         <li nz-menu-item>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-welcome',
@@ -8,8 +8,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
-  validateForm!: FormGroup;
+  constructor(private fb: UntypedFormBuilder) { }
+  validateForm!: UntypedFormGroup;
 
   submitForm(): void {
     if (this.validateForm.valid) {

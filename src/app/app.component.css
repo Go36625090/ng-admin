@@ -1,12 +1,11 @@
 
 .logo {
   width: 200px;
-  height: 40px;
-  margin: 5px;
   float: left;
   color: whitesmoke;
-  line-height: 40px;
+  line-height: 64px;
   font-size: 14px;
+  padding: 0 5px;
 }
 
 .logo:before{
@@ -18,16 +17,13 @@
   content: "";
 }
 .logo img{
-  margin-bottom: 10px;
 }
 .logo span{
-  margin-inline: 5px;
   display: inline-block;
-
+  margin: 0 5px;
 }
 nz-header{
   font-size: 0;
-  height: 50px;
   background-color: #262F3E;
   box-sizing: border-box;
   width: 100%;
@@ -37,15 +33,15 @@ nz-header{
 
 nz-header [nz-menu] {
   display: flex;
-  text-align: right;
-  flex: 0 100;
-  flex-direction: row-reverse;
+  justify-content: end;
   background-color: transparent;
-  color: whitesmoke;
-  line-height: 50px;
+  line-height: 64px;
+  height: 64px;
+  padding: 0 5px;
+  text-align: right;
 }
+
 nz-header [nz-menu] li{
-  line-height: 40px;
   width: 50px;
   font-size: 15px;
   padding: 5px;
@@ -67,6 +63,7 @@ nz-sider {
 
 nz-sider [nz-menu]{
   border-right: none;
+  height: 100vh;
 }
 nz-sider .compact{
   padding: 0;
@@ -76,7 +73,7 @@ nz-sider .compact{
 .right-layout{
   right: 0;
   bottom: 0;
-  top: 50px;
+  top: 64px;
   left: 0;
   transform: none !important;
   height: auto;
@@ -87,7 +84,7 @@ nz-content{
 }
 
 .inner-content{
-  background-color: #fff;
+  /*background-color: #fff;*/
   margin: 1px;
   padding: 20px;
 }
