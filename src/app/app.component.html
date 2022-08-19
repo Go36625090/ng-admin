@@ -91,8 +91,8 @@
     </ul>
 
   </nz-header>
-  <div id="container">
-    <nz-sider nzBreakpoint="md" nzTheme="light" nzCollapsible [nzCollapsedWidth]="width"
+  <nz-layout id="container">
+    <nz-sider nzBreakpoint="xs" nzTheme="light" nzCollapsible [nzCollapsedWidth]="width"
               (nzCollapsedChange)="updateMenuInlineCollapsed($event)">
       <ul nz-menu nzMode="inline">
         <li nz-submenu nzTitle="Team" nzIcon="team">
@@ -134,11 +134,11 @@
         </li>
       </ul>
     </nz-sider>
-    <nz-content [ngStyle]="{'left': isCollapsed? width+'px': '200px'}">
+    <nz-content>
       <div class="inner-content">
-        {{width}}
+        <nz-divider></nz-divider>
         <router-outlet></router-outlet>
       </div>
     </nz-content>
-  </div>
+  </nz-layout>
 </nz-layout>

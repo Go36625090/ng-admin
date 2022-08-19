@@ -88,35 +88,23 @@ nz-sider {
 }
 
 #container{
-  position: absolute;
   right: 0;
   bottom: 0;
   top: 50px;
   left: 0;
   transform: none !important;
   height: auto;
+  position: absolute;
 }
 
 nz-breadcrumb {
 }
 
 nz-content{
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 200px;
-  overflow-y: auto;
-  overflow-x: hidden;
+  width: auto !important;
+  overflow: scroll;
   border-left: whitesmoke solid 1px;
-
-}
-
-nz-content.isCollapsed{
-  left: 60px;
-}
-.inner-content{
-  padding: 5px;
+  line-height: inherit;
 }
 
 nz-footer {
