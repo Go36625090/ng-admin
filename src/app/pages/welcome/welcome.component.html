@@ -1,3 +1,6 @@
+<nz-divider></nz-divider>
+<span >The author is {gender, select, male {male} female {female} other {other}}</span>
+<nz-divider></nz-divider>
 <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
   <nz-form-item>
     <nz-form-control nzErrorTip="Please input your username!">
@@ -20,10 +23,11 @@
       <a class="login-form-forgot">Forgot password</a>
     </div>
   </div>
-  <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
+  <button  nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
   Or
   <a>register now!</a>
 </form>
+<nz-pagination [nzPageIndex]="2" [nzTotal]="500" nzShowQuickJumper></nz-pagination>
 
 <div style="background: rgb(190, 200, 200);padding: 26px 16px 16px;">
   <button nz-button nzType="primary" nzGhost>Primary</button>
@@ -34,6 +38,7 @@
 
 
 <nz-result
+  i18n-nzSubTitle
   nzStatus="success"
   nzTitle="Successfully Purchased Cloud Server ECS!"
   nzSubTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
@@ -77,3 +82,6 @@
   </div>
 
 </nz-result>
+
+<nz-divider></nz-divider>
+the end

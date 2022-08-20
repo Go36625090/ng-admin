@@ -13,10 +13,18 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "zh": "src/locale/messages.zh_CN.xlf"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": true,
+            "i18nMissingTranslation": "error",
             "outputPath": "dist/jewellery",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -47,7 +55,22 @@
             "scripts": []
           },
           "configurations": {
+            "zh": {
+              "localize": ["zh"]
+            },
+            "zh-dev": {
+              "localize": ["zh"],
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            },
             "production": {
+              "aot": true,
+              "buildOptimizer": true,
+              "optimization": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -81,7 +104,16 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "jewellery:build"
+          },
           "configurations": {
+            "zh": {
+              "browserTarget": "jewellery:build:zh"
+            },
+            "zh-dev": {
+              "browserTarget": "jewellery:build:zh-dev"
+            },
             "production": {
               "browserTarget": "jewellery:build:production"
             },

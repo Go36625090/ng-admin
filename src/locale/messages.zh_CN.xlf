@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+       <trans-unit id="5866254605255506989" datatype="html">
+            <source>English</source>
+            <target>英语</target>
+            <context-group purpose="location">
+              <context context-type="sourcefile">src/app/app.component.html</context>
+              <context context-type="linenumber">22</context>
+            </context-group>
+          </trans-unit>
+          <trans-unit id="2524703772136247897" datatype="html">
+            <source>Simplified Chinese</source>
+            <target>简体中文</target>
+            <context-group purpose="location">
+              <context context-type="sourcefile">src/app/app.component.html</context>
+              <context context-type="linenumber">27</context>
+            </context-group>
+          </trans-unit>
+          <trans-unit id="4733307402565258070" datatype="html">
+            <source>Documents</source>
+            <target>帮助文档</target>
+            <context-group purpose="location">
+              <context context-type="sourcefile">src/app/app.component.html</context>
+              <context context-type="linenumber">41</context>
+            </context-group>
+          </trans-unit>
+          <trans-unit id="8429316238784832901" datatype="html">
+            <source>Feedback</source>
+            <target>问题反馈</target>
+            <context-group purpose="location">
+              <context context-type="sourcefile">src/app/app.component.html</context>
+              <context context-type="linenumber">46</context>
+            </context-group>
+          </trans-unit>
+          <trans-unit id="8983597411711235800" datatype="html">
+            <source>System message</source>
+            <target>系统消息</target>
+            <context-group purpose="location">
+              <context context-type="sourcefile">src/app/app.component.html</context>
+              <context context-type="linenumber">61</context>
+            </context-group>
+          </trans-unit>
+          <trans-unit id="7811063622954631713" datatype="html">
+            <source>Notice message</source>
+            <target>通知信息</target>
+            <context-group purpose="location">
+              <context context-type="sourcefile">src/app/app.component.html</context>
+              <context context-type="linenumber">65</context>
+            </context-group>
+          </trans-unit>
+          <trans-unit id="3823567271177486054" datatype="html">
+            <source>Alert messages</source>
+            <target>告警信息</target>
+            <context-group purpose="location">
+              <context context-type="sourcefile">src/app/app.component.html</context>
+              <context context-type="linenumber">70</context>
+            </context-group>
+          </trans-unit>
+          <trans-unit id="4915431133669985304" datatype="html">
+            <source>Profile</source>
+            <target>概述</target>
+            <context-group purpose="location">
+              <context context-type="sourcefile">src/app/app.component.html</context>
+              <context context-type="linenumber">84</context>
+            </context-group>
+          </trans-unit>
+          <trans-unit id="4930506384627295710" datatype="html">
+            <source>Settings</source>
+            <target>设置</target>
+            <context-group purpose="location">
+              <context context-type="sourcefile">src/app/app.component.html</context>
+              <context context-type="linenumber">88</context>
+            </context-group>
+          </trans-unit>
+          <trans-unit id="3797778920049399855" datatype="html">
+            <source>Logout</source>
+            <target>退出</target>
+            <context-group purpose="location">
+              <context context-type="sourcefile">src/app/app.component.html</context>
+              <context context-type="linenumber">93</context>
+            </context-group>
+          </trans-unit>
+      <trans-unit id="3560311772637911677" datatype="html">
+        <source>The author is <x id="ICU" equiv-text="{gender, select, male {male} female {female} other {other}}" xid="7670372064920373295"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/welcome/welcome.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7670372064920373295" datatype="html">
+        <source>{VAR_SELECT, select, male {male} female {female} other {other}}</source>
+        <target>{VAR_SELECT, select, male {男性} female {女性} other {other}}</target>
+        <context-group purpose="location">male
+          <context context-type="sourcefile">src/app/pages/welcome/welcome.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2336550011721758066" datatype="html">
+        <source>Log in</source>
+         <target>登录</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/welcome/welcome.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2359376199577276137" datatype="html">
+        <source>Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait.</source>
+        <target>订单号：2017182818828182881云服务器配置需要1-5分钟，请稍候。</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/welcome/welcome.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/welcome/welcome.component.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3218762333631681304" datatype="html">
+        <source>:this message starts with a colon (:)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/welcome/welcome.component.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <note priority="1" from="description">some description</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

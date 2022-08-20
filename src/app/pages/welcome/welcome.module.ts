@@ -10,15 +10,19 @@ import {FormGroupDirective, FormsModule, ReactiveFormsModule} from "@angular/for
 import {NzResultModule} from "ng-zorro-antd/result";
 import {NzCollapseModule} from "ng-zorro-antd/collapse";
 import {NzIconModule} from "ng-zorro-antd/icon";
+import {NzPaginationModule} from "ng-zorro-antd/pagination";
+import {NzDividerModule} from "ng-zorro-antd/divider";
 
 
 @NgModule({
   imports: [WelcomeRoutingModule, FormsModule,
     ReactiveFormsModule, NzButtonModule, NzFormModule,
     NzFormPatchModule, NzResultModule, NzCollapseModule,
-    NzIconModule],
+    NzIconModule, NzPaginationModule, NzDividerModule],
   declarations: [WelcomeComponent],
   exports: [WelcomeComponent],
   providers: [NzFormDirective, FormGroupDirective]
 })
-export class WelcomeModule { }
+export class WelcomeModule {
+
+}

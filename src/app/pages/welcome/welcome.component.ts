@@ -7,6 +7,7 @@ import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
   styleUrls: ['./welcome.component.css']
 })
 export class WelcomeComponent implements OnInit {
+  gender: string = 'male';
 
   constructor(private fb: UntypedFormBuilder) { }
   validateForm!: UntypedFormGroup;

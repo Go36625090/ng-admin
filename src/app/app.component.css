@@ -1,94 +1,90 @@
 
-.logo {
-  width: 200px;
-  float: left;
-  color: whitesmoke;
-  line-height: 64px;
-  font-size: 14px;
-  padding: 0 5px;
-}
-
-.logo:before{
-  display: table;
-  content: "";
-}
-.logo:after{
-  display: table;
-  content: "";
-}
-.logo img{
-}
-.logo span{
-  display: inline-block;
-  margin: 0 5px;
-}
 nz-header{
   font-size: 0;
   background-color: #262F3E;
   box-sizing: border-box;
   width: 100%;
-  z-index: 999999;
   padding-right: 0;
+  display: flex;
+  flex: auto;
+  flex-direction: row;
+  align-items: baseline;
+  height: auto;
+  color: white;
+  position: fixed;
+  z-index: 1;
+}
+nz-header [nz-row]{
+  width: inherit;
+  background-color: inherit;
+}
+nz-header [nz-row] [nz-col]{
+  display: flex;
+  flex-direction: row;
+}
+
+@media (min-width: 768px) {
+  nz-header [nz-row] [nz-col].nz-col-right{
+    justify-content: flex-end;
+  }
 }
 
 nz-header [nz-menu] {
   display: flex;
-  justify-content: end;
+  flex-direction: row;
+  color: inherit;
   background-color: transparent;
+  border: none;
   line-height: 64px;
   height: 64px;
   padding: 0 5px;
   text-align: right;
+
 }
 
 nz-header [nz-menu] li{
-  width: 50px;
-  font-size: 15px;
-  padding: 5px;
+  min-width: 50px;
+  width: auto;
+  padding: 0 5px;
   text-align: center;
+  color: inherit;
 }
 nz-header [nz-menu] li a{
-  font-size: 18px;
-  color: whitesmoke;
+  color: inherit;
+  font-size: 16px;
+}
+
+.main-container{
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: auto;
+  position: absolute;
+  top: 128px;
+}
+@media (min-width: 768px) {
+  .main-container{
+    top: 64px;
+  }
 }
 nz-sider {
   position: relative;
-  width: 200px;
-  display: inline-block;
-  height: 100vh;
-  vertical-align: top;
-  overflow-y: auto;
-  overflow-x: hidden;
+}
+nz-sider .sider-content{
+  display: block;
+  height: 100%;
+  overflow: scroll;
 }
 
 nz-sider [nz-menu]{
-  border-right: none;
-  height: 100vh;
-}
-nz-sider .compact{
-  padding: 0;
-  margin: 0 0 24px;
+  min-height: 100%;
 }
 
-.right-layout{
-  right: 0;
-  bottom: 0;
-  top: 64px;
-  left: 0;
-  transform: none !important;
-  height: auto;
-  position: absolute;
-}
 nz-content{
+  position: relative;
   overflow: scroll;
 }
 
 .inner-content{
-  /*background-color: #fff;*/
-  margin: 1px;
-  padding: 20px;
-}
-
-nz-footer {
-  text-align: center;
+  padding: 24px;
 }

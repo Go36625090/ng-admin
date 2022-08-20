@@ -1,139 +1,175 @@
 <nz-layout class="layout">
   <nz-header>
-    <div class="logo">
-      <img width="32" height="32" alt="logo" src="./assets/img/logo.svg">
-      <span>NG jewellery</span>
-    </div>
-    <ul  nz-menu>
+    <div nz-row >
+      <div nz-col class="nz-col-left" [nzXs]="24" [nzSm]="6">
+        <ul nz-menu  nzMode="horizontal">
+          <li>
+            <a href="/">
+              <img width="32" height="32" alt="logo" src="./assets/img/logo.svg">
+            </a>
+          </li>
+          <li>
+            <span>NG jewellery</span>
+          </li>
+        </ul>
+      </div>
+      <div nz-col class="nz-col-right" [nzXs]="24" [nzSm]="18">
+        <ul nz-menu  nzMode="horizontal">
       <li>
         <a class="header-trigger" (click)="toggleTheme()" href="javascript://">
-          <i class="trigger" nz-icon nzType="skin" nzTheme="outline"></i>
+          <i class="trigger" nz-icon nzType="skin"></i>
         </a>
       </li>
       <li>
+        <a  nz-dropdown [nzDropdownMenu]="menuLang" (click)="showDefault()" nzPlacement="bottomRight">
+          <i nz-icon nzIconfont="icon-language"></i>
+        </a>
+        <nz-dropdown-menu #menuLang="nzDropdownMenu">
+          <ul nz-menu style="width: auto">
+            <li nz-menu-divider></li>
+            <li nz-menu-item (click)="switchLanguage('en_US')">
+              <i nz-icon nzType="question-circle"></i>
+              &nbsp;&nbsp;<span i18n>English</span>
+            </li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item (click)="switchLanguage('zh_CN')">
+              <i nz-icon nzType="highlight"></i>
+              &nbsp;&nbsp;<span i18n>Simplified Chinese</span>
+            </li>
+          </ul>
+        </nz-dropdown-menu>
+      </li>
+      <li>
         <a  nz-dropdown [nzDropdownMenu]="menuHelp" nzPlacement="bottomRight">
-          <i nz-icon nzType="question-circle" nzTheme="outline"></i>
+          <i nz-icon nzType="question-circle"></i>
         </a>
         <nz-dropdown-menu #menuHelp="nzDropdownMenu">
-          <ul nz-menu style="width: 160px">
+          <ul nz-menu >
             <li nz-menu-divider></li>
             <li nz-menu-item (click)="log('1st menu item')">
-              <i nz-icon nzType="question-circle" nzTheme="twotone"></i>
-              &nbsp;&nbsp;Documents
+              <i nz-icon nzType="question-circle"></i>
+              &nbsp;&nbsp;<span i18n>Documents</span>
             </li>
             <li nz-menu-divider></li>
             <li nz-menu-item (click)="log('1st menu item')">
-              <i nz-icon nzType="highlight" nzTheme="twotone"></i>
-              &nbsp;&nbsp;Feedback
+              <i nz-icon nzType="highlight"></i>
+              &nbsp;&nbsp;<span i18n>Feedback</span>
             </li>
           </ul>
         </nz-dropdown-menu>
       </li>
       <li>
         <a nz-dropdown [nzDropdownMenu]="menuMail" nzPlacement="bottomRight">
-          <i nz-icon nzType="mail" nzTheme="outline"></i>
+          <i nz-icon nzType="mail"></i>
         </a>
         <nz-dropdown-menu #menuMail="nzDropdownMenu">
-          <ul nz-menu style="width: 160px">
+          <ul nz-menu >
             <li nz-menu-divider></li>
 
             <li nz-menu-item (click)="log('1st menu item')">
-              <i nz-icon nzType="check-circle" nzTheme="twotone" nzTwotoneColor="#52c41a"></i>
-              &nbsp;&nbsp;System message
+              <i nz-icon nzType="check-circle" nzTwotoneColor="#52c41a"></i>
+              &nbsp;&nbsp;<span i18n>System message</span>
             </li>
             <li nz-menu-item (click)="log('1st menu item')">
-              <i nz-icon nzType="info-circle" nzTheme="twotone"></i>
-              &nbsp;&nbsp;Notice message
+              <i nz-icon nzType="info-circle"></i>
+              &nbsp;&nbsp;<span i18n>Notice message</span>
             </li>
             <li nz-menu-divider></li>
             <li nz-menu-item (click)="log('1st menu item')">
-              <i nz-icon nzType="warning" nzTwotoneColor="#faad14" nzTheme="twotone"></i>
-              &nbsp;&nbsp;Alert messages
+              <i nz-icon nzType="warning" nzTwotoneColor="#faad14"></i>
+              &nbsp;&nbsp;&nbsp;<span i18n>Alert messages</span>
             </li>
           </ul>
         </nz-dropdown-menu>
       </li>
       <li>
         <a nz-dropdown [nzDropdownMenu]="menu" nzPlacement="bottomRight">
-          <i nz-icon nzType="user" nzTheme="outline"></i>
+          <i nz-icon nzType="user"></i>
         </a>
         <nz-dropdown-menu #menu="nzDropdownMenu">
-          <ul nz-menu style="width: 160px">
-            <li nz-menu-divider></li>
-
-            <li nz-menu-item (click)="log('1st menu item')">
-              <i nz-icon nzType="profile" nzTheme="outline"></i>
-              &nbsp;&nbsp;Profile</li>
-            <li nz-menu-item (click)="log('1st menu item')">
-              <i nz-icon nzType="setting" nzTheme="outline"></i>
-              &nbsp;&nbsp;Settings</li>
+          <ul nz-menu>
             <li nz-menu-divider></li>
             <li nz-menu-item (click)="log('1st menu item')">
-              <i nz-icon nzType="poweroff" nzTheme="outline" style="color: #e10f0f"></i>
-              &nbsp;&nbsp;Logout</li>
+              <i nz-icon nzType="profile"></i>
+              &nbsp;&nbsp;<span i18n>Profile</span>
+            </li>
+            <li nz-menu-item (click)="log('1st menu item')">
+              <i nz-icon nzType="setting"></i>
+              &nbsp;&nbsp;<span i18n>Settings</span>
+            </li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item (click)="log('1st menu item')">
+              <i nz-icon nzType="logout"></i>
+              &nbsp;&nbsp;<span i18n>Logout</span>
+            </li>
           </ul>
         </nz-dropdown-menu>
       </li>
     </ul>
+      </div>
+    </div>
 
   </nz-header>
-  <nz-layout class="right-layout">
+  <nz-layout class="main-container">
     <nz-sider nzBreakpoint="md"  nzCollapsible [nzCollapsedWidth]="width"
               (nzCollapsedChange)="updateMenuInlineCollapsed($event)">
-      <ul nz-menu nzMode="inline">
-        <li nz-menu-item>
-          <i nz-icon nzType="home" nzTheme="outline"></i>
-          <span>Home</span>
-        </li>
-        <nz-divider class="compact"></nz-divider>
+      <div class="sider-content">
+      <ul nz-menu nzMode="inline" nzTheme="light">
         <li nz-submenu nzTitle="Dashboard" nzIcon="dashboard">
           <ul>
-            <li nz-menu-item>Team 1</li>
-            <li nz-menu-item>Team 2</li>
+            <li nz-menu-item><i nz-icon nzType="pie-chart"></i>&nbsp;Team 1</li>
+            <li nz-menu-item><i nz-icon nzType="bar-chart"></i>&nbsp;Team 2</li>
           </ul>
         </li>
-        <nz-divider></nz-divider>
-        <li nz-submenu nzTitle="Team" nzIcon="team">
+        <nz-divider class="compact" style="margin-top: 0"></nz-divider>
+        <li nz-submenu nzTitle="Orders" nzIcon="ordered-list">
           <ul>
             <li nz-menu-item>Team 1</li>
             <li nz-menu-item>Team 2</li>
           </ul>
         </li>
-        <li nz-submenu nzTitle="Team" nzIcon="team">
+        <li nz-submenu nzTitle="Items" nzIcon="gift">
           <ul>
             <li nz-menu-item>Team 1</li>
             <li nz-menu-item>Team 2</li>
           </ul>
         </li>
-        <li nz-submenu nzTitle="Team" nzIcon="team">
+        <li nz-submenu nzTitle="Revenue" nzIcon="dollar-circle">
           <ul>
             <li nz-menu-item>Team 1</li>
             <li nz-menu-item>Team 2</li>
           </ul>
         </li>
-        <li nz-submenu nzTitle="Team" nzIcon="team">
+        <nz-divider class="compact"></nz-divider>
+        <li nz-submenu nzTitle="apartment" nzIcon="apartment">
           <ul>
             <li nz-menu-item>Team 1</li>
             <li nz-menu-item>Team 2</li>
           </ul>
         </li>
-        <nz-divider></nz-divider>
         <li nz-submenu nzTitle="Settings" nzIcon="setting">
           <ul>
             <li nz-menu-item>Team 1</li>
             <li nz-menu-item>Team 2</li>
           </ul>
         </li>
+        <nz-divider class="compact"></nz-divider>
+        <li
+          routerLink="/about"
+          nz-menu-item
+        >
+          <i nz-icon nzType="info-circle"></i>
+          <span>&nbsp;&nbsp;&nbsp;About</span>
+        </li>
       </ul>
+      </div>
     </nz-sider>
     <nz-content>
       <div class="inner-content">
-        <nz-breadcrumb>
-          <nz-breadcrumb-item>Home</nz-breadcrumb-item>
+        <nz-breadcrumb nzAutoGenerate="true">
           <nz-breadcrumb-item>
-            <a>Application List</a>
+            <a [routerLink]="['/']">Home</a>
           </nz-breadcrumb-item>
-          <nz-breadcrumb-item>An Application</nz-breadcrumb-item>
         </nz-breadcrumb>
         <nz-divider></nz-divider>
         <router-outlet
@@ -145,3 +181,22 @@
     </nz-content>
   </nz-layout>
 </nz-layout>
+<!--<nz-drawer-->
+<!--  [style]="'margin-top: 50px'"-->
+<!--  [nzSize]="size"-->
+<!--  [nzVisible]="visible"-->
+<!--  nzPlacement="right"-->
+<!--  [nzTitle]="title"-->
+<!--  [nzExtra]="extra"-->
+<!--&gt;-->
+<!--  <ng-container *nzDrawerContent>-->
+<!--    <p>Some contents...</p>-->
+<!--    <p>Some contents...</p>-->
+<!--    <p>Some contents...</p>-->
+<!--  </ng-container>-->
+<!--</nz-drawer>-->
+<!--<ng-template #extra>-->
+<!--  <button nz-button nzType="default" >Cancel</button>-->
+<!--  &nbsp;-->
+<!--  <button nz-button nzType="primary" >OK</button>-->
+<!--</ng-template>-->
