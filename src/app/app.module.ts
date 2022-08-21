@@ -29,6 +29,10 @@ registerLocaleData(en);
 registerLocaleData(zh);
 
 import {en_US, NZ_I18N, zh_CN } from "ng-zorro-antd/i18n";
+import {HttpClientInMemoryWebApiModule} from "angular-in-memory-web-api";
+import {InMemoryDataService} from "./service/in-memory-data.service";
+import {environment} from "../environments/environment";
+
 const ngZorroConfig: NzConfig = {
   // 注意组件名称没有 nz 前缀
   message: { nzTop: 120 },
@@ -59,7 +63,10 @@ const ngZorroConfig: NzConfig = {
     NzListModule,
     NzToolTipModule,
     NzDrawerModule,
-    // NoopAnimationsModule,
+    environment.production ?
+      [] : HttpClientInMemoryWebApiModule.forRoot(
+        InMemoryDataService,  {dataEncapsulation: false,  passThruUnknownUrl: true }
+      )
   ],
   providers: [
     { provide: NZ_CONFIG, useValue:  ngZorroConfig  },

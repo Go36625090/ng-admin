@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ThemeService} from "./theme.service";
+import {ThemeService} from "./service/theme.service";
 import { en_US, zh_CN, NzI18nService } from 'ng-zorro-antd/i18n';
 import {NzIconService} from "ng-zorro-antd/icon";
 @Component({
@@ -28,6 +28,7 @@ export class AppComponent {
   toggleTheme(): void {
     this.themeService.toggleTheme().then();
   }
+
   updateMenuInlineCollapsed(e: any): void{
     console.log(e);
     this.isCollapsed = e;

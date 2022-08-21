@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ApiService} from "../../service/api.service";
+import {UserService} from "../../service/user.service";
 
 @Component({
   selector: 'app-about',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private api: ApiService, private userService: UserService) { }
 
   ngOnInit(): void {
+    this.userService.getUsers()
+      .subscribe(heroes => console.log(heroes));
   }
-
 }
