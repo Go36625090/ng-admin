@@ -12,7 +12,9 @@ import {LOGIN_URL} from "../consts";
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor{
   constructor(private auth: TokenService, private logging: LoggingService,
-              @Inject(LOGIN_URL) private loginUrl: string ) {}
+              @Inject(LOGIN_URL) private loginUrl: string ) {
+
+  }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Get the auth token from the service.
     const authToken = this.auth.getAuthorizationToken();
@@ -45,13 +47,13 @@ export class AuthInterceptor implements HttpInterceptor{
             }
           },
           // Operation failed; error is an HttpErrorResponse
-          error: (error) => (this.logging.error(error.message))
+          error: (error) => (this.logging.bind(this).error(error.message))
         }),
         // Log when response observable either completes or errors
         finalize(() => {
           const elapsed = Date.now() - started;
           const msg = `${req.method} "${req.urlWithParams}" ${ok} in ${elapsed} ms.`;
-          this.logging.debug(msg);
+          this.logging._debug(msg);
         })
       );
   }

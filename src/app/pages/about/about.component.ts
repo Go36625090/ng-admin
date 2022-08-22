@@ -13,6 +13,6 @@ export class AboutComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getUsers()
-      .subscribe(heroes => console.log(heroes));
+      .subscribe((heroes: any) => heroes);
   }
 }

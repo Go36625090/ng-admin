@@ -33,8 +33,8 @@ export class WelcomeComponent implements OnInit {
 
     this.api.post('welcome.info.query',{})
       .subscribe({
-        next: (v) => console.log(v),
-        error: (e) => console.error(e),
+        next: (v: any) => console.log(v),
+        error: (e: any) => console.error(e),
         complete: () => console.info('complete')
       });
 

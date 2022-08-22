@@ -6,6 +6,7 @@ import {catchError, Observable, of, tap} from "rxjs";
 import {User} from "../models/user";
 import {LOGIN_URL} from "../consts";
 import {ActivatedRoute, Router} from "@angular/router";
+import {APIResponse} from "../api/response";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class UserService {
   constructor(private api: ApiService, private tokenService: TokenService,
               private http: HttpClient, @Inject(LOGIN_URL) private loginUrl: string,
               private router: Router, private route: ActivatedRoute) {
+
   }
 
   logout(){
@@ -25,12 +27,11 @@ export class UserService {
 
   login(){
     this.api.get('/login').subscribe({
-      next: (v) => {
-        console.log(v);
+      next: (v: APIResponse) => {
         this.router.navigateByUrl('/' ,
           { skipLocationChange: false } ).then(r => console.log(r));
       },
-      error: (e) => console.error(e),
+      error: (e: any) => console.error(e),
       complete: () => console.info('complete')
     })
   }
@@ -40,7 +41,7 @@ export class UserService {
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.heroesUrl)
       .pipe(
-        tap(_ => console.log('fetched heroes')),
+        // tap(_ => console.log('fetched heroes')),
         catchError(this.handleError<User[]>('getUsers', []))
       );
   }
