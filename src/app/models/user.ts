@@ -3,5 +3,5 @@ import {Permission} from "./permission";
 export interface User {
   id: number
   name: string
-  permissions: {[key: string]: Permission}
+  permissions?: {[key: string]: Permission}
 }

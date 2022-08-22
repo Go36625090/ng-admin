@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import {ThemeService} from "./service/theme.service";
 import { en_US, zh_CN, NzI18nService } from 'ng-zorro-antd/i18n';
 import {NzIconService} from "ng-zorro-antd/icon";
+import {UserService} from "./service/user.service";
+import {LoggingService} from "./service/logging.service";
+import {LoginComponent} from "./pages/user/login/login.component";
+import {ActivatedRoute, ActivatedRouteSnapshot} from "@angular/router";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,13 +13,21 @@ import {NzIconService} from "ng-zorro-antd/icon";
 })
 export class AppComponent {
   isCollapsed = false;
-  width = 60;
-
-  constructor(private themeService: ThemeService, private i18n: NzI18nService,
-              private iconService: NzIconService) {
+  singlePage = true;
+  constructor(private themeService: ThemeService,
+              private i18n: NzI18nService,
+              private iconService: NzIconService,
+              private userService: UserService,
+              private logging: LoggingService,
+              private router: ActivatedRoute) {
     this.iconService.fetchFromIconfont({
       scriptUrl: 'assets/scripts/icon-svg.js'
     });
+    this.singlePage = (router.outlet != 'primary');
+
+  }
+  logout(){
+    this.userService.logout();
   }
 
   switchLanguage(id: string) {
@@ -35,23 +47,6 @@ export class AppComponent {
   }
 
   log(s: string): void {
-    console.log('click dropdown button');
-  }
-
-  onActivate($event: any) {
-
-  }
-
-  onDeactivate($event: any) {
-
-  }
-
-  onAttach($event: any) {
-
-  }
-
-  onDetach($event: any) {
-
   }
 
   visible = false;
@@ -77,6 +72,20 @@ export class AppComponent {
 
   close(): void {
     this.visible = false;
+  }
+  onActivate($event: any) {
+    console.log()
+  }
+
+  onDeactivate($event: any) {
+
+  }
+
+  onAttach($event: any) {
+  }
+
+  onDetach($event: any) {
+
   }
 
 }

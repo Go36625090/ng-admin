@@ -1,0 +1,111 @@
+<nz-header>
+  <div nz-row >
+    <div nz-col class="nz-col-left" [nzXs]="24" [nzSm]="6">
+      <ul nz-menu  nzMode="horizontal">
+        <li>
+          <a style="display: block;" href="/">
+            <img width="36" height="36" alt="logo" src="./assets/img/logo.svg">
+          </a>
+        </li>
+        <li>
+          <span style="display: block;height: 64px;padding-top: 2px;">NG jewellery</span>
+        </li>
+      </ul>
+    </div>
+    <div nz-col class="nz-col-right" [nzXs]="24" [nzSm]="18">
+      <ul nz-menu  nzMode="horizontal">
+        <li>
+          <a class="header-trigger" (click)="toggleTheme()" href="javascript://">
+            <i class="trigger" nz-icon nzType="skin"></i>
+          </a>
+        </li>
+        <li>
+          <a  nz-dropdown [nzDropdownMenu]="menuLang"  nzPlacement="bottomRight">
+            <i nz-icon nzIconfont="icon-language"></i>
+          </a>
+          <nz-dropdown-menu #menuLang="nzDropdownMenu">
+            <ul nz-menu style="width: auto">
+              <li nz-menu-divider></li>
+              <li nz-menu-item (click)="switchLanguage('en_US')">
+                <i nz-icon nzType="question-circle"></i>
+                &nbsp;&nbsp;<span i18n>English</span>
+              </li>
+              <li nz-menu-divider></li>
+              <li nz-menu-item (click)="switchLanguage('zh_CN')">
+                <i nz-icon nzType="highlight"></i>
+                &nbsp;&nbsp;<span i18n>Simplified Chinese</span>
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </li>
+        <li>
+          <a  nz-dropdown [nzDropdownMenu]="menuHelp" nzPlacement="bottomRight">
+            <i nz-icon nzType="question-circle"></i>
+          </a>
+          <nz-dropdown-menu #menuHelp="nzDropdownMenu">
+            <ul nz-menu >
+              <li nz-menu-divider></li>
+              <li nz-menu-item (click)="log('1st menu item')">
+                <i nz-icon nzType="question-circle"></i>
+                &nbsp;&nbsp;<span i18n>Documents</span>
+              </li>
+              <li nz-menu-divider></li>
+              <li nz-menu-item (click)="log('1st menu item')">
+                <i nz-icon nzType="highlight"></i>
+                &nbsp;&nbsp;<span i18n>Feedback</span>
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </li>
+        <li>
+          <a nz-dropdown [nzDropdownMenu]="menuMail" nzPlacement="bottomRight">
+            <i nz-icon nzType="mail"></i>
+          </a>
+          <nz-dropdown-menu #menuMail="nzDropdownMenu">
+            <ul nz-menu >
+              <li nz-menu-divider></li>
+
+              <li nz-menu-item (click)="log('1st menu item')">
+                <i nz-icon nzType="check-circle" nzTwotoneColor="#52c41a"></i>
+                &nbsp;&nbsp;<span i18n>System message</span>
+              </li>
+              <li nz-menu-item (click)="log('1st menu item')">
+                <i nz-icon nzType="info-circle"></i>
+                &nbsp;&nbsp;<span i18n>Notice message</span>
+              </li>
+              <li nz-menu-divider></li>
+              <li nz-menu-item (click)="log('1st menu item')">
+                <i nz-icon nzType="warning" nzTwotoneColor="#faad14"></i>
+                &nbsp;&nbsp;&nbsp;<span i18n>Alert messages</span>
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </li>
+        <li>
+          <a nz-dropdown [nzDropdownMenu]="menu" nzPlacement="bottomRight">
+            <i nz-icon nzType="user"></i>
+          </a>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-menu-divider></li>
+              <li nz-menu-item (click)="log('1st menu item')">
+                <i nz-icon nzType="profile"></i>
+                &nbsp;&nbsp;<span i18n>Profile</span>
+              </li>
+              <li nz-menu-item (click)="log('1st menu item')">
+                <i nz-icon nzType="setting"></i>
+                &nbsp;&nbsp;<span i18n>Settings</span>
+              </li>
+              <li nz-menu-divider></li>
+              <li nz-menu-item (click)="logout()">
+                <i nz-icon nzType="logout"></i>
+                &nbsp;&nbsp;<span i18n>Logout</span>
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</nz-header>

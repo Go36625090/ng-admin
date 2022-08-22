@@ -13,4 +13,16 @@ export class TokenService {
   set token(value: string) {
     this._token = value;
   }
+
+  getAuthorizationToken(): string {
+    return "";
+  }
+
+  remove() {
+
+  }
+
+  removeAuthorizationToken() {
+
+  }
 }

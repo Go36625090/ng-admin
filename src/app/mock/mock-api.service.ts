@@ -1,15 +1,14 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {catchError, map, Observable} from "rxjs";
-
-import {APIService} from "../api";
 import {APIResponse} from "../api/response";
+import {APIService} from "../api";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService implements APIService{
+export class MockApiService implements APIService{
   private readonly api: string
 
   constructor(private http: HttpClient) {
@@ -20,7 +19,7 @@ export class ApiService implements APIService{
     return this.http.get<APIResponse>(this.toURI(path), {headers: headers})
       .pipe(catchError(this.handleError.bind(this)))
       .pipe(
-        map(res => ApiService.deserialize(res))
+        map(res => MockApiService.deserialize(res))
       );
   }
 
@@ -28,16 +27,16 @@ export class ApiService implements APIService{
     return this.http.post<APIResponse>(this.toURI(path), body, {headers: headers})
       .pipe(catchError(this.handleError.bind(this)))
       .pipe(
-        map(res => ApiService.deserialize(res))
+        map(res => MockApiService.deserialize(res))
       );
   }
 
   private toURI(p: string): string {
     if (!p.startsWith('http')) {
       if (!p.startsWith('/')){
-        return this.api + '/' +p;
+        return this.api + '/' + p.split('.').join('_')
       }
-      return this.api + p;
+      return this.api + p.split('.').join('_');
     }
     return p;
   }

@@ -1,0 +1,54 @@
+@media (min-width: 768px) {
+  nz-header [nz-row] [nz-col].nz-col-right{
+    justify-content: flex-end;
+  }
+}
+nz-header{
+  font-size: 0;
+  background-color: #262F3E;
+  box-sizing: border-box;
+  width: 100%;
+  padding-right: 0;
+  display: flex;
+  flex: auto;
+  flex-direction: row;
+  align-items: baseline;
+  height: auto;
+  color: white;
+  position: fixed;
+  z-index: 1;
+}
+nz-header [nz-row]{
+  width: inherit;
+  background-color: inherit;
+}
+nz-header [nz-row] [nz-col]{
+  display: flex;
+  flex-direction: row;
+}
+
+
+nz-header [nz-menu] {
+  display: flex;
+  flex-direction: row;
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  line-height: 64px;
+  height: 64px;
+  padding: 0 5px;
+  text-align: right;
+
+}
+
+nz-header [nz-menu] li{
+  min-width: 50px;
+  width: auto;
+  padding: 0 5px;
+  text-align: center;
+  color: inherit;
+}
+nz-header [nz-menu] li a{
+  color: inherit;
+  font-size: 16px;
+}

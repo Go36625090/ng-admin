@@ -1,0 +1,21 @@
+nz-layout{
+  height: 100%;
+  overflow: hidden;
+}
+nz-sider {
+  min-height: 100%;
+}
+
+nz-sider .sider-content{
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 48px;
+  overflow: scroll;
+}
+
+[nz-menu]{
+  min-height: 100%;
+}

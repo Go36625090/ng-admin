@@ -1,0 +1,15 @@
+<nz-content>
+  <div class="inner-content">
+    <nz-breadcrumb nzAutoGenerate="true">
+      <nz-breadcrumb-item>
+        <a [routerLink]="['/']">Home</a>
+      </nz-breadcrumb-item>
+    </nz-breadcrumb>
+    <nz-divider></nz-divider>
+    <router-outlet
+      (activate)='onActivate($event)'
+      (deactivate)='onDeactivate($event)'
+      (attach)='onAttach($event)'
+      (detach)='onDetach($event)'></router-outlet>
+  </div>
+</nz-content>

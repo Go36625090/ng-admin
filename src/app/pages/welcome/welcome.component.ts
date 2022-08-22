@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
-import {ApiService} from "../../service/api.service";
-import { of } from 'rxjs';
+import {APIService, API_SERVICE} from "../../api";
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
@@ -10,7 +9,7 @@ import { of } from 'rxjs';
 export class WelcomeComponent implements OnInit {
   gender: string = 'male';
 
-  constructor(private fb: UntypedFormBuilder, private api: ApiService) { }
+  constructor(private fb: UntypedFormBuilder, @Inject(API_SERVICE) private api: APIService) { }
   validateForm!: UntypedFormGroup;
 
   submitForm(): void {
@@ -32,7 +31,7 @@ export class WelcomeComponent implements OnInit {
       remember: [true, [Validators.required]]
     });
 
-    this.api.post('http://127.0.0.1:8082/turbo-trader/api', {})
+    this.api.post('welcome.info.query',{})
       .subscribe({
         next: (v) => console.log(v),
         error: (e) => console.error(e),

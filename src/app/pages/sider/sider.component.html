@@ -1,0 +1,54 @@
+<nz-layout>
+  <nz-sider nzBreakpoint="md" nzTheme="dark" nzCollapsible>
+    <div class="sider-content">
+      <ul nz-menu nzMode="inline">
+        <li nz-submenu nzTitle="Dashboard" nzIcon="dashboard">
+          <ul>
+            <li nz-menu-item><i nz-icon nzType="pie-chart"></i>&nbsp;Team 1</li>
+            <li nz-menu-item><i nz-icon nzType="bar-chart"></i>&nbsp;Team 2</li>
+          </ul>
+        </li>
+        <nz-divider class="compact" style="margin-top: 0"></nz-divider>
+        <li nz-submenu nzTitle="Orders" nzIcon="ordered-list">
+          <ul>
+            <li nz-menu-item>Team 1</li>
+            <li nz-menu-item>Team 2</li>
+          </ul>
+        </li>
+        <li nz-submenu nzTitle="Items" nzIcon="gift">
+          <ul>
+            <li nz-menu-item>Team 1</li>
+            <li nz-menu-item>Team 2</li>
+          </ul>
+        </li>
+        <li nz-submenu nzTitle="Revenue" nzIcon="dollar-circle">
+          <ul>
+            <li nz-menu-item>Team 1</li>
+            <li nz-menu-item>Team 2</li>
+          </ul>
+        </li>
+        <nz-divider class="compact"></nz-divider>
+        <li nz-submenu nzTitle="apartment" nzIcon="apartment">
+          <ul>
+            <li nz-menu-item>Team 1</li>
+            <li nz-menu-item>Team 2</li>
+          </ul>
+        </li>
+        <li nz-submenu nzTitle="Settings" nzIcon="setting">
+          <ul>
+            <li nz-menu-item>Team 1</li>
+            <li nz-menu-item>Team 2</li>
+          </ul>
+        </li>
+        <nz-divider class="compact"></nz-divider>
+        <li
+          routerLink="/about"
+          nz-menu-item
+        >
+          <i nz-icon nzType="info-circle"></i>
+          <span>&nbsp;&nbsp;&nbsp;About</span>
+        </li>
+      </ul>
+    </div>
+  </nz-sider>
+</nz-layout>
