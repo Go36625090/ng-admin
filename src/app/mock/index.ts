@@ -11,5 +11,5 @@ export const MockWebApiModule = environment.production ?
   [] : HttpClientInMemoryWebApiModule.forRoot(
     InMemoryDataService, {
       dataEncapsulation: true, apiBase: environment.api.startsWith('/')?environment.api.substring(1):environment.api,
-      passThruUnknownUrl: true,
+      passThruUnknownUrl: true, delay: 1000,
     });

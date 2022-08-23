@@ -2,62 +2,69 @@
  * using strict
  */
 
-import { Injectable } from '@angular/core';
-
+import {Inject, Injectable} from '@angular/core';
+import {environment} from "../../environments/environment";
+import {Writer} from "../log/writer";
+import {Log, LOG_WRITER} from "../log";
 @Injectable({
   providedIn: 'root'
 })
 export class LoggingService {
-  private log: any
-  constructor() {
-    if (Function.prototype.bind) {
-      this.log = Function.prototype.bind.call(console.log, console);
-    }
-    else {
-      this.log = function() {
-        Function.prototype.apply.call(console.log, console, arguments);
-      };
-    }
 
+  constructor(@Inject(LOG_WRITER)private writer: Writer) {
   }
 
-  bind(target: any): any{
-    Object.defineProperty(this, "error", {
-      get: ()=>this._error.bind(console, target.constructor.name,'['+Date.now()+']', '[ERROR]')
-    });
+  bind(target: any): Log{
     Object.defineProperty(this, "info", {
-      get: ()=>this._info.bind(console, target.constructor.name,'['+Date.now()+']', '[INFO]')
+      get: ()=>environment.production? ()=>()=>{}
+        :this._info.bind(this, '['+Math.floor(Date.now()/1000)+']','[INFO]', `[${target.constructor.name}]`)
     });
+    Object.defineProperty(this, "warn", {
+      get: ()=>environment.production? ()=>()=>{}
+        :this._warn.bind(this, '['+Math.floor(Date.now()/1000)+']','[WARN]', `[${target.constructor.name}]`)
+    });
+
+    Object.defineProperty(this, "error", {
+      get: ()=> environment.production? ()=>()=>{}
+        :this._error.bind(this, '['+Math.floor(Date.now()/1000)+']', '[ERROR]', `[${target.constructor.name}]`)
+    });
+
     Object.defineProperty(this, "debug", {
-      get: ()=>this._debug.bind(console, target.constructor.name,'['+Date.now()+']', '[DEBUG]')
+      get: ()=>environment.production? ()=>()=>{}
+        :this._debug.bind(this, '['+Math.floor(Date.now()/1000)+']','[DEBUG]', `[${target.constructor.name}]`)
     });
+    Object.defineProperty(this, "trace", {
+      get: ()=>environment.production? ()=>()=>{}
+        :this._trace.bind(this, '['+Math.floor(Date.now()/1000)+']','[TRACE]', `[${target.constructor.name}]`)
+    });
+
+    // @ts-ignore
     return this;
   }
 
   _info(...data: any[]): any{
-    console.info(...data);
+    this.writer.write(...data);
     return console.info.bind(console, ...data);
   }
 
-  _error(...data: any[]):any{
-    let stackLine2 = new Error().stack;
-
-    if(stackLine2){
-      console.log(stackLine2.toString().slice(0,200));
-      let stackLine = stackLine2.toString().split('\n')[2]
-
-      let caller_line = stackLine.slice(stackLine.lastIndexOf('/'),stackLine.lastIndexOf(')'))
-      console.log(caller_line);
-    }
-
-
-    console.error(...data);
+  _error(...data: any[]): any{
+    this.writer.write(...data);
     return console.error.bind(console, ...data);
   }
 
   _debug(...data: any[]): any{
-    console.debug(...data);
+    this.writer.write(...data);
     return console.debug.bind(console, ...data);
   }
 
+  _trace(...data: any[]): any{
+    this.writer.write(...data);
+    return console.trace.bind(console, ...data);
+  }
+
+  _warn(...data: any[]): any{
+    this.writer.write(...data);
+    return console.warn.bind(console, ...data);
+  }
 }
+

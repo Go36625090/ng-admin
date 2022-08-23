@@ -27,7 +27,7 @@ import { MockWebApiModule } from "./mock";
 
 import {
   API_SERVICE_PROVIDER,
-  HTTP_INTERCEPTOR_PROVIDERS,
+  HTTP_INTERCEPTOR_PROVIDERS, LOG_WRITER_PROVIDER,
   LOGIN_URL_PROVIDER
 } from "./app.provider";
 
@@ -70,6 +70,7 @@ import {LOCALE_PROVIDER} from "./app.locale";
     HTTP_INTERCEPTOR_PROVIDERS,
     NZ_CONFIG_PROVIDER,
     LOCALE_PROVIDER,
+    LOG_WRITER_PROVIDER
   ],
   bootstrap: [AppComponent]
 })
