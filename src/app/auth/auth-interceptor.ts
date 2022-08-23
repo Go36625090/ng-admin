@@ -53,7 +53,7 @@ export class AuthInterceptor implements HttpInterceptor{
         finalize(() => {
           const elapsed = Date.now() - started;
           const msg = `${req.method} "${req.urlWithParams}" ${ok} in ${elapsed} ms.`;
-          this.logging._debug(msg);
+          this.logging.bind(this).debug(msg);
         })
       );
   }

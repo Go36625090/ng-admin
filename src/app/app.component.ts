@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {APP_INITIALIZER, ApplicationInitStatus, Component, Inject} from '@angular/core';
 import {ThemeService} from "./service/theme.service";
 import { en_US, zh_CN, NzI18nService } from 'ng-zorro-antd/i18n';
 import {NzIconService} from "ng-zorro-antd/icon";
@@ -6,6 +6,8 @@ import {UserService} from "./service/user.service";
 import {LoggingService} from "./service/logging.service";
 import {LoginComponent} from "./pages/user/login/login.component";
 import {ActivatedRoute, ActivatedRouteSnapshot} from "@angular/router";
+import {Subject} from "rxjs";
+import {AsyncPipe} from "@angular/common";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,7 +16,9 @@ import {ActivatedRoute, ActivatedRouteSnapshot} from "@angular/router";
 export class AppComponent {
   isCollapsed = false;
   singlePage = true;
-  constructor(private themeService: ThemeService,
+  constructor(
+    @Inject(APP_INITIALIZER) public appInit: ApplicationInitStatus,
+    private themeService: ThemeService,
               private i18n: NzI18nService,
               private iconService: NzIconService,
               private userService: UserService,
@@ -24,7 +28,6 @@ export class AppComponent {
       scriptUrl: 'assets/scripts/icon-svg.js'
     });
     this.singlePage = (router.outlet != 'primary');
-
   }
   logout(){
     this.userService.logout();

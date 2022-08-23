@@ -31,8 +31,9 @@ import {
   LOGIN_URL_PROVIDER
 } from "./app.provider";
 
-import {NZ_CONFIG_PROVIDER} from "./app.config";
+import {CONFIG_PROVIDER, NZ_CONFIG_PROVIDER} from "./app.config";
 import {LOCALE_PROVIDER} from "./app.locale";
+import {CommonModule} from "@angular/common";
 
 
 
@@ -45,7 +46,8 @@ import {LOCALE_PROVIDER} from "./app.locale";
     ContentComponent,
   ],
   imports: [
-    BrowserModule,
+    CommonModule,
+    BrowserModule.withServerTransition({appId: 'jewellery'}),
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
@@ -65,13 +67,15 @@ import {LOCALE_PROVIDER} from "./app.locale";
     MockWebApiModule,
   ],
   providers: [
+    CONFIG_PROVIDER,
     API_SERVICE_PROVIDER,
     LOGIN_URL_PROVIDER,
     HTTP_INTERCEPTOR_PROVIDERS,
     NZ_CONFIG_PROVIDER,
     LOCALE_PROVIDER,
-    LOG_WRITER_PROVIDER
+    LOG_WRITER_PROVIDER,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [CommonModule]
 })
 export class AppModule { }

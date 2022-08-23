@@ -3,8 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  test: false,
   production: false,
-  api: '/turbo-trader/api'
+  api: '/turbo-trader/api',
+  config_url: '/assets/config.dev.json'
 };
 
 /*

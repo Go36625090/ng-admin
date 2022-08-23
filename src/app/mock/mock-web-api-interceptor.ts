@@ -26,24 +26,25 @@ export class MockWebApiInterceptor implements HttpInterceptor{
     const started = Date.now();
 // extend server response observable with logging
     let ok: string;
-    this.log.error("req", authReq.url).apply(this);
-    // this.logging.info("req", authReq.url);
     return next.handle(authReq)
       .pipe(
         tap({
           // Succeeds when there is a response; ignore other events
           // next: (event) => (ok = event instanceof HttpResponse ? 'succeeded' : ''),
           next: (event) => {
-            this.log.info("response", event).apply(this);
+            // this.log.info("response", event);
+            return event;
           },
           // Operation failed; error is an HttpErrorResponse
-          error: (error) => error
+          error: (error) => {
+            this.log.debug("response", error);
+          }
         }),
         // Log when response observable either completes or errors
         finalize(() => {
           const elapsed = Date.now() - started;
           const msg = `${req.method} "${req.urlWithParams}" ${ok} in ${elapsed} ms.`;
-          this.logging._debug(msg);
+          this.log.info('finalize',msg);
         })
       );
   }

@@ -28,6 +28,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "localize": true,
             "i18nMissingTranslation": "error",
             "outputPath": "dist/jewellery",
