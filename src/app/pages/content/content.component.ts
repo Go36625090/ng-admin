@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {LoggingService} from "../../service/logging.service";
+import {LoggingService} from "../../log/logging.service";
 
 @Component({
   selector: 'app-content',

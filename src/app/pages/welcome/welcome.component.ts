@@ -1,7 +1,7 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
-import {APIService, API_SERVICE} from "../../api";
-import {LoggingService} from "../../service/logging.service";
+import {APIService, API_SERVICE} from "../../providers/api";
+import {LoggingService} from "../../log/logging.service";
 import {Log} from "../../log";
 @Component({
   selector: 'app-welcome',
@@ -20,7 +20,6 @@ export class WelcomeComponent implements OnInit {
 
   submitForm(): void {
     if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
@@ -37,11 +36,11 @@ export class WelcomeComponent implements OnInit {
       remember: [true, [Validators.required]]
     });
 
-    this.api.post('welcome.info.query',{})
+    this.api.post({pattern: 'welcome.info.query'},{})
       .subscribe({
-        next: (v: any) => this.log.info(v),
-        error: (e: any) => this.log.error(e),
-        complete: () => this.log.debug('complete')
+        // next: (v: any) => this.log.info(v),
+        // error: (e: any) => this.log.error(e),
+        // complete: () => this.log.debug('complete')
       });
 
   }

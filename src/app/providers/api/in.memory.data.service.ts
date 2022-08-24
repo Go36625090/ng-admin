@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {InMemoryDbService, RequestInfo} from "angular-in-memory-web-api";
 import {Observable, of} from "rxjs";
-import {User} from "../models/user";
-import {LoginResponse} from "../models/login-response";
+import {User} from "../../models/user";
+import {LoginResponse} from "../../models/login-response";
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +45,7 @@ export class InMemoryDataService implements InMemoryDbService {
 
     return {
       users: users,
-      login: login,
+      user_account_login: login,
       welcome_info_query: welcomeinfoquery,
     };
   }

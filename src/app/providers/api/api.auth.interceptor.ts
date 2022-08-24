@@ -3,34 +3,29 @@ import {
   HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse
 } from '@angular/common/http';
 
-import {finalize, Observable, tap} from "rxjs";
-import {TokenService} from "../service/token.service";
-import {LoggingService} from "../service/logging.service";
-import {APIResponse} from "../api/response";
-import {LOGIN_URL} from "../consts";
+import {Observable, tap} from "rxjs";
+import {TokenService} from "../../service/token.service";
+import {LoggingService} from "../../log/logging.service";
+import {APIResponse} from "./response";
+import {LOGIN_ENDPOINT} from "../../consts";
 
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor{
+export class ApiAuthInterceptor implements HttpInterceptor{
   constructor(private auth: TokenService, private logging: LoggingService,
-              @Inject(LOGIN_URL) private loginUrl: string ) {
-
+              @Inject(LOGIN_ENDPOINT) private loginUrl: string ) {
   }
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Get the auth token from the service.
     const authToken = this.auth.getAuthorizationToken();
 
-    // Clone the request and replace the original headers with
-    // cloned headers, updated with the authorization.
     const authReq = req.clone({
       headers: req.headers.set('Authorization', authToken)
     });
-    const started = Date.now();
-// extend server response observable with logging
-    let ok: string;
+
     return next.handle(authReq)
       .pipe(
         tap({
-          // Succeeds when there is a response; ignore other events
           // next: (event) => (ok = event instanceof HttpResponse ? 'succeeded' : ''),
           next: (event) => {
             if (event instanceof HttpResponse) {
@@ -45,15 +40,7 @@ export class AuthInterceptor implements HttpInterceptor{
                 location.replace(this.loginUrl);
               }
             }
-          },
-          // Operation failed; error is an HttpErrorResponse
-          error: (error) => (this.logging.bind(this).error(error.message))
-        }),
-        // Log when response observable either completes or errors
-        finalize(() => {
-          const elapsed = Date.now() - started;
-          const msg = `${req.method} "${req.urlWithParams}" ${ok} in ${elapsed} ms.`;
-          this.logging.bind(this).debug(msg);
+          }
         })
       );
   }

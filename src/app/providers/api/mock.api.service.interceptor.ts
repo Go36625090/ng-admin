@@ -1,16 +1,16 @@
 import {Inject, Injectable} from "@angular/core";
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import {TokenService} from "../service/token.service";
-import {LoggingService} from "../service/logging.service";
+import {TokenService} from "../../service/token.service";
+import {LoggingService} from "../../log/logging.service";
 import {finalize, Observable, tap} from "rxjs";
-import {LOGIN_URL} from "../consts";
-import {Log} from "../log";
+import {LOGIN_ENDPOINT} from "../../consts";
+import {Log} from "../../log";
 
 @Injectable()
-export class MockWebApiInterceptor implements HttpInterceptor{
+export class MockApiServiceInterceptor implements HttpInterceptor{
   private log: Log;
   constructor(private auth: TokenService, private logging: LoggingService,
-              @Inject(LOGIN_URL) private loginUrl: string ) {
+              @Inject(LOGIN_ENDPOINT) private loginUrl: string ) {
 
     this.log = logging.bind(this);
 
@@ -22,10 +22,7 @@ export class MockWebApiInterceptor implements HttpInterceptor{
       headers: req.headers.set('Authorization', authToken),
       method: 'GET',
     });
-
-    const started = Date.now();
 // extend server response observable with logging
-    let ok: string;
     return next.handle(authReq)
       .pipe(
         tap({
@@ -34,17 +31,7 @@ export class MockWebApiInterceptor implements HttpInterceptor{
           next: (event) => {
             // this.log.info("response", event);
             return event;
-          },
-          // Operation failed; error is an HttpErrorResponse
-          error: (error) => {
-            this.log.debug("response", error);
           }
-        }),
-        // Log when response observable either completes or errors
-        finalize(() => {
-          const elapsed = Date.now() - started;
-          const msg = `${req.method} "${req.urlWithParams}" ${ok} in ${elapsed} ms.`;
-          this.log.info('finalize',msg);
         })
       );
   }

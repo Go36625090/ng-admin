@@ -1,5 +1,4 @@
 import {InjectionToken} from "@angular/core";
-import {Writer} from "./writer";
 import {Level} from "./level";
 
 export interface Log {
@@ -10,10 +9,6 @@ export interface Log {
   trace(...data: any[]): void;
 }
 
-export interface LogConfig {
-    level: Level
-    report_url: string
-    use_writer: boolean
-}
+export const LOG_LEVEL= new InjectionToken<Level>('LOG_LEVEL');
 
-export const LOG_WRITER= new InjectionToken<Writer>('LOG_WRITER');
+export const LOG_LEVEL_PROVIDER = {provide: LOG_LEVEL, useValue: Level.INFO}

@@ -1,7 +1,7 @@
 {
-  "log": {
-    "level": 1,
-    "report_url": "/logging",
-    "use_writer": true
+  "report": {
+    "url": "/logging",
+    "level": "error",
+    "filter": []
   }
 }

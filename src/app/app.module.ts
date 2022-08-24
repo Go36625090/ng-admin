@@ -23,17 +23,18 @@ import {NzDrawerModule} from "ng-zorro-antd/drawer";
 import {HeaderComponent} from "./pages/header/header.component";
 import { SiderComponent } from './pages/sider/sider.component';
 import { ContentComponent } from './pages/content/content.component';
-import { MockWebApiModule } from "./mock";
 
 import {
-  API_SERVICE_PROVIDER,
-  HTTP_INTERCEPTOR_PROVIDERS, LOG_WRITER_PROVIDER,
+  HTTP_INTERCEPTOR_PROVIDERS,
   LOGIN_URL_PROVIDER
 } from "./app.provider";
 
 import {CONFIG_PROVIDER, NZ_CONFIG_PROVIDER} from "./app.config";
 import {LOCALE_PROVIDER} from "./app.locale";
 import {CommonModule} from "@angular/common";
+import {REPORTER_PROVIDER} from "./providers/reporter";
+import {LOG_LEVEL_PROVIDER} from "./log";
+import {API_SERVICE_PROVIDER, MockWebApiModule} from "./providers/api";
 
 
 
@@ -47,7 +48,7 @@ import {CommonModule} from "@angular/common";
   ],
   imports: [
     CommonModule,
-    BrowserModule,
+    BrowserModule.withServerTransition({appId: 'jewellery'}),
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
@@ -73,7 +74,8 @@ import {CommonModule} from "@angular/common";
     HTTP_INTERCEPTOR_PROVIDERS,
     NZ_CONFIG_PROVIDER,
     LOCALE_PROVIDER,
-    LOG_WRITER_PROVIDER,
+    LOG_LEVEL_PROVIDER,
+    REPORTER_PROVIDER,
   ],
   bootstrap: [AppComponent],
   exports: [CommonModule]

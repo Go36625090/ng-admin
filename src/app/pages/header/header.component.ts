@@ -3,7 +3,7 @@ import {en_US, NzI18nService, zh_CN} from "ng-zorro-antd/i18n";
 import {ThemeService} from "../../service/theme.service";
 import {NzIconService} from "ng-zorro-antd/icon";
 import {UserService} from "../../service/user.service";
-import {LoggingService} from "../../service/logging.service";
+import {LoggingService} from "../../log/logging.service";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({

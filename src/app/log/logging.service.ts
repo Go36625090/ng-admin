@@ -4,9 +4,8 @@
 
 import {Inject, Injectable} from '@angular/core';
 import {environment} from "../../environments/environment";
-import {Writer} from "../log/writer";
-import {Log, LOG_WRITER} from "../log";
-import {Level} from "../log/level";
+import {Log, LOG_LEVEL} from "./index";
+import {Level} from "./level";
 import {AppConfig} from "../app.config";
 
 @Injectable({
@@ -14,14 +13,11 @@ import {AppConfig} from "../app.config";
   deps: [AppConfig]
 })
 export class LoggingService {
-  private readonly config: any;
-  constructor(@Inject(LOG_WRITER)private writer: Writer,
-              private appConfig: AppConfig) {
-    this.config = appConfig.getConfig('log');
-  }
+  constructor(@Inject(LOG_LEVEL)private level: Level) {}
 
   bind(target: any): Log{
-    const log = new LoggingService(this.writer, this.appConfig);
+    const log = new LoggingService(this.level);
+
     Object.defineProperty(log, "info", {
       get: log._bind(Level.INFO, target )
     });
@@ -40,13 +36,16 @@ export class LoggingService {
     Object.defineProperty(log, "trace", {
       get: log._bind(Level.TRACE, target )
     });
+    Object.defineProperty(log, "any", {
+      get: log._any(Level.NONE, target )
+    });
     // @ts-ignore
     return log;
   }
 
   private _bind(level: Level, target: any): any{
-    let obj: any = () => ()=>{}
-    let args: any[] = [];
+    let obj: any;
+    let args: any[];
     switch (level) {
       case Level.INFO:
         args = ['['+Math.floor(Date.now()/1000)+']', `[INFO]`, `[${target.constructor.name}]`];
@@ -68,44 +67,42 @@ export class LoggingService {
         args = ['['+Math.floor(Date.now()/1000)+']', `[TRACE]`, `[${target.constructor.name}]`];
         obj = this._trace.bind(this, ...args);
         break;
+      default:
+        args = ['['+Math.floor(Date.now()/1000)+']', `[LOGGER]`, `[${target.constructor.name}]`];
+        obj = this._any.bind(this, ...args);
+        break;
     }
     return obj
   }
 
   _info(...data: any[]): any{
-    if (this.config.level == Level.DEBUG || this.config.level == Level.INFO || this.config.level == Level.TRACE){
-      this.writer.write(...data);
-    }
-    const other_level = this.config.level != Level.DEBUG && this.config.level != Level.INFO && this.config.level != Level.TRACE;
-
-    return environment.production || other_level ? ()=>()=>{}: console.info.bind(console, ...data);
+    const other_level = this.level == Level.WARN || this.level == Level.ERROR;
+    return environment.production || other_level ? ()=>()=>{}: console.info.bind(console.info, ...data);
   }
 
   _error(...data: any[]): any{
-    this.writer.write(...data);
     return environment.production? ()=>()=>{}: console.error.bind(console, ...data);
   }
 
   _debug(...data: any[]): any{
-    if (this.config.level == Level.DEBUG){
-      this.writer.write(...data);
-    }
-
-    return environment.production || this.config.level != Level.DEBUG? ()=>()=>{} :console.debug.bind(console, ...data);
+    return environment.production ||
+            this.level != Level.DEBUG? ()=>()=>{} :
+              console.debug.bind(console, ...data);
   }
 
   _trace(...data: any[]): any{
-    if (this.config.level == Level.TRACE){
-      this.writer.write(...data);
-    }
-    return environment.production|| this.config.level != Level.TRACE? ()=>()=>{} : console.trace.bind(console, ...data);
+    return environment.production||
+            this.level != Level.TRACE? ()=>()=>{} :
+              console.trace.bind(console, ...data);
   }
 
   _warn(...data: any[]): any{
-    if (this.config.level == Level.WARN || this.config.level == Level.INFO){
-      this.writer.write(...data);
-    }
-    return environment.production? ()=>()=>{} : console.warn.bind(console, ...data);
+    return environment.production || this.level == Level.ERROR?
+            ()=>()=>{} : console.warn.bind(console, ...data);
+  }
+
+  _any(...data: any[]): any{
+    return environment.production? ()=>()=>{} : console.info.bind(console, ...data);
   }
 }
 
