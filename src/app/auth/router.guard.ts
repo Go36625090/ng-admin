@@ -14,8 +14,6 @@ export class RouterGuard implements CanActivate, CanActivateChild, CanLoad {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    // console.log(route);
-    // console.log(state.root.params);
     return true;
   }
 

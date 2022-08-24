@@ -5,15 +5,20 @@ import {catchError, map, Observable} from "rxjs";
 
 import {APIService} from "../api";
 import {APIResponse} from "../api/response";
+import {LoggingService} from "./logging.service";
+import {Log} from "../log";
+import {API} from "../api/api";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService implements APIService{
   private readonly api: string
+  private log: Log;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private logging: LoggingService) {
     this.api = environment.api;
+    this.log = console;
   }
 
   public get(path: string,  headers?: HttpHeaders): Observable<APIResponse> {
@@ -24,7 +29,7 @@ export class ApiService implements APIService{
       );
   }
 
-  public post(path: string, body: object|undefined|null, headers?: HttpHeaders): Observable<APIResponse> {
+  public post(path: API.path, body: object|undefined|null, headers?: HttpHeaders): Observable<APIResponse> {
     return this.http.post<APIResponse>(this.toURI(path), body, {headers: headers})
       .pipe(catchError(this.handleError.bind(this)))
       .pipe(
@@ -51,11 +56,11 @@ export class ApiService implements APIService{
   private handleError(error: HttpErrorResponse, caught: Observable<any>): Observable<any> {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error.message);
+      this.log.error('An error occurred:', error.error.message);
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
-      console.error(
+      this.log.error(
         `Backend returned code ${error.status}, ` +
         `url was: ${error.url}`);
     }

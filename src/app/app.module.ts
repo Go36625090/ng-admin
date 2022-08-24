@@ -47,7 +47,7 @@ import {CommonModule} from "@angular/common";
   ],
   imports: [
     CommonModule,
-    BrowserModule.withServerTransition({appId: 'jewellery'}),
+    BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,

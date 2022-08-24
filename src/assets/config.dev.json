@@ -1,6 +1,6 @@
 {
   "log": {
-    "level": 0,
+    "level": 1,
     "report_url": "/logging",
     "use_writer": true
   }

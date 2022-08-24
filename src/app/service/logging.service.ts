@@ -17,31 +17,31 @@ export class LoggingService {
   private readonly config: any;
   constructor(@Inject(LOG_WRITER)private writer: Writer,
               private appConfig: AppConfig) {
-    this.config = appConfig.config;
+    this.config = appConfig.getConfig('log');
   }
 
   bind(target: any): Log{
-    Object.defineProperty(this, "info", {
-      get:  this._bind(Level.INFO, target )
+    const log = new LoggingService(this.writer, this.appConfig);
+    Object.defineProperty(log, "info", {
+      get: log._bind(Level.INFO, target )
+    });
+    Object.defineProperty(log, "warn", {
+      get: log._bind(Level.WARN, target )
     });
 
-    Object.defineProperty(this, "warn", {
-      get: this._bind(Level.WARN, target )
+    Object.defineProperty(log, "error", {
+      get: log._bind(Level.ERROR, target )
     });
 
-    Object.defineProperty(this, "error", {
-      get: this._bind(Level.ERROR, target )
+    Object.defineProperty(log, "debug", {
+      get: log._bind(Level.DEBUG, target )
     });
 
-    Object.defineProperty(this, "debug", {
-      get: this._bind(Level.DEBUG, target )
-    });
-
-    Object.defineProperty(this, "trace", {
-      get: this._bind(Level.TRACE, target )
+    Object.defineProperty(log, "trace", {
+      get: log._bind(Level.TRACE, target )
     });
     // @ts-ignore
-    return this;
+    return log;
   }
 
   private _bind(level: Level, target: any): any{
