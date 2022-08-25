@@ -8,6 +8,7 @@ import {
 } from "angular-in-memory-web-api";
 import {Observable} from "rxjs";
 import {API} from "./types";
+import {menus} from "./mock-data/menu";
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +21,7 @@ export class InMemoryDataService implements InMemoryDbService {
     id: 1,
     username: "admin",
     token: "11111111111111111111111111111111",
-    menus: [{
-      id: 1,
-      name: '关于我们',
-      pattern: '/about'
-    }],
+    menus: menus,
     permissions: [{
       id: 1,
       name: '查询信息',

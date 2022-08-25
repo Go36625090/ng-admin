@@ -12,13 +12,15 @@ import {NzCollapseModule} from "ng-zorro-antd/collapse";
 import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzPaginationModule} from "ng-zorro-antd/pagination";
 import {NzDividerModule} from "ng-zorro-antd/divider";
+import {CommonModule} from "@angular/common";
+import {NzInputModule} from "ng-zorro-antd/input";
 
 
 @NgModule({
-  imports: [WelcomeRoutingModule, FormsModule,
+  imports: [WelcomeRoutingModule, FormsModule, CommonModule,
     ReactiveFormsModule, NzButtonModule, NzFormModule,
     NzFormPatchModule, NzResultModule, NzCollapseModule,
-    NzIconModule, NzPaginationModule, NzDividerModule],
+    NzIconModule, NzPaginationModule, NzDividerModule, NzInputModule],
   declarations: [WelcomeComponent],
   exports: [WelcomeComponent],
   providers: [NzFormDirective, FormGroupDirective]

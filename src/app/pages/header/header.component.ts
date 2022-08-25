@@ -29,9 +29,12 @@ export class HeaderComponent implements OnInit {
   switchLanguage(id: string) {
     if (id == 'zh_CN'){
       this.i18n.setLocale(zh_CN);
+      this.userService.localeEvent$.emit('zh');
     }else{
       this.i18n.setLocale(en_US);
+      this.userService.localeEvent$.emit('us');
     }
+
   }
 
   toggleTheme(): void {

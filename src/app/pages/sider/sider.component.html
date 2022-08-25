@@ -1,54 +1,24 @@
 <nz-layout>
   <nz-sider nzBreakpoint="md" nzTheme="dark" nzCollapsible>
     <div class="sider-content">
+
       <ul nz-menu nzMode="inline" [nzSelectable]="true">
-        <li nz-submenu nzTitle="Dashboard" nzIcon="dashboard">
-          <ul>
-            <li nz-menu-item routerLinkActive="ant-menu-item-selected"><i nz-icon nzType="pie-chart"></i>&nbsp;Team 1</li>
-            <li nz-menu-item routerLinkActive="ant-menu-item-selected"><i nz-icon nzType="bar-chart"></i>&nbsp;Team 2</li>
-          </ul>
-        </li>
-        <nz-divider  nz-menu-divider ></nz-divider>
-        <li nz-submenu nzTitle="Orders" nzIcon="ordered-list">
-          <ul>
-            <li nz-menu-item routerLinkActive="ant-menu-item-selected">Team 1</li>
-            <li nz-menu-item routerLinkActive="ant-menu-item-selected">Team 2</li>
-          </ul>
-        </li>
-        <li nz-submenu nzTitle="Items" nzIcon="gift">
-          <ul>
-            <li nz-menu-item routerLinkActive="ant-menu-item-selected">Team 1</li>
-            <li nz-menu-item routerLinkActive="ant-menu-item-selected">Team 2</li>
-          </ul>
-        </li>
-        <li nz-submenu nzTitle="Revenue" nzIcon="dollar-circle">
-          <ul>
-            <li nz-menu-item routerLinkActive="ant-menu-item-selected">Team 1</li>
-            <li nz-menu-item routerLinkActive="ant-menu-item-selected">Team 2</li>
-          </ul>
-        </li>
-        <nz-divider  nz-menu-divider ></nz-divider>
-        <li nz-submenu nzTitle="apartment" nzIcon="apartment" >
-          <ul>
-            <li nz-menu-item routerLinkActive="ant-menu-item-selected">Team 1</li>
-            <li nz-menu-item routerLinkActive="ant-menu-item-selected">Team 2</li>
-          </ul>
-        </li>
-        <li nz-submenu nzTitle="Setting" [nzOpen]="url.startsWith('/setting')"  nzIcon="setting">
-          <ul>
-            <li nz-menu-item [nzMatchRouter]='true' routerLink="/setting/menu" >菜单管理</li>
-            <li nz-menu-item [nzMatchRouter]='true' routerLink="/setting/permission">权限管理</li>
-          </ul>
-        </li>
-        <nz-divider nz-menu-divider ></nz-divider>
-        <li
-          routerLink="/about"
-          routerLinkActive="ant-menu-item-selected"
-          nz-menu-item
-        >
-          <i nz-icon nzType="info-circle"></i>
-          <span>About</span>
-        </li>
+        <ng-container *ngFor="let group of menus;index as i;">
+          <ng-container *ngFor="let menu of group">
+            <li *ngIf="menu.type == 0" nz-submenu  [nzTitle]="menu.i18nNames[locale]||menu.name" [nzIcon]="menu.icon" [nzOpen]="url.startsWith('/'+menu.pattern)">
+              <ul>
+                <li *ngFor="let sub of menu.submenus" nz-menu-item [nzMatchRouter]='true' [routerLink]="menu.pattern+'/'+sub.pattern">
+                  <i nz-icon [nzType]="sub.icon" ></i>&nbsp;{{sub.i18nNames[locale]||sub.name}}
+                </li>
+              </ul>
+            </li>
+            <li *ngIf="menu.type == 1" [routerLink]="menu.pattern" nz-menu-item [nzMatchRouter]='true'>
+              <i nz-icon [nzType]="menu.icon"></i>
+              <span>{{menu.i18nNames[locale]||menu.name}}</span>
+            </li>
+          </ng-container>
+          <nz-divider *ngIf="i+1 == group.length" nz-menu-divider></nz-divider>
+        </ng-container>
       </ul>
     </div>
   </nz-sider>

@@ -1,45 +1,54 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {AboutComponent} from "./pages/about/about.component";
 import {RouterGuard} from "./auth/router.guard";
+import {HomeComponent} from "./pages/home/home.component";
+import {PageNotFoundComponent} from "./pages/errors/page.not.found.component";
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/welcome' },
+  {path: '', pathMatch: 'full', redirectTo: '/home'},
+  {
+    path: 'home', component: HomeComponent,
+    data: {
+      name: 'home'
+    }
+  },
   {
     path: 'dashboard',
     canLoad: [RouterGuard],
     canActivateChild: [RouterGuard],
     loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule),
     data: {
-      breadcrumb: 'dashboard'
+      name: 'dashboard'
     }
   },
   {
     path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule),
     data: {
-      breadcrumb: 'welcome'
+      name: 'welcome'
     }
   },
-  { path: 'user', loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule)},
+  {path: 'user', loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule)},
   {
     path: 'setting',
-    loadChildren: ()=> import('./pages/setting/setting.module').then(m => m.SettingModule),
-    canLoad: [RouterGuard],
+    loadChildren: () => import('./pages/setting/setting.module').then(m => m.SettingModule),
     canActivateChild: [RouterGuard],
     data: {
-      breadcrumb: 'setting'
+      name: 'setting'
     }
   },
-  { path: 'about', pathMatch: 'full', component: AboutComponent,
-    canLoad: [RouterGuard],
+  {
+    path: 'about', component: AboutComponent,
     canActivate: [RouterGuard],
     data: {
-      breadcrumb: 'about'
-    },}
+      name: 'about'
+    },
+  },
+  {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{})],
+  imports: [RouterModule.forRoot(routes, {})],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -35,6 +35,9 @@ import {CommonModule} from "@angular/common";
 import {REPORTER_PROVIDER} from "./providers/reporter";
 import {LOG_LEVEL_PROVIDER} from "./log";
 import {API_SERVICE_PROVIDER, MockWebApiModule} from "./providers/api";
+import { HomeComponent } from './pages/home/home.component';
+import { PageNotFoundComponent } from './pages/errors/page.not.found.component';
+import {IconModule} from "@ant-design/icons-angular";
 
 
 
@@ -45,6 +48,8 @@ import {API_SERVICE_PROVIDER, MockWebApiModule} from "./providers/api";
     AboutComponent,
     SiderComponent,
     ContentComponent,
+    HomeComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     CommonModule,
@@ -66,6 +71,7 @@ import {API_SERVICE_PROVIDER, MockWebApiModule} from "./providers/api";
     NzToolTipModule,
     NzDrawerModule,
     MockWebApiModule,
+    IconModule,
   ],
   providers: [
     CONFIG_PROVIDER,

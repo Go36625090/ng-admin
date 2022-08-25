@@ -1,4 +1,4 @@
-import {Inject, Injectable} from '@angular/core';
+import {EventEmitter, Inject, Injectable} from '@angular/core';
 import {TokenService} from "./token.service";
 import {LOGIN_ENDPOINT} from "../consts";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -9,7 +9,7 @@ import {Level} from "../log/level";
 import {REPORTER} from "../providers/reporter";
 import {Reporter} from "../providers/reporter/reporter";
 import {API} from "../providers/api/types";
-import {LoginResponse} from "../models/login.response";
+import {UserInfo} from "../models/user.info";
 import {CacheService} from "../providers/cache/cache.service";
 
 @Injectable({
@@ -17,8 +17,9 @@ import {CacheService} from "../providers/cache/cache.service";
 })
 export class UserService {
   private log: Log;
-  private user: LoginResponse|undefined;
+  private user: UserInfo | undefined | null;
   public readonly userInfoKey = '__user_info__';
+  localeEvent$: EventEmitter<string>
 
   constructor(
     @Inject(API_SERVICE) private api: APIService,
@@ -29,6 +30,7 @@ export class UserService {
     private logging: LogService,
     private router: Router, private route: ActivatedRoute) {
     this.log = this.logging.bind(this);
+    this.localeEvent$ = new EventEmitter<string>();
   }
 
   logout() {
@@ -38,9 +40,9 @@ export class UserService {
   }
 
   login(body: any) {
-    this.api.post<LoginResponse>({pattern: 'user.account.login'}, body)
+    this.api.post<UserInfo>({pattern: 'user.account.login'}, body)
       .subscribe({
-        next: (v: API.response<LoginResponse>) => {
+        next: (v: API.response<UserInfo>) => {
           this.user = v.content;
           this.tokenService.setToken(v.content.token);
           this.cache.set(this.userInfoKey, this.user);
@@ -53,7 +55,11 @@ export class UserService {
         }
       })
   }
-  getUser():any{
-    return this.user;
+  getUser(): UserInfo{
+    if(!this.user){
+      this.user = this.cache.get(this.userInfoKey);
+    }
+
+    return this.user as UserInfo
   }
 }

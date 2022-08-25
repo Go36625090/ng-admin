@@ -1,5 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import {LogService} from "../../log/log.service";
+import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
+import {UserService} from "../../service/user.service";
+import {UserInfo} from "../../models/user.info";
+import {Menu} from "../../models/menu";
+import {
+  ActivationEnd,
+  ActivationStart, ChildActivationEnd,
+  ChildActivationStart, ResolveEnd, RouteConfigLoadEnd,
+  Router
+} from "@angular/router";
 
 @Component({
   selector: 'app-content',
@@ -8,11 +16,32 @@ import {LogService} from "../../log/log.service";
 })
 export class ContentComponent implements OnInit {
 
-  constructor(private logging: LogService) { }
-
-  ngOnInit(): void {
+  user: UserInfo | undefined;
+  menus: Menu[][]|undefined;
+  breadcrumb: {parent: string, child: string} = {
+    parent: '',
+    child: ''
+  };
+  constructor(private userService: UserService,
+              public router: Router,
+              @Inject(LOCALE_ID) public locale: string) {
+    this.userService.localeEvent$.subscribe(locale=>this.locale = locale);
   }
 
+  ngOnInit(): void {
+    const user = this.userService.getUser();
+    if (user) {
+      this.user = user;
+      this.menus = user.menus;
+    }
+    this.router.events.subscribe(evt=> {
+      if(evt instanceof  ResolveEnd ) {
+        const paths = evt.state.url.split('/');
+        this.breadcrumb.parent = paths[1];
+        this.breadcrumb.child = paths[2]
+      }
+    });
+  }
   onActivate($event: any) {
   }
 

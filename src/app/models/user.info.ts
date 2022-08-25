@@ -1,10 +1,10 @@
 import {Menu} from "./menu";
 import {Permission} from "./permission";
 
-export interface LoginResponse {
+export interface UserInfo {
   id: number
   token: string
   principal: {[key:string]: any}
-  menus: Menu[]
+  menus: Menu[][]
   permissions: Permission[]
 }
