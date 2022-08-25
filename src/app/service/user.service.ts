@@ -9,12 +9,14 @@ import {Level} from "../log/level";
 import {REPORTER} from "../providers/reporter";
 import {Reporter} from "../providers/reporter/reporter";
 import {API} from "../providers/api/types";
+import {LoginResponse} from "../models/login.response";
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   private log: Log;
+  private loginInfo: LoginResponse|undefined;
 
   constructor(
     @Inject(API_SERVICE) private api: APIService,
@@ -33,16 +35,17 @@ export class UserService {
   }
 
   login(body: any) {
-    this.api.post({pattern: 'user.account.login'}, body)
+    this.api.post<LoginResponse>({pattern: 'user.account.login'}, body)
       .subscribe({
-        next: (v: API.response) => {
-          this.reporter.write(Level.INFO, 'user.account.login', v);
+        next: (v: API.response<LoginResponse>) => {
+          console.log(v)
+          this.loginInfo = v.content;
+          this.tokenService.setToken(v.content.token);
           this.router.navigateByUrl('/', {skipLocationChange: false})
             .then();
         },
         error: err => this.reporter.write(Level.ERROR, 'user.account.login', err.message)
       })
   }
-
 
 }

@@ -17,10 +17,10 @@ export abstract class BaseApiService implements APIService{
   abstract pathParse(path: API.endpoint): string;
   abstract bodyParse(path: API.endpoint, body: any): API.request;
 
-  private static deserialize(response: any): API.response {
+  private static deserialize<T>(response: any): API.response<T> {
     const apiResponse = {code: 0};
     Object.assign(apiResponse, response);
-    return <API.response>apiResponse;
+    return <API.response<T>>apiResponse;
   }
 
   private handleError(error: HttpErrorResponse, caught: Observable<any>): Observable<any> {
@@ -29,53 +29,56 @@ export abstract class BaseApiService implements APIService{
     return new Observable(subscriber => subscriber.error(response));
   }
 
-  public get(path: API.endpoint, params?: API.params, headers?: HttpHeaders): Observable<API.response> {
+  public get<T>(path: API.endpoint, params?: API.params, headers?: HttpHeaders): Observable<API.response<T>> {
     const options = {headers: headers, params: params};
 
-    return this.http.get<API.response>(this.pathParse(path), options )
-      .pipe(catchError(this.handleError.bind(this)))
-      .pipe(
-        map(res => BaseApiService.deserialize(res))
-      );
-  }
-
-  public post(path: API.endpoint, body: object|undefined|null,params?: API.params, headers?: HttpHeaders): Observable<API.response> {
-    const options = {headers: headers, params: params};
-    return this.http.post<API.response>(this.pathParse(path), this.bodyParse(path, body), options)
+    return this.http.get<API.response<T>>(this.pathParse(path), options )
       .pipe(catchError(this.handleError.bind(this)))
       .pipe(
         map(res => BaseApiService.deserialize(res))
       );
   }
 
-  public put(path: API.endpoint, body: object|undefined|null,params?: API.params, headers?: HttpHeaders): Observable<API.response> {
+  public post<T>(path: API.endpoint, body: any,params?: API.params, headers?: HttpHeaders):
+    Observable<API.response<T>> {
     const options = {headers: headers, params: params};
-    return this.http.put<API.response>(this.pathParse(path), this.bodyParse(path, body), options)
-      .pipe(catchError(this.handleError.bind(this)))
-      .pipe(
-        map(res => BaseApiService.deserialize(res))
-      );
-  }
-  public patch(path: API.endpoint, body: object|undefined|null,params?: API.params, headers?: HttpHeaders): Observable<API.response> {
-    const options = {headers: headers, params: params};
-    return this.http.patch<API.response>(this.pathParse(path), this.bodyParse(path, body),options)
-      .pipe(catchError(this.handleError.bind(this)))
-      .pipe(
-        map(res => BaseApiService.deserialize(res))
-      );
-  }
-  public delete(path: API.endpoint,params?: API.params,headers?: HttpHeaders): Observable<API.response> {
-    const options = {headers: headers, params: params};
-    return this.http.delete<API.response>(this.pathParse(path), options)
+    return this.http.post<API.response<T>>(this.pathParse(path), this.bodyParse(path, body), options)
       .pipe(catchError(this.handleError.bind(this)))
       .pipe(
         map(res => BaseApiService.deserialize(res))
       );
   }
 
-  public options(path: API.endpoint,params?: API.params, headers?: HttpHeaders): Observable<API.response> {
+  public put<T>(path: API.endpoint, body: any,params?: API.params, headers?: HttpHeaders):
+    Observable<API.response<T>> {
     const options = {headers: headers, params: params};
-    return this.http.options<API.response>(this.pathParse(path), options)
+    return this.http.put<API.response<T>>(this.pathParse(path), this.bodyParse(path, body), options)
+      .pipe(catchError(this.handleError.bind(this)))
+      .pipe(
+        map(res => BaseApiService.deserialize(res))
+      );
+  }
+  public patch<T>(path: API.endpoint, body: any,params?: API.params, headers?: HttpHeaders):
+    Observable<API.response<T>> {
+    const options = {headers: headers, params: params};
+    return this.http.patch<API.response<T>>(this.pathParse(path), this.bodyParse(path, body),options)
+      .pipe(catchError(this.handleError.bind(this)))
+      .pipe(
+        map(res => BaseApiService.deserialize(res))
+      );
+  }
+  public delete<T>(path: API.endpoint,params?: API.params,headers?: HttpHeaders): Observable<API.response<T>> {
+    const options = {headers: headers, params: params};
+    return this.http.delete<API.response<T>>(this.pathParse(path), options)
+      .pipe(catchError(this.handleError.bind(this)))
+      .pipe(
+        map(res => BaseApiService.deserialize(res))
+      );
+  }
+
+  public options<T>(path: API.endpoint,params?: API.params, headers?: HttpHeaders): Observable<API.response<T>> {
+    const options = {headers: headers, params: params};
+    return this.http.options<API.response<T>>(this.pathParse(path), options)
       .pipe(catchError(this.handleError.bind(this)))
       .pipe(
         map(res => BaseApiService.deserialize(res))

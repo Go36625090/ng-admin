@@ -7,6 +7,7 @@ import {
   STATUS
 } from "angular-in-memory-web-api";
 import {Observable} from "rxjs";
+import {API} from "./types";
 
 @Injectable({
   providedIn: 'root'
@@ -57,10 +58,15 @@ export class InMemoryDataService implements InMemoryDbService {
   post(reqInfo: RequestInfo) {
     let body = reqInfo.utils.getJsonBody(reqInfo.req)
     const isLoginFail = reqInfo.url == "user.account.login" && (body == null||body.username != 'admin');
+    const response: API.response<any> = {
+      code: 0, content: this.login, message: "", sign: "", timestamp: "", trace_id: ""
+
+    }
+
     return reqInfo.utils.createResponse$(() => {
       const options: ResponseOptions =
         {
-          body: this.login,
+          body: response,
           status: isLoginFail?STATUS.UNAUTHORIZED: STATUS.OK
         }
       return this.finishOptions(options, reqInfo);
@@ -81,12 +87,15 @@ export class InMemoryDataService implements InMemoryDbService {
     let item: any = reqInfo.utils.findById(collection, reqInfo.id);
     const body = reqInfo.utils.getJsonBody(reqInfo.req)
     Object.assign(item, body);
+    const response: API.response<any> = {
+      code: 0, content: body, message: "", sign: "", timestamp: "", trace_id: ""
 
+    }
     // respond
     return reqInfo.utils.createResponse$(() => {
       const options: ResponseOptions =
         {
-          body: item,
+          body: response,
           status: STATUS.OK
         }
       return this.finishOptions(options, reqInfo);

@@ -8,15 +8,16 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class SiderComponent implements OnInit {
   isCollapsed = false;
-  constructor(private route: ActivatedRoute) { }
+  url: string = '';
+  constructor(public route: ActivatedRoute) {
+    this.url = location.pathname;
+  }
 
   ngOnInit(): void {
   }
   updateMenuInlineCollapsed(e: any): void{
-    console.log(e);
     this.isCollapsed = e;
   }
   login(){
-    this.route.component
   }
 }

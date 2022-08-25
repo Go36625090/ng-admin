@@ -1,17 +1,23 @@
-import {Injectable} from "@angular/core";
+import {Injectable, SkipSelf} from "@angular/core";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
   private _token: string | undefined;
+  private storage: Storage;
 
-  get token(): string {
+  constructor() {
+    this.storage = localStorage;
+  }
+
+  getToken(): string {
     return <string>this._token;
   }
 
-  set token(value: string) {
+  setToken(value: string) {
     this._token = value;
+    this.storage.setItem('token', value);
   }
 
   getAuthorizationToken(): string {

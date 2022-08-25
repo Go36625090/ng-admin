@@ -10,17 +10,17 @@ import {InMemoryDataService} from "./in.memory.data.service";
 import {API} from "./types";
 
 export interface APIService {
-  get(e: API.endpoint, params?: API.params, headers?: HttpHeaders): Observable<API.response>;
+  get<T>(e: API.endpoint, params?: API.params, headers?: HttpHeaders): Observable<API.response<T>>;
 
-  put(e: API.endpoint, body: object | undefined | null,params?: API.params, headers?: HttpHeaders): Observable<API.response>;
+  put<T>(e: API.endpoint, body: any,params?: API.params, headers?: HttpHeaders): Observable<API.response<T>>;
 
-  post(e: API.endpoint, body: object | undefined | null,params?: API.params, headers?: HttpHeaders): Observable<API.response>;
+  post<T>(e: API.endpoint, body: any,params?: API.params, headers?: HttpHeaders): Observable<API.response<T>>;
 
-  patch(e: API.endpoint, body: object | undefined | null, params?: API.params, headers?: HttpHeaders): Observable<API.response>;
+  patch<T>(e: API.endpoint, body: any, params?: API.params, headers?: HttpHeaders): Observable<API.response<T>>;
 
-  delete(e: API.endpoint, params?: API.params, headers?: HttpHeaders): Observable<API.response>;
+  delete<T>(e: API.endpoint, params?: API.params, headers?: HttpHeaders): Observable<API.response<T>>;
 
-  options(e: API.endpoint,params?: API.params, headers?: HttpHeaders): Observable<API.response>
+  options<T>(e: API.endpoint,params?: API.params, headers?: HttpHeaders): Observable<API.response<T>>
 }
 
 export const API_SERVICE = new InjectionToken<APIService>('API_SERVICE');

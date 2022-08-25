@@ -67,15 +67,14 @@ export namespace API{
   // 	Timestamp  int64       `json:"timestamp" xml:"timestamp"`
   // 	Sign       string      `json:"sign" xml:"sign"`
   // }
-  export interface response {
+  export interface response<T> {
     code: number
     message: string
-    content: any
+    content: T
     pagination?: pagination
     trace_id: string
     timestamp: string
     sign: string
   }
-
 
 }

@@ -8,7 +8,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {IconsProviderModule} from './icons-provider.module';
 import {NzLayoutModule} from 'ng-zorro-antd/layout';
-import {NzMenuModule} from 'ng-zorro-antd/menu';
+import {NzMenuModule, NzMenuServiceLocalToken} from 'ng-zorro-antd/menu';
 import {NzFormModule} from "ng-zorro-antd/form";
 import {NzBreadCrumbModule} from "ng-zorro-antd/breadcrumb";
 import {NzIconModule} from "ng-zorro-antd/icon";

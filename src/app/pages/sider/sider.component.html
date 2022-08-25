@@ -1,14 +1,14 @@
 <nz-layout>
   <nz-sider nzBreakpoint="md" nzTheme="dark" nzCollapsible>
     <div class="sider-content">
-      <ul nz-menu nzMode="inline">
+      <ul nz-menu nzMode="inline" [nzSelectable]="true">
         <li nz-submenu nzTitle="Dashboard" nzIcon="dashboard">
           <ul>
             <li nz-menu-item routerLinkActive="ant-menu-item-selected"><i nz-icon nzType="pie-chart"></i>&nbsp;Team 1</li>
             <li nz-menu-item routerLinkActive="ant-menu-item-selected"><i nz-icon nzType="bar-chart"></i>&nbsp;Team 2</li>
           </ul>
         </li>
-        <nz-divider class="compact" style="margin-top: 0"></nz-divider>
+        <nz-divider  nz-menu-divider ></nz-divider>
         <li nz-submenu nzTitle="Orders" nzIcon="ordered-list">
           <ul>
             <li nz-menu-item routerLinkActive="ant-menu-item-selected">Team 1</li>
@@ -27,27 +27,27 @@
             <li nz-menu-item routerLinkActive="ant-menu-item-selected">Team 2</li>
           </ul>
         </li>
-        <nz-divider class="compact"></nz-divider>
-        <li nz-submenu nzTitle="apartment" nzIcon="apartment">
+        <nz-divider  nz-menu-divider ></nz-divider>
+        <li nz-submenu nzTitle="apartment" nzIcon="apartment" >
           <ul>
             <li nz-menu-item routerLinkActive="ant-menu-item-selected">Team 1</li>
             <li nz-menu-item routerLinkActive="ant-menu-item-selected">Team 2</li>
           </ul>
         </li>
-        <li nz-submenu nzTitle="Settings" nzIcon="setting">
+        <li nz-submenu nzTitle="Setting" [nzOpen]="url.startsWith('/setting')"  nzIcon="setting">
           <ul>
-            <li nz-menu-item routerLinkActive="ant-menu-item-selected">Team 1</li>
-            <li nz-menu-item routerLinkActive="ant-menu-item-selected">Team 2</li>
+            <li nz-menu-item [nzMatchRouter]='true' routerLink="/setting/menu" >菜单管理</li>
+            <li nz-menu-item [nzMatchRouter]='true' routerLink="/setting/permission">权限管理</li>
           </ul>
         </li>
-        <nz-divider class="compact"></nz-divider>
+        <nz-divider nz-menu-divider ></nz-divider>
         <li
           routerLink="/about"
           routerLinkActive="ant-menu-item-selected"
           nz-menu-item
         >
           <i nz-icon nzType="info-circle"></i>
-          <span>&nbsp;&nbsp;&nbsp;About</span>
+          <span>About</span>
         </li>
       </ul>
     </div>

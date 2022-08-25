@@ -3,8 +3,8 @@ import {Permission} from "./permission";
 
 export interface LoginResponse {
   id: number
-  username: string
   token: string
+  principal: {[key:string]: any}
   menus: Menu[]
   permissions: Permission[]
 }

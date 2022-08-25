@@ -29,7 +29,7 @@ export class ApiAuthInterceptor implements HttpInterceptor{
           // next: (event) => (ok = event instanceof HttpResponse ? 'succeeded' : ''),
           next: (event) => {
             if (event instanceof HttpResponse) {
-              const response: HttpResponse<API.response> = event;
+              const response: HttpResponse<API.response<any>> = event;
               if (response.status === 401) {
                 this.auth.removeAuthorizationToken();
                 location.replace(this.loginUrl);
