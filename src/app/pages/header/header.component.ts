@@ -3,7 +3,7 @@ import {en_US, NzI18nService, zh_CN} from "ng-zorro-antd/i18n";
 import {ThemeService} from "../../service/theme.service";
 import {NzIconService} from "ng-zorro-antd/icon";
 import {UserService} from "../../service/user.service";
-import {LoggingService} from "../../log/logging.service";
+import {LogService} from "../../log/log.service";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
               private i18n: NzI18nService,
               private iconService: NzIconService,
               private userService: UserService,
-              private logging: LoggingService,
+              private logging: LogService,
               private router: ActivatedRoute) { }
 
   ngOnInit(): void {

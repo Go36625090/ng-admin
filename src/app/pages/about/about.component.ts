@@ -13,6 +13,6 @@ export class AboutComponent implements OnInit {
   constructor(@Inject(API_SERVICE) private api: APIService, private userService: UserService) { }
 
   ngOnInit(): void {
-
+    this.api.post({method: 'app.info.about'}, null).subscribe()
   }
 }

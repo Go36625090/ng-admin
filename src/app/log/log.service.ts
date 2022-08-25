@@ -12,11 +12,11 @@ import {AppConfig} from "../app.config";
   providedIn: 'root',
   deps: [AppConfig]
 })
-export class LoggingService {
+export class LogService {
   constructor(@Inject(LOG_LEVEL)private level: Level) {}
 
   bind(target: any): Log{
-    const log = new LoggingService(this.level);
+    const log = new LogService(this.level);
 
     Object.defineProperty(log, "info", {
       get: log._bind(Level.INFO, target )

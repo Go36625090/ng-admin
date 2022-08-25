@@ -1,7 +1,7 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {APIService, API_SERVICE} from "../../providers/api";
-import {LoggingService} from "../../log/logging.service";
+import {LogService} from "../../log/log.service";
 import {Log} from "../../log";
 @Component({
   selector: 'app-welcome',
@@ -12,7 +12,7 @@ export class WelcomeComponent implements OnInit {
   gender: string = 'male';
   private readonly log: Log;
   constructor(private fb: UntypedFormBuilder, @Inject(API_SERVICE) private api: APIService,
-              private logging: LoggingService) {
+              private logging: LogService) {
     this.log = logging.bind(this);
 
   }
@@ -36,7 +36,7 @@ export class WelcomeComponent implements OnInit {
       remember: [true, [Validators.required]]
     });
 
-    this.api.post({pattern: 'welcome.info.query'},{})
+    this.api.post({method: 'welcome.info.query'},{})
       .subscribe({
         // next: (v: any) => this.log.info(v),
         // error: (e: any) => this.log.error(e),

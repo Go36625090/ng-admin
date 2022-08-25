@@ -11,4 +11,4 @@ export interface Log {
 
 export const LOG_LEVEL= new InjectionToken<Level>('LOG_LEVEL');
 
-export const LOG_LEVEL_PROVIDER = {provide: LOG_LEVEL, useValue: Level.INFO}
+export const LOG_LEVEL_PROVIDER = {provide: LOG_LEVEL, useValue: Level.DEBUG}

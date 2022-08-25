@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {LoggingService} from "../../log/logging.service";
+import {LogService} from "../../log/log.service";
 
 @Component({
   selector: 'app-content',
@@ -8,7 +8,7 @@ import {LoggingService} from "../../log/logging.service";
 })
 export class ContentComponent implements OnInit {
 
-  constructor(private logging: LoggingService) { }
+  constructor(private logging: LogService) { }
 
   ngOnInit(): void {
   }

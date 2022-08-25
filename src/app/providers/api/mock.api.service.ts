@@ -7,25 +7,18 @@ import {API} from "./types";
 @Injectable()
 export class MockApiService extends BaseApiService {
 
-
-
   constructor(protected override http: HttpClient) {
     super(http)
   }
 
-  pathParse(path: API.method| API.endpoint): string {
-    let p = '';
-
-    if (!p.startsWith('http')) {
-      if (!p.startsWith('/')) {
-        return this.api + '/' + p.split('.').join('_')
-      }
-      return this.api + p.split('.').join('_');
+  pathParse(path: API.endpoint): string {
+    if(path.pattern){
+      return this.api + path.pattern
     }
-    return p;
+    return this.api;
   }
 
-  bodyParse(path: API.method | API.endpoint, body: any):any {
+  bodyParse(path: API.endpoint, body: any):any {
     return body;
   }
 

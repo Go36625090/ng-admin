@@ -5,13 +5,13 @@ import {
 
 import {Observable, tap} from "rxjs";
 import {TokenService} from "../../service/token.service";
-import {LoggingService} from "../../log/logging.service";
-import {APIResponse} from "./response";
+import {LogService} from "../../log/log.service";
 import {LOGIN_ENDPOINT} from "../../consts";
+import {API} from "./types";
 
 @Injectable()
 export class ApiAuthInterceptor implements HttpInterceptor{
-  constructor(private auth: TokenService, private logging: LoggingService,
+  constructor(private auth: TokenService, private logging: LogService,
               @Inject(LOGIN_ENDPOINT) private loginUrl: string ) {
   }
 
@@ -29,30 +29,15 @@ export class ApiAuthInterceptor implements HttpInterceptor{
           // next: (event) => (ok = event instanceof HttpResponse ? 'succeeded' : ''),
           next: (event) => {
             if (event instanceof HttpResponse) {
-              const response: HttpResponse<APIResponse> = event;
-              if (!response.body){
-                return;
-              }
-              if (response.body.code === 0 && isAuthFail(response.body.code)) {
+              const response: HttpResponse<API.response> = event;
+              if (response.status === 401) {
                 this.auth.removeAuthorizationToken();
-              }
-              if (response.body.code === 0 && isAuthFail(response.body.code ) && location.pathname !== this.loginUrl) {
                 location.replace(this.loginUrl);
               }
             }
-          }
+          },
+          error: err => console.log(err)
         })
       );
   }
 }
-
-function isAuthFail(code: number): boolean {
-  switch (code) {
-    case 2000:
-    case 2001:
-    case 2002:
-      return true;
-  }
-  return false;
-}
-

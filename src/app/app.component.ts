@@ -3,7 +3,7 @@ import {ThemeService} from "./service/theme.service";
 import { en_US, zh_CN, NzI18nService } from 'ng-zorro-antd/i18n';
 import {NzIconService} from "ng-zorro-antd/icon";
 import {UserService} from "./service/user.service";
-import {LoggingService} from "./log/logging.service";
+import {LogService} from "./log/log.service";
 import {LoginComponent} from "./pages/user/login/login.component";
 import {ActivatedRoute, ActivatedRouteSnapshot} from "@angular/router";
 import {Subject} from "rxjs";
@@ -22,7 +22,7 @@ export class AppComponent {
               private i18n: NzI18nService,
               private iconService: NzIconService,
               private userService: UserService,
-              private logging: LoggingService,
+              private logging: LogService,
               private router: ActivatedRoute) {
     this.iconService.fetchFromIconfont({
       scriptUrl: 'assets/scripts/icon-svg.js'

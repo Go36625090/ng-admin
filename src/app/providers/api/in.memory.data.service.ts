@@ -1,8 +1,12 @@
 import {Injectable} from '@angular/core';
-import {InMemoryDbService, RequestInfo} from "angular-in-memory-web-api";
-import {Observable, of} from "rxjs";
-import {User} from "../../models/user";
-import {LoginResponse} from "../../models/login-response";
+import {
+  getStatusText,
+  InMemoryDbService,
+  RequestInfo,
+  ResponseOptions,
+  STATUS
+} from "angular-in-memory-web-api";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +15,23 @@ export class InMemoryDataService implements InMemoryDbService {
 
   constructor() {
   }
-
+  login= {
+    id: 1,
+    username: "admin",
+    token: "11111111111111111111111111111111",
+    menus: [{
+      id: 1,
+      name: '关于我们',
+      pattern: '/about'
+    }],
+    permissions: [{
+      id: 1,
+      name: '查询信息',
+      pattern: 'about.info.query'
+    }]
+  };
   createDb(reqInfo?: RequestInfo): {} | Observable<{}> | Promise<{}> {
-    const users: User[] = [
+    const users = [
       {id: 12, name: 'Dr. Nice'},
       {id: 13, name: 'Bombasto'},
       {id: 14, name: 'Celeritas'},
@@ -24,33 +42,66 @@ export class InMemoryDataService implements InMemoryDbService {
       {id: 19, name: 'Magma'},
       {id: 20, name: 'Tornado'}
     ];
-    const login: LoginResponse = {
-        id: 1,
-        username: "mock_user",
-        token: "",
-        menus: [{
-          id: 1,
-          name: '关于我们',
-          pattern: '/about'
-        }],
-        permissions: [{
-          id: 1,
-          name: '查询信息',
-          pattern: 'about.info.query'
-        }]
-      };
+
     const welcomeinfoquery = {
         name: 'welcome.info.query'
     }
 
     return {
       users: users,
-      user_account_login: login,
+      user_account_login : this.login,
       welcome_info_query: welcomeinfoquery,
     };
   }
 
-  genId(heroes: User[]): number {
+  post(reqInfo: RequestInfo) {
+    let body = reqInfo.utils.getJsonBody(reqInfo.req)
+    const isLoginFail = reqInfo.url == "user.account.login" && (body == null||body.username != 'admin');
+    return reqInfo.utils.createResponse$(() => {
+      const options: ResponseOptions =
+        {
+          body: this.login,
+          status: isLoginFail?STATUS.UNAUTHORIZED: STATUS.OK
+        }
+      return this.finishOptions(options, reqInfo);
+    });
+  }
+
+  put(reqInfo: RequestInfo) {
+    let collection = reqInfo.collection;
+
+    // process only requests as /api/object/:id
+    if (!collection || !reqInfo.id)
+      return reqInfo.utils.createResponse$(() => {
+        const options: ResponseOptions = { status: STATUS.NOT_FOUND };
+        return this.finishOptions(options, reqInfo);
+      });
+
+    // update an object
+    let item: any = reqInfo.utils.findById(collection, reqInfo.id);
+    const body = reqInfo.utils.getJsonBody(reqInfo.req)
+    Object.assign(item, body);
+
+    // respond
+    return reqInfo.utils.createResponse$(() => {
+      const options: ResponseOptions =
+        {
+          body: item,
+          status: STATUS.OK
+        }
+      return this.finishOptions(options, reqInfo);
+    });
+  }
+
+  private finishOptions(options: ResponseOptions, { headers, url }: RequestInfo) {
+    if (options.status != null) {
+      options.statusText = getStatusText(options.status);
+    }
+    options.headers = headers;
+    options.url = url;
+    return options;
+  }
+  genId(heroes: any[]): number {
     return heroes.length > 0 ? Math.max(...heroes.map(hero => hero.id)) + 1 : 11;
   }
 }

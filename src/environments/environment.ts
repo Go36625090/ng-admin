@@ -5,7 +5,7 @@
 export const environment = {
   test: false,
   production: false,
-  api: '/turbo-trader/api',
+  api: '/turbo/api',
   config_url: '/assets/config.dev.json'
 };
 

@@ -6,13 +6,13 @@ import {
   HttpInterceptor, HttpResponse
 } from '@angular/common/http';
 import {finalize, Observable, tap} from 'rxjs';
-import {LoggingService} from "../log/logging.service";
+import {LogService} from "../log/log.service";
 import {Log} from "../log";
 
 @Injectable()
 export class TraceInterceptor implements HttpInterceptor {
   private log: Log;
-  constructor(private logging: LoggingService) {
+  constructor(private logging: LogService) {
     this.log = logging.bind(this);
   }
 
@@ -24,7 +24,11 @@ export class TraceInterceptor implements HttpInterceptor {
       .pipe(
         tap(
           {
-            next: value => (okCode = value instanceof HttpResponse<any> ? value.status : 0),
+            next: value => {
+              okCode = value instanceof HttpResponse<any> ? value.status : 0;
+              this.log.debug(`${req.method} "${req.urlWithParams}"`, 'response: ', value);
+              return value;
+            },
             error: err => errCode = err.status
           }
         ),
