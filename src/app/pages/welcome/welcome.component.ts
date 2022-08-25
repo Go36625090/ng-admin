@@ -3,6 +3,7 @@ import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {APIService, API_SERVICE} from "../../providers/api";
 import {LogService} from "../../log/log.service";
 import {Log} from "../../log";
+import {UserService} from "../../service/user.service";
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
@@ -11,10 +12,13 @@ import {Log} from "../../log";
 export class WelcomeComponent implements OnInit {
   gender: string = 'male';
   private readonly log: Log;
-  constructor(private fb: UntypedFormBuilder, @Inject(API_SERVICE) private api: APIService,
+  user: any;
+  constructor(private fb: UntypedFormBuilder, @Inject(API_SERVICE)
+              private api: APIService,
+              private userService: UserService,
               private logging: LogService) {
     this.log = logging.bind(this);
-
+    this.user = userService.getUser();
   }
   validateForm!: UntypedFormGroup;
 

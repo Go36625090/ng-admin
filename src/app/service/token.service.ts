@@ -1,34 +1,25 @@
-import {Injectable, SkipSelf} from "@angular/core";
+import {Injectable} from "@angular/core";
+import {CacheService} from "../providers/cache/cache.service";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
-  private _token: string | undefined;
-  private storage: Storage;
-
-  constructor() {
-    this.storage = localStorage;
+  public readonly tokenKey = '__token__';
+  constructor(private cache:CacheService) {
   }
 
   getToken(): string {
-    return <string>this._token;
+    return <string>this.cache.get(this.tokenKey);
   }
 
   setToken(value: string) {
-    this._token = value;
-    this.storage.setItem('token', value);
+    this.cache.set(this.tokenKey, value);
   }
 
-  getAuthorizationToken(): string {
-    return "";
+  removeToken() {
+    this.cache.remove(this.tokenKey);
   }
 
-  remove() {
-
-  }
-
-  removeAuthorizationToken() {
-
-  }
 }

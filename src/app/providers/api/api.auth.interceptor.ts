@@ -17,7 +17,7 @@ export class ApiAuthInterceptor implements HttpInterceptor{
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Get the auth token from the service.
-    const authToken = this.auth.getAuthorizationToken();
+    const authToken = this.auth.getToken();
 
     const authReq = req.clone({
       headers: req.headers.set('Authorization', authToken)
@@ -31,7 +31,7 @@ export class ApiAuthInterceptor implements HttpInterceptor{
             if (event instanceof HttpResponse) {
               const response: HttpResponse<API.response<any>> = event;
               if (response.status === 401) {
-                this.auth.removeAuthorizationToken();
+                this.auth.removeToken();
                 location.replace(this.loginUrl);
               }
             }

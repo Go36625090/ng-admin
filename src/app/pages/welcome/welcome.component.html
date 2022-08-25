@@ -1,6 +1,7 @@
 <nz-divider></nz-divider>
 <span >The author is {gender, select, male {male} female {female} other {other}}</span>
 <nz-divider></nz-divider>
+{{user}}
 <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
   <nz-form-item>
     <nz-form-control nzErrorTip="Please input your username!">

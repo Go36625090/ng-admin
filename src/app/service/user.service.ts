@@ -10,17 +10,20 @@ import {REPORTER} from "../providers/reporter";
 import {Reporter} from "../providers/reporter/reporter";
 import {API} from "../providers/api/types";
 import {LoginResponse} from "../models/login.response";
+import {CacheService} from "../providers/cache/cache.service";
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   private log: Log;
-  private loginInfo: LoginResponse|undefined;
+  private user: LoginResponse|undefined;
+  public readonly userInfoKey = '__user_info__';
 
   constructor(
     @Inject(API_SERVICE) private api: APIService,
     private tokenService: TokenService,
+    private cache: CacheService,
     @Inject(LOGIN_ENDPOINT) private loginUrl: string,
     @Inject(REPORTER) private reporter: Reporter,
     private logging: LogService,
@@ -29,7 +32,7 @@ export class UserService {
   }
 
   logout() {
-    this.tokenService.removeAuthorizationToken();
+    this.cache.clear();
     this.router.navigateByUrl('/user/login',
       {skipLocationChange: false}).catch(e => alert(e));
   }
@@ -38,14 +41,19 @@ export class UserService {
     this.api.post<LoginResponse>({pattern: 'user.account.login'}, body)
       .subscribe({
         next: (v: API.response<LoginResponse>) => {
-          console.log(v)
-          this.loginInfo = v.content;
+          this.user = v.content;
           this.tokenService.setToken(v.content.token);
+          this.cache.set(this.userInfoKey, this.user);
           this.router.navigateByUrl('/', {skipLocationChange: false})
             .then();
         },
-        error: err => this.reporter.write(Level.ERROR, 'user.account.login', err.message)
+        error: err => {
+          this.reporter.write(Level.ERROR, 'user.account.login', err.message);
+          this.cache.clear();
+        }
       })
   }
-
+  getUser():any{
+    return this.user;
+  }
 }
