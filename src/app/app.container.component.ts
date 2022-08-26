@@ -56,7 +56,6 @@ import { Component, OnInit } from '@angular/core';
           transform: rotate(360deg);
         }
       }
-
     `
   ]
 })

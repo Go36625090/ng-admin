@@ -12,6 +12,7 @@ import {API} from "../providers/api/types";
 import {UserInfo} from "../models/user.info";
 import {CacheService} from "../providers/cache/cache.service";
 import {Menu} from "../models/menu";
+import {Urls} from "../consts/urls";
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +35,7 @@ export class UserService {
 
   logout() {
     this.cache.clear();
-    this.router.navigate(['/login'], {replaceUrl: true});
+    location.replace(Urls.LOGIN_URL);
   }
 
   login(body: any) {
@@ -44,7 +45,7 @@ export class UserService {
           this.user = v.content;
           this.tokenService.setToken(v.content.token);
           this.cache.set(this.userInfoKey, this.user);
-          this.router.navigate(['/home'], {replaceUrl: true});
+          location.replace(Urls.HOME_URL);
         },
         error: err => {
           this.reporter.write(Level.ERROR, 'user.account.login', err.message);

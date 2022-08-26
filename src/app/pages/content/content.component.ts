@@ -3,9 +3,7 @@ import {UserService} from "../../service/user.service";
 import {UserInfo} from "../../models/user.info";
 import {Menu} from "../../models/menu";
 import {
-  ActivationEnd,
-  ActivationStart, ChildActivationEnd,
-  ChildActivationStart, ResolveEnd, RouteConfigLoadEnd,
+ResolveEnd,
   Router
 } from "@angular/router";
 import {I18nService} from "../../service/i18n.service";
@@ -37,24 +35,12 @@ export class ContentComponent implements OnInit {
     }
     this.router.events.subscribe(evt=> {
       if(evt instanceof  ResolveEnd ) {
-
         const paths = evt.state.url.split('/');
         this.breadcrumb.parent = paths[1];
         this.breadcrumb.child = paths[2]
       }
     });
   }
-  onActivate($event: any) {
-  }
 
-  onDeactivate($event: any) {
-  }
-
-  onAttach($event: any) {
-  }
-
-  onDetach($event: any) {
-
-  }
 
 }

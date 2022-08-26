@@ -43,6 +43,7 @@ import {NzInputModule} from "ng-zorro-antd/input";
 import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
 import { AppContainerDirective } from './app.container.directive';
 import { AppContainerComponent } from './app.container.component';
+import { AppBlankComponent } from './app.blank.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { AppContainerComponent } from './app.container.component';
     LoginComponent,
     PageNotFoundComponent,
     AppContainerDirective,
-    AppContainerComponent
+    AppContainerComponent,
+    AppBlankComponent
   ],
   imports: [
     CommonModule,

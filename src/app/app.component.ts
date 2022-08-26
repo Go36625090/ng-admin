@@ -1,22 +1,31 @@
-import {APP_INITIALIZER, ApplicationInitStatus, Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  APP_INITIALIZER,
+  ApplicationInitStatus,
+  Component,
+  Inject,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import {ThemeService} from "./service/theme.service";
-import {en_US, zh_CN, NzI18nService} from 'ng-zorro-antd/i18n';
+import {NzI18nService} from 'ng-zorro-antd/i18n';
 import {NzIconService} from "ng-zorro-antd/icon";
 import {UserService} from "./service/user.service";
 import {LogService} from "./log/log.service";
-import {ActivatedRoute, ResolveStart, Router} from "@angular/router";
+import {NavigationEnd, ResolveEnd, ResolveStart, Router} from "@angular/router";
 import {TokenService} from "./service/token.service";
-import {Subject} from "rxjs";
 import {AppContainerDirective} from "./app.container.directive";
 import {AppContainerComponent} from "./app.container.component";
 import {LoginComponent} from "./pages/user/login/login.component";
+import {Urls} from "./consts/urls";
+import {AppBlankComponent} from "./app.blank.component";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, AfterViewInit{
   isCollapsed = false;
   initialized = false;
   @ViewChild(AppContainerDirective, {static: true}) appContainerDirective!: AppContainerDirective;
@@ -30,32 +39,42 @@ export class AppComponent implements OnInit{
     private logging: LogService,
     private tokenService: TokenService,
     public router: Router) {
-    this.iconService.fetchFromIconfont({
-      scriptUrl: 'assets/scripts/icon-svg.js'
-    });
-
+    console.log('init app')
     this.router.events.subscribe(evt => {
-      if(!location.pathname.endsWith('/login') && !this.tokenService.getToken()){
-        location.replace('/login')
-        return;
+      if(evt instanceof NavigationEnd){
+        if(!location.pathname.endsWith(Urls.LOGIN_URL) && !this.tokenService.getToken()){
+          this.loadAppBlankComponent()
+          location.replace(Urls.LOGIN_URL);
+          return;
+        }else {
+          if(!this.initialized)
+            this.loadContentComponent();
+          this.initialized = true;
+        }
       }
-      this.loadContentComponent();
+
     })
   }
 
-  loadLoginComponent(){
+  loadAppBlankComponent(){
     const viewContainerRef = this.appContainerDirective.viewContainerRef;
     viewContainerRef.clear();
-    viewContainerRef.createComponent<LoginComponent>(LoginComponent);
+    viewContainerRef.createComponent<AppBlankComponent>(AppBlankComponent);
   }
 
   loadContentComponent(){
+    console.log('loadContentComponent')
     const viewContainerRef = this.appContainerDirective.viewContainerRef;
     viewContainerRef.clear();
     viewContainerRef.createComponent<AppContainerComponent>(AppContainerComponent);
   }
 
   ngOnInit(): void {
+    console.log('init ngOnInit')
+  }
+
+  ngAfterViewInit(): void {
+    console.log('init ngAfterViewInit')
   }
 
 
