@@ -8,7 +8,7 @@
             <li *ngIf="menu.type == 0" nz-submenu  [nzTitle]="menu.i18nNames[locale]||menu.name" [nzIcon]="menu.icon" [nzOpen]="url.startsWith('/'+menu.pattern)">
               <ul>
                 <li *ngFor="let sub of menu.submenus" nz-menu-item [nzMatchRouter]='true' [routerLink]="menu.pattern+'/'+sub.pattern">
-                  <i nz-icon [nzType]="sub.icon" ></i>&nbsp;{{sub.i18nNames[locale]||sub.name}}
+                  {{sub.i18nNames[locale]||sub.name}}
                 </li>
               </ul>
             </li>
