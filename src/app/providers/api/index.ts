@@ -37,5 +37,5 @@ export const MockWebApiModule = environment.production ?
       dataEncapsulation: true,
       apiBase: environment.api,
       passThruUnknownUrl: true,
-      delay: 1000,
+      delay: 300,
     });

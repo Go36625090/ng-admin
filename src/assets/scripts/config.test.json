@@ -1,7 +1,0 @@
-const configDev = {
-  log: {
-    level: 0,
-    report_url: '/',
-    use_writer: true,
-  }
-}

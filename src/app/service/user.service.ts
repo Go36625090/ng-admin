@@ -20,7 +20,6 @@ export class UserService {
   private log: Log;
   private user: UserInfo | undefined | null;
   public readonly userInfoKey = '__user_info__';
-  // localeEvent$: EventEmitter<string>
 
   constructor(
     @Inject(API_SERVICE) private api: APIService,
@@ -31,13 +30,11 @@ export class UserService {
     private logging: LogService,
     private router: Router, private route: ActivatedRoute) {
     this.log = this.logging.bind(this);
-    // this.localeEvent$ = new EventEmitter<string>();
   }
 
   logout() {
     this.cache.clear();
-    this.router.navigateByUrl('/user/login',
-      {skipLocationChange: false}).catch(e => alert(e));
+    this.router.navigate(['/login'], {replaceUrl: true});
   }
 
   login(body: any) {
@@ -47,8 +44,7 @@ export class UserService {
           this.user = v.content;
           this.tokenService.setToken(v.content.token);
           this.cache.set(this.userInfoKey, this.user);
-          this.router.navigateByUrl('/', {skipLocationChange: false})
-            .then();
+          this.router.navigate(['/home'], {replaceUrl: true});
         },
         error: err => {
           this.reporter.write(Level.ERROR, 'user.account.login', err.message);
@@ -65,9 +61,11 @@ export class UserService {
     return this.user as UserInfo
   }
 
-  fetchMenus():Menu[][]{
+  fetchMenus():Menu[][]|null|undefined{
     const user = this.getUser();
-    return user.menus;
+    if(user)
+      return user.menus;
+    return null;
   }
 
 }

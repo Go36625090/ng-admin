@@ -18,9 +18,12 @@ export class ApiAuthInterceptor implements HttpInterceptor{
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Get the auth token from the service.
     const authToken = this.auth.getToken();
-
+    const headers = req.headers;
+    if(authToken){
+      headers.set('Authorization', authToken)
+    }
     const authReq = req.clone({
-      headers: req.headers.set('Authorization', authToken)
+      headers: headers
     });
 
     return next.handle(authReq)
@@ -35,8 +38,8 @@ export class ApiAuthInterceptor implements HttpInterceptor{
                 location.replace(this.loginUrl);
               }
             }
+            return event;
           },
-          error: err => console.log(err)
         })
       );
   }

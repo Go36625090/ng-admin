@@ -1,7 +1,0 @@
-{
-  "log": {
-    "level": 0,
-    "report_url": "/logging",
-    "use_writer": true
-  }
-}

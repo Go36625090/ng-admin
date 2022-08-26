@@ -3,12 +3,12 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {IconsProviderModule} from './icons-provider.module';
 import {NzLayoutModule} from 'ng-zorro-antd/layout';
-import {NzMenuModule, NzMenuServiceLocalToken} from 'ng-zorro-antd/menu';
+import {NzMenuModule} from 'ng-zorro-antd/menu';
 import {NzFormModule} from "ng-zorro-antd/form";
 import {NzBreadCrumbModule} from "ng-zorro-antd/breadcrumb";
 import {NzIconModule} from "ng-zorro-antd/icon";
@@ -38,7 +38,11 @@ import {API_SERVICE_PROVIDER, MockWebApiModule} from "./providers/api";
 import { HomeComponent } from './pages/home/home.component';
 import { PageNotFoundComponent } from './pages/errors/page.not.found.component';
 import {IconModule} from "@ant-design/icons-angular";
-
+import {LoginComponent} from "./pages/user/login/login.component";
+import {NzInputModule} from "ng-zorro-antd/input";
+import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
+import { AppContainerDirective } from './app.container.directive';
+import { AppContainerComponent } from './app.container.component';
 
 
 @NgModule({
@@ -49,13 +53,17 @@ import {IconModule} from "@ant-design/icons-angular";
     SiderComponent,
     ContentComponent,
     HomeComponent,
+    LoginComponent,
     PageNotFoundComponent,
+    AppContainerDirective,
+    AppContainerComponent
   ],
   imports: [
     CommonModule,
     BrowserModule.withServerTransition({appId: 'jewellery'}),
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     IconsProviderModule,
@@ -72,6 +80,8 @@ import {IconModule} from "@ant-design/icons-angular";
     NzDrawerModule,
     MockWebApiModule,
     IconModule,
+    NzInputModule,
+    NzCheckboxModule,
   ],
   providers: [
     CONFIG_PROVIDER,

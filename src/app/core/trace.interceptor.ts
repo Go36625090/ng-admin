@@ -33,7 +33,7 @@ export class TraceInterceptor implements HttpInterceptor {
               this.response = value;
               return value;
             },
-            error: err => errCode = err.status
+            error: err => (errCode = err.status, this.log.error(err))
           }
         ),
         finalize(() => {

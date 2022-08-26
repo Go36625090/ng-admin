@@ -11,9 +11,7 @@ import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
 
 
 @NgModule({
-  declarations: [
-    LoginComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     FormsModule,

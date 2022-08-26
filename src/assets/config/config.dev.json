@@ -2,6 +2,6 @@
   "report": {
     "url": "/logging",
     "level": "error",
-    "filter": []
+    "filter": ["info"]
   }
 }

@@ -4,6 +4,7 @@ import {AboutComponent} from "./pages/about/about.component";
 import {RouterGuard} from "./auth/router.guard";
 import {HomeComponent} from "./pages/home/home.component";
 import {PageNotFoundComponent} from "./pages/errors/page.not.found.component";
+import {LoginComponent} from "./pages/user/login/login.component";
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/home'},
@@ -11,6 +12,12 @@ const routes: Routes = [
     path: 'home', component: HomeComponent,
     data: {
       name: 'home'
+    }
+  },
+  {
+    path: 'login', component: LoginComponent,
+    data: {
+      name: 'login'
     }
   },
   {
@@ -28,7 +35,13 @@ const routes: Routes = [
       name: 'welcome'
     }
   },
-  {path: 'user', loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule)},
+  {
+    path: 'user', loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule),
+    canActivateChild: [RouterGuard],
+    data: {
+      name: 'user'
+    },
+  },
   {
     path: 'setting',
     loadChildren: () => import('./pages/setting/setting.module').then(m => m.SettingModule),

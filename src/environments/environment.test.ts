@@ -6,7 +6,7 @@ export const environment = {
   test: true,
   production: false,
   api: '/turbo/api',
-  config_url: '/assets/config.test.json'
+  config_url: '/assets/config/config.test.json'
 };
 
 /*

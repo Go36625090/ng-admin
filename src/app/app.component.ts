@@ -1,94 +1,62 @@
-import {APP_INITIALIZER, ApplicationInitStatus, Component, Inject} from '@angular/core';
+import {APP_INITIALIZER, ApplicationInitStatus, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {ThemeService} from "./service/theme.service";
-import { en_US, zh_CN, NzI18nService } from 'ng-zorro-antd/i18n';
+import {en_US, zh_CN, NzI18nService} from 'ng-zorro-antd/i18n';
 import {NzIconService} from "ng-zorro-antd/icon";
 import {UserService} from "./service/user.service";
 import {LogService} from "./log/log.service";
-import {LoginComponent} from "./pages/user/login/login.component";
-import {ActivatedRoute, ActivatedRouteSnapshot} from "@angular/router";
+import {ActivatedRoute, ResolveStart, Router} from "@angular/router";
+import {TokenService} from "./service/token.service";
 import {Subject} from "rxjs";
-import {AsyncPipe} from "@angular/common";
+import {AppContainerDirective} from "./app.container.directive";
+import {AppContainerComponent} from "./app.container.component";
+import {LoginComponent} from "./pages/user/login/login.component";
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   isCollapsed = false;
-  singlePage = true;
+  initialized = false;
+  @ViewChild(AppContainerDirective, {static: true}) appContainerDirective!: AppContainerDirective;
+
   constructor(
     @Inject(APP_INITIALIZER) public appInit: ApplicationInitStatus,
     private themeService: ThemeService,
-              private i18n: NzI18nService,
-              private iconService: NzIconService,
-              private userService: UserService,
-              private logging: LogService,
-              private router: ActivatedRoute) {
+    private i18n: NzI18nService,
+    private iconService: NzIconService,
+    private userService: UserService,
+    private logging: LogService,
+    private tokenService: TokenService,
+    public router: Router) {
     this.iconService.fetchFromIconfont({
       scriptUrl: 'assets/scripts/icon-svg.js'
     });
-    this.singlePage = (router.outlet != 'primary');
-  }
-  logout(){
-    this.userService.logout();
+
+    this.router.events.subscribe(evt => {
+      if(!location.pathname.endsWith('/login') && !this.tokenService.getToken()){
+        location.replace('/login')
+        return;
+      }
+      this.loadContentComponent();
+    })
   }
 
-  switchLanguage(id: string) {
-    if (id == 'zh_CN'){
-      this.i18n.setLocale(zh_CN);
-    }else{
-      this.i18n.setLocale(en_US);
-    }
-  }
-  toggleTheme(): void {
-    this.themeService.toggleTheme().then();
+  loadLoginComponent(){
+    const viewContainerRef = this.appContainerDirective.viewContainerRef;
+    viewContainerRef.clear();
+    viewContainerRef.createComponent<LoginComponent>(LoginComponent);
   }
 
-  updateMenuInlineCollapsed(e: any): void{
-    console.log(e);
-    this.isCollapsed = e;
+  loadContentComponent(){
+    const viewContainerRef = this.appContainerDirective.viewContainerRef;
+    viewContainerRef.clear();
+    viewContainerRef.createComponent<AppContainerComponent>(AppContainerComponent);
   }
 
-  log(s: string): void {
+  ngOnInit(): void {
   }
 
-  visible = false;
-  size: 'large' | 'default' = 'default';
-
-  get title(): string {
-    return `${this.size} Drawer`;
-  }
-
-  showDefault(): void {
-    this.size = 'default';
-    this.open();
-  }
-
-  showLarge(): void {
-    this.size = 'large';
-    this.open();
-  }
-
-  open(): void {
-    this.visible = true;
-  }
-
-  close(): void {
-    this.visible = false;
-  }
-  onActivate($event: any) {
-    console.log()
-  }
-
-  onDeactivate($event: any) {
-
-  }
-
-  onAttach($event: any) {
-  }
-
-  onDetach($event: any) {
-
-  }
 
 }

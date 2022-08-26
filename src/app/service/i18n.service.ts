@@ -9,7 +9,7 @@ import {en_US, NzI18nService, zh_CN} from "ng-zorro-antd/i18n";
   providedIn: 'root'
 })
 export class I18nService implements OnInit{
-  menus: Menu[][]|undefined;
+  menus: Menu[][] | null | undefined;
   readonly localeEvent$: EventEmitter<string>
 
   constructor(private httpClient:HttpClient,
