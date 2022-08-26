@@ -11,6 +11,7 @@ import {Reporter} from "../providers/reporter/reporter";
 import {API} from "../providers/api/types";
 import {UserInfo} from "../models/user.info";
 import {CacheService} from "../providers/cache/cache.service";
+import {Menu} from "../models/menu";
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ export class UserService {
   private log: Log;
   private user: UserInfo | undefined | null;
   public readonly userInfoKey = '__user_info__';
-  localeEvent$: EventEmitter<string>
+  // localeEvent$: EventEmitter<string>
 
   constructor(
     @Inject(API_SERVICE) private api: APIService,
@@ -30,7 +31,7 @@ export class UserService {
     private logging: LogService,
     private router: Router, private route: ActivatedRoute) {
     this.log = this.logging.bind(this);
-    this.localeEvent$ = new EventEmitter<string>();
+    // this.localeEvent$ = new EventEmitter<string>();
   }
 
   logout() {
@@ -55,6 +56,7 @@ export class UserService {
         }
       })
   }
+
   getUser(): UserInfo{
     if(!this.user){
       this.user = this.cache.get(this.userInfoKey);
@@ -62,4 +64,10 @@ export class UserService {
 
     return this.user as UserInfo
   }
+
+  fetchMenus():Menu[][]{
+    const user = this.getUser();
+    return user.menus;
+  }
+
 }

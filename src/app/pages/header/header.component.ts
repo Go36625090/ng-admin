@@ -5,6 +5,7 @@ import {NzIconService} from "ng-zorro-antd/icon";
 import {UserService} from "../../service/user.service";
 import {LogService} from "../../log/log.service";
 import {ActivatedRoute} from "@angular/router";
+import {I18nService} from "../../service/i18n.service";
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,7 @@ import {ActivatedRoute} from "@angular/router";
 export class HeaderComponent implements OnInit {
 
   constructor(private themeService: ThemeService,
-              private i18n: NzI18nService,
+              public i18n: I18nService,
               private iconService: NzIconService,
               private userService: UserService,
               private logging: LogService,
@@ -26,16 +27,16 @@ export class HeaderComponent implements OnInit {
     this.userService.logout();
   }
 
-  switchLanguage(id: string) {
-    if (id == 'zh_CN'){
-      this.i18n.setLocale(zh_CN);
-      this.userService.localeEvent$.emit('zh');
-    }else{
-      this.i18n.setLocale(en_US);
-      this.userService.localeEvent$.emit('us');
-    }
-
-  }
+  // switchLanguage(id: string) {
+  //   if (id == 'zh_CN'){
+  //     this.i18n.setLocale(zh_CN);
+  //     this.userService.localeEvent$.emit('zh');
+  //   }else{
+  //     this.i18n.setLocale(en_US);
+  //     this.userService.localeEvent$.emit('en');
+  //   }
+  //
+  // }
 
   toggleTheme(): void {
     this.themeService.toggleTheme().then();

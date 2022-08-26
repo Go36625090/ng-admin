@@ -8,6 +8,7 @@ import {
   ChildActivationStart, ResolveEnd, RouteConfigLoadEnd,
   Router
 } from "@angular/router";
+import {I18nService} from "../../service/i18n.service";
 
 @Component({
   selector: 'app-content',
@@ -24,8 +25,8 @@ export class ContentComponent implements OnInit {
   };
   constructor(private userService: UserService,
               public router: Router,
+              public i18nService: I18nService,
               @Inject(LOCALE_ID) public locale: string) {
-    this.userService.localeEvent$.subscribe(locale=>this.locale = locale);
   }
 
   ngOnInit(): void {
@@ -36,6 +37,7 @@ export class ContentComponent implements OnInit {
     }
     this.router.events.subscribe(evt=> {
       if(evt instanceof  ResolveEnd ) {
+
         const paths = evt.state.url.split('/');
         this.breadcrumb.parent = paths[1];
         this.breadcrumb.child = paths[2]

@@ -5,10 +5,10 @@
         <a routerLink="/"><i nz-icon nzType="home"></i></a>
       </nz-breadcrumb-item>
       <nz-breadcrumb-item *ngIf="breadcrumb.parent">
-        <a (click)="breadcrumb.child=''" [routerLink]="breadcrumb.parent">{{breadcrumb.parent}}</a>
+        <a (click)="breadcrumb.child=''" [routerLink]="breadcrumb.parent">{{i18nService.translateMenu(breadcrumb.parent, null)}}</a>
       </nz-breadcrumb-item>
       <nz-breadcrumb-item  *ngIf="breadcrumb.child">
-        <a [routerLink]="breadcrumb.parent+'/'+breadcrumb.child">{{breadcrumb.child}}</a>
+        <a [routerLink]="breadcrumb.parent+'/'+breadcrumb.child">{{i18nService.translateMenu(breadcrumb.parent, breadcrumb.child)}}</a>
       </nz-breadcrumb-item>
     </nz-breadcrumb>
     <nz-divider></nz-divider>

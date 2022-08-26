@@ -4,6 +4,7 @@ import {UserService} from "../../service/user.service";
 import {UserInfo} from "../../models/user.info";
 import {Subject} from "rxjs";
 import {Menu} from "../../models/menu";
+import {I18nService} from "../../service/i18n.service";
 
 @Component({
   selector: 'app-sider',
@@ -18,18 +19,16 @@ export class SiderComponent implements OnInit {
 
   constructor(public route: ActivatedRoute,
               private userService: UserService,
+              private i18nService: I18nService,
               @Inject(LOCALE_ID) public locale: string) {
     this.url = location.pathname;
-    this.userService.localeEvent$.subscribe(locale=>this.locale = locale);
+    this.i18nService.localeEvent$.subscribe(locale=>this.locale = locale);
   }
 
   ngOnInit(): void {
-    const user = this.userService.getUser();
-    if (user) {
-      this.user = user;
-      this.menus = user.menus;
-    }
+    this.menus = this.userService.fetchMenus();
   }
+
   updateMenuInlineCollapsed(e: any): void{
     this.isCollapsed = e;
   }
