@@ -58,6 +58,6 @@ export class HomeComponent implements OnInit {
   }
 
   onQueryParamsChange($event: NzTableQueryParams) {
-    
+
   }
 }

@@ -47,6 +47,7 @@ import { AppBlankComponent } from './app.blank.component';
 import {NzPaginationModule} from "ng-zorro-antd/pagination";
 import {NzResultModule} from "ng-zorro-antd/result";
 import {NzTableModule} from "ng-zorro-antd/table";
+import { TableComponent } from './pages/commons/table/table/table.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import {NzTableModule} from "ng-zorro-antd/table";
     PageNotFoundComponent,
     AppContainerDirective,
     AppContainerComponent,
-    AppBlankComponent
+    AppBlankComponent,
+    TableComponent
   ],
   imports: [
     CommonModule,
