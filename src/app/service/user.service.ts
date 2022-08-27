@@ -62,11 +62,11 @@ export class UserService {
     return this.user as UserInfo
   }
 
-  fetchMenus():Menu[][]|null|undefined{
+  fetchMenus():Menu[][]{
     const user = this.getUser();
     if(user)
       return user.menus;
-    return null;
+    return [];
   }
 
 }

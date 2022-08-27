@@ -17,7 +17,7 @@
               <span>{{menu.i18nNames[locale]||menu.name}}</span>
             </li>
           </ng-container>
-          <nz-divider *ngIf="i+1 == group.length" nz-menu-divider></nz-divider>
+          <nz-divider *ngIf="i < menus.length-1" nz-menu-divider></nz-divider>
         </ng-container>
       </ul>
     </div>

@@ -15,8 +15,7 @@ export class SiderComponent implements OnInit {
   isCollapsed = false;
   url: string = '';
   user: UserInfo | undefined;
-  menus: Menu[][]|undefined|null;
-
+  menus: Menu[][] = [];
   constructor(public route: ActivatedRoute,
               private userService: UserService,
               private i18nService: I18nService,
