@@ -16,16 +16,17 @@ export class SiderComponent implements OnInit {
   url: string = '';
   user: UserInfo | undefined;
   menus: Menu[][] = [];
-  constructor(public route: ActivatedRoute,
-              private userService: UserService,
-              private i18nService: I18nService,
-              @Inject(LOCALE_ID) public locale: string) {
+  constructor(private userService: UserService,
+              private i18nService: I18nService) {
     this.url = location.pathname;
-    this.i18nService.localeEvent$.subscribe(locale=>this.locale = locale);
   }
 
   ngOnInit(): void {
     this.menus = this.userService.fetchMenus();
+  }
+
+  translateMenu(parent: string, child?: string|null){
+    return this.i18nService.translateMenu(parent, child)
   }
 
   updateMenuInlineCollapsed(e: any): void{

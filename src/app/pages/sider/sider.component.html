@@ -5,16 +5,16 @@
       <ul nz-menu nzMode="inline" [nzSelectable]="true">
         <ng-container *ngFor="let group of menus;index as i;">
           <ng-container *ngFor="let menu of group">
-            <li *ngIf="menu.type == 0" nz-submenu  [nzTitle]="menu.i18nNames[locale]||menu.name" [nzIcon]="menu.icon" [nzOpen]="url.startsWith('/'+menu.pattern)">
+            <li *ngIf="menu.type == 0" nz-submenu  [nzTitle]="translateMenu(menu.name)" [nzIcon]="menu.icon" [nzOpen]="url.startsWith('/'+menu.pattern)">
               <ul>
                 <li *ngFor="let sub of menu.submenus" nz-menu-item [nzMatchRouter]='true' [routerLink]="menu.pattern+'/'+sub.pattern">
-                  {{sub.i18nNames[locale]||sub.name}}
+                  {{translateMenu(menu.name, sub.name)}}
                 </li>
               </ul>
             </li>
             <li *ngIf="menu.type == 1" [routerLink]="menu.pattern" nz-menu-item [nzMatchRouter]='true'>
               <i nz-icon [nzType]="menu.icon"></i>
-              <span>{{menu.i18nNames[locale]||menu.name}}</span>
+              <span>{{translateMenu(menu.name)}}</span>
             </li>
           </ng-container>
           <nz-divider *ngIf="i < menus.length-1" nz-menu-divider></nz-divider>

@@ -15,11 +15,8 @@ import {I18nService} from "../../service/i18n.service";
 export class HeaderComponent implements OnInit {
 
   constructor(private themeService: ThemeService,
-              public i18n: I18nService,
-              private iconService: NzIconService,
-              private userService: UserService,
-              private logging: LogService,
-              private router: ActivatedRoute) { }
+              private i18n: I18nService,
+              private userService: UserService) { }
 
   ngOnInit(): void {
   }
@@ -27,22 +24,14 @@ export class HeaderComponent implements OnInit {
     this.userService.logout();
   }
 
-  // switchLanguage(id: string) {
-  //   if (id == 'zh_CN'){
-  //     this.i18n.setLocale(zh_CN);
-  //     this.userService.localeEvent$.emit('zh');
-  //   }else{
-  //     this.i18n.setLocale(en_US);
-  //     this.userService.localeEvent$.emit('en');
-  //   }
-  //
-  // }
+  switchLanguage(id: string){
+    this.i18n.switchLanguage(id)
+  }
+
 
   toggleTheme(): void {
     this.themeService.toggleTheme().then();
   }
 
-  log(s: string): void {
-  }
 
 }

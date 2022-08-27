@@ -44,6 +44,9 @@ import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
 import { AppContainerDirective } from './app.container.directive';
 import { AppContainerComponent } from './app.container.component';
 import { AppBlankComponent } from './app.blank.component';
+import {NzPaginationModule} from "ng-zorro-antd/pagination";
+import {NzResultModule} from "ng-zorro-antd/result";
+import {NzTableModule} from "ng-zorro-antd/table";
 
 
 @NgModule({
@@ -84,6 +87,9 @@ import { AppBlankComponent } from './app.blank.component';
     IconModule,
     NzInputModule,
     NzCheckboxModule,
+    NzPaginationModule,
+    NzResultModule,
+    NzTableModule,
   ],
   providers: [
     CONFIG_PROVIDER,

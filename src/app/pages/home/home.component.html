@@ -1,1 +1,90 @@
-<p>home works!</p>
+<span >The author is {gender, select, male {male} female {female} other {other}}</span>
+
+<form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your username!">
+      <nz-input-group nzPrefixIcon="user">
+        <input type="text" nz-input formControlName="userName" placeholder="Username" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your Password!">
+      <nz-input-group nzPrefixIcon="lock">
+        <input type="text" nz-input formControlName="password" placeholder="Password" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <div nz-row class="login-form-margin">
+    <div nz-col [nzSpan]="12">
+    </div>
+    <div nz-col [nzSpan]="12">
+      <a class="login-form-forgot">Forgot password</a>
+    </div>
+  </div>
+  <button  nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
+  Or
+  <a>register now!</a>
+</form>
+<!--<nz-pagination [nzPageIndex]="2" [nzTotal]="500" nzShowQuickJumper></nz-pagination>-->
+<nz-divider></nz-divider>
+
+<div style="background: rgb(190, 200, 200);padding: 26px 16px 16px;">
+  <button nz-button nzType="primary" nzGhost>Primary</button>
+  <button nz-button nzType="default" nzGhost>Default</button>
+  <button nz-button nzType="dashed" nzGhost>Dashed</button>
+  <a nz-button nzType="link" nzGhost>Link</a>
+</div>
+
+
+<nz-result
+  i18n-nzSubTitle
+  nzStatus="success"
+  nzTitle="Successfully Purchased Cloud Server ECS!"
+  nzSubTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
+>
+  <div nz-result-extra>
+    <button nz-button nzType="primary">Go Console</button>
+    <button nz-button>Buy Again</button>
+  </div>
+
+</nz-result>
+
+<div style="background: rgb(190, 200, 200);padding: 26px 16px 16px;">
+  <button nz-button nzType="primary" nzDanger>Primary</button>
+  <button nz-button nzType="default" nzDanger>Default</button>
+  <button nz-button nzType="dashed" nzDanger>Dashed</button>
+  <button nz-button nzType="text" nzDanger>Text</button>
+  <a nz-button nzType="link" nzDanger>Link</a>
+
+</div>
+<nz-divider></nz-divider>
+
+<nz-table
+  nzShowSizeChanger
+  [nzData]="listOfRandomUser"
+  [nzFrontPagination]="false"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [nzPageSize]="pageSize"
+  [nzPageIndex]="pageIndex"
+  (nzQueryParams)="onQueryParamsChange($event)"
+>
+  <thead>
+  <tr>
+    <th nzColumnKey="name" [nzSortFn]="true">Name</th>
+    <th nzColumnKey="gender" [nzFilters]="filterGender" [nzFilterFn]="true">Gender</th>
+    <th nzColumnKey="email" [nzSortFn]="true">Email</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of listOfRandomUser">
+    <td>{{ data.name.first }} {{ data.name.last }}</td>
+    <td>{{ data.gender }}</td>
+    <td>{{ data.email }}</td>
+  </tr>
+  </tbody>
+</nz-table>
+
+<nz-divider></nz-divider>
+the end

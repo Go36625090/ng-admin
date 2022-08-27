@@ -40,7 +40,7 @@ export class I18nService implements OnInit{
    * @param parent
    * @param child
    */
-  translateMenu(parent: string, child: string|null): string{
+  translateMenu(parent: string, child?: string|null): string{
     this.menus = this.userService.fetchMenus();
     if(!this.menus){
       return child?child:parent;

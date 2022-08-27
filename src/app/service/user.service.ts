@@ -28,8 +28,7 @@ export class UserService {
     private cache: CacheService,
     @Inject(LOGIN_ENDPOINT) private loginUrl: string,
     @Inject(REPORTER) private reporter: Reporter,
-    private logging: LogService,
-    private router: Router, private route: ActivatedRoute) {
+    private logging: LogService) {
     this.log = this.logging.bind(this);
   }
 
