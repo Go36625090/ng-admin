@@ -25,6 +25,7 @@
         [nzShowSort]="column.sort" [nzSortFn]="column.sort!=undefined && column.sort">
       {{column.name}}
     </th>
+    <th i18n *ngIf="operations">Operations</th>
   </tr>
   </thead>
   <tbody>
@@ -34,6 +35,11 @@
       <td *ngIf="column.transformer" [innerHTML]="column.transformer.apply(row)|keepSafeHtml"></td>
       <td *ngIf="!column.transformer">{{row[column.kind]}}</td>
     </ng-container>
+    <td *ngIf="operations">
+      <ng-container *ngFor="let op of operations">
+        <div [innerHTML]="op.apply(row)|keepSafeHtml" (click)="op.onEvent(row)"></div>
+      </ng-container>
+    </td>
   </tr>
   </tbody>
 </nz-table>

@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {API_SERVICE, APIService} from "../../../common/api";
 import {UserInfo} from "../../../models/user.info";
-import {TableGridColumn} from "../../../common/table.grid/models";
+import {TableGridColumn, TableGridRowOperation} from "../../../common/table.grid/models";
 import {TableGridComponent} from "../../../common/table.grid/table.grid.component";
 import {NzTableQueryParams} from "ng-zorro-antd/table";
 
@@ -12,6 +12,7 @@ import {NzTableQueryParams} from "ng-zorro-antd/table";
 })
 export class CustomComponent implements OnInit {
   columns: TableGridColumn<any>[];
+  operations: TableGridRowOperation[];
   data: any[];
   @ViewChild(TableGridComponent) table: TableGridComponent<any> | undefined;
   constructor( @Inject(API_SERVICE)private api:APIService) {
@@ -21,8 +22,18 @@ export class CustomComponent implements OnInit {
       {name: 'name', kind: 'name',sort: true},
       {name: 'pattern', kind: 'pattern', filter: true}
     ];
+    this.operations = [
+      {
+        onEvent: this.clickDetail,
+        apply(input: any): any {
+          return '<a">详情</a>'
+        }
+      }
+    ]
   }
-
+  clickDetail(row: any){
+    console.log(row);
+  }
   ngOnInit(): void {
 
   }

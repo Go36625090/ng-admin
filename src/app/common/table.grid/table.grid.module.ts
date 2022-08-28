@@ -5,7 +5,6 @@ import {NzTableModule} from "ng-zorro-antd/table";
 import {PipeModule} from "../pipe/pipe.module";
 
 
-
 @NgModule({
   declarations: [
     TableGridComponent,

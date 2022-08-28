@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angular/core';
 import {NzTableQueryParams} from "ng-zorro-antd/table";
-import {DefaultPagination, Pagination, TableData, TableGridColumn} from "./models";
+import {DefaultPagination, Pagination, TableData, TableGridColumn, TableGridRowOperation} from "./models";
 
 @Component({
   selector: 'app-table-grid',
@@ -9,8 +9,10 @@ import {DefaultPagination, Pagination, TableData, TableGridColumn} from "./model
 })
 export class TableGridComponent<T> implements OnInit {
 
+
+  data: any[];
   @Input() columns: TableGridColumn<T>[];
-  @Input() data: any[];
+  @Input() operations: TableGridRowOperation[] | undefined;
   pagination: Pagination;
   onDataChangeEvent$: EventEmitter<TableData> = new EventEmitter<TableData>();
   @Output() onQueryParamsChangeEvent$: EventEmitter<NzTableQueryParams> = new EventEmitter<NzTableQueryParams>();
