@@ -1,5 +1,5 @@
 import {AppConfig} from "../../app.config";
-import {Level} from "../../log/level";
+import {Level} from "../log/level";
 import {Reporter} from "./reporter";
 
 export class NoopReporter implements Reporter{

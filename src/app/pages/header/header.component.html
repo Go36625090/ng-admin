@@ -20,25 +20,6 @@
           </a>
         </li>
         <li>
-          <a  nz-dropdown [nzDropdownMenu]="menuLang"  nzPlacement="bottomRight">
-            <i nz-icon nzIconfont="icon-language"></i>
-          </a>
-          <nz-dropdown-menu #menuLang="nzDropdownMenu">
-            <ul nz-menu style="width: auto">
-              <li nz-menu-divider></li>
-              <li nz-menu-item (click)="switchLanguage('en_US')">
-                <i nz-icon nzType="question-circle"></i>
-                &nbsp;&nbsp;<span i18n>English</span>
-              </li>
-              <li nz-menu-divider></li>
-              <li nz-menu-item (click)="switchLanguage('zh_CN')">
-                <i nz-icon nzType="highlight"></i>
-                &nbsp;&nbsp;<span i18n>Simplified Chinese</span>
-              </li>
-            </ul>
-          </nz-dropdown-menu>
-        </li>
-        <li>
           <a  nz-dropdown [nzDropdownMenu]="menuHelp" nzPlacement="bottomRight">
             <i nz-icon nzType="question-circle"></i>
           </a>

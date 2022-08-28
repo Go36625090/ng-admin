@@ -3,10 +3,10 @@
  */
 
 import {Inject, Injectable} from '@angular/core';
-import {environment} from "../../environments/environment";
+import {environment} from "../../../environments/environment";
 import {Log, LOG_LEVEL} from "./index";
 import {Level} from "./level";
-import {AppConfig} from "../app.config";
+import {AppConfig} from "../../app.config";
 
 @Injectable({
   providedIn: 'root',

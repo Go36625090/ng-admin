@@ -11,7 +11,7 @@ import {ThemeService} from "./service/theme.service";
 import {NzI18nService} from 'ng-zorro-antd/i18n';
 import {NzIconService} from "ng-zorro-antd/icon";
 import {UserService} from "./service/user.service";
-import {LogService} from "./log/log.service";
+import {LogService} from "./common/log/log.service";
 import {NavigationEnd, ResolveEnd, ResolveStart, Router} from "@angular/router";
 import {TokenService} from "./service/token.service";
 import {AppContainerDirective} from "./app.container.directive";

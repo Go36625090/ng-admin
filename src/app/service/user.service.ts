@@ -1,18 +1,17 @@
-import {EventEmitter, Inject, Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {TokenService} from "./token.service";
 import {LOGIN_ENDPOINT} from "../consts";
-import {ActivatedRoute, Router} from "@angular/router";
-import {LogService} from "../log/log.service";
-import {API_SERVICE, APIService} from "../providers/api";
-import {Log} from "../log";
-import {Level} from "../log/level";
-import {REPORTER} from "../providers/reporter";
-import {Reporter} from "../providers/reporter/reporter";
-import {API} from "../providers/api/types";
+import {LogService} from "../common/log/log.service";
+import {API_SERVICE, APIService} from "../common/api";
+import {Log} from "../common/log";
+import {Level} from "../common/log/level";
+import {REPORTER} from "../common/reporter";
+import {Reporter} from "../common/reporter/reporter";
+import {API} from "../common/api/types";
 import {UserInfo} from "../models/user.info";
-import {CacheService} from "../providers/cache/cache.service";
 import {Menu} from "../models/menu";
 import {Urls} from "../consts/urls";
+import {CacheService} from "../common/cache/cache.service";
 
 @Injectable({
   providedIn: 'root',
@@ -46,7 +45,7 @@ export class UserService {
           this.cache.set(this.userInfoKey, this.user);
           location.replace(Urls.HOME_URL);
         },
-        error: err => {
+        error: (err: { message: any; }) => {
           this.reporter.write(Level.ERROR, 'user.account.login', err.message);
           this.cache.clear();
         }

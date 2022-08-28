@@ -6,7 +6,6 @@ import {
 ResolveEnd,
   Router
 } from "@angular/router";
-import {I18nService} from "../../service/i18n.service";
 
 @Component({
   selector: 'app-content',
@@ -23,7 +22,6 @@ export class ContentComponent implements OnInit {
   };
   constructor(private userService: UserService,
               public router: Router,
-              public i18nService: I18nService,
               @Inject(LOCALE_ID) public locale: string) {
   }
 

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { I18nService } from './i18n.service';
+import { NtTableGridService } from './nt.table.grid.service';
 
-describe('I18nService', () => {
-  let service: I18nService;
+describe('NtTableGridService', () => {
+  let service: NtTableGridService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(I18nService);
+    service = TestBed.inject(NtTableGridService);
   });
 
   it('should be created', () => {

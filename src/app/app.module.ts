@@ -32,9 +32,8 @@ import {
 import {CONFIG_PROVIDER, NZ_CONFIG_PROVIDER} from "./app.config";
 import {LOCALE_PROVIDER} from "./app.locale";
 import {CommonModule} from "@angular/common";
-import {REPORTER_PROVIDER} from "./providers/reporter";
-import {LOG_LEVEL_PROVIDER} from "./log";
-import {API_SERVICE_PROVIDER, MockWebApiModule} from "./providers/api";
+import {LOG_LEVEL_PROVIDER} from "./common/log";
+import {API_SERVICE_PROVIDER, MockWebApiModule} from "./common/api";
 import { HomeComponent } from './pages/home/home.component';
 import { PageNotFoundComponent } from './pages/errors/page.not.found.component';
 import {IconModule} from "@ant-design/icons-angular";
@@ -47,7 +46,9 @@ import { AppBlankComponent } from './app.blank.component';
 import {NzPaginationModule} from "ng-zorro-antd/pagination";
 import {NzResultModule} from "ng-zorro-antd/result";
 import {NzTableModule} from "ng-zorro-antd/table";
-import { TableComponent } from './pages/commons/table/table/table.component';
+import {PipeModule} from "./common/pipe/pipe.module";
+import {REPORTER_PROVIDER} from "./common/reporter";
+
 
 
 @NgModule({
@@ -63,7 +64,6 @@ import { TableComponent } from './pages/commons/table/table/table.component';
     AppContainerDirective,
     AppContainerComponent,
     AppBlankComponent,
-    TableComponent
   ],
   imports: [
     CommonModule,
@@ -92,6 +92,7 @@ import { TableComponent } from './pages/commons/table/table/table.component';
     NzPaginationModule,
     NzResultModule,
     NzTableModule,
+    PipeModule,
   ],
   providers: [
     CONFIG_PROVIDER,
@@ -104,6 +105,7 @@ import { TableComponent } from './pages/commons/table/table/table.component';
     REPORTER_PROVIDER,
   ],
   bootstrap: [AppComponent],
-  exports: [CommonModule]
+  exports: [
+  ]
 })
 export class AppModule { }

@@ -1,0 +1,39 @@
+<ng-template #totalTemplate let-range="range" let-total>
+  {{ range[0] }}-{{ range[1] }} of {{ total }} Total
+</ng-template>
+
+<nz-table
+  nzShowQuickJumper
+  nzShowSizeChanger
+  [nzSize]="'default'"
+  [nzData]="data"
+  [nzLoadingDelay]="1"
+  [nzLoading]="loading"
+  [nzTotal]="pagination.total"
+  [nzFrontPagination]='false'
+  [nzPageSize]="pagination.size"
+  [nzPageIndex]="pagination.page"
+  [nzShowTotal]="totalTemplate"
+  (nzQueryParams)="onQueryParamsChange($event)"
+  >
+  <thead>
+  <tr>
+    <th *ngIf="enableSelect"
+      [nzChecked]="checked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="onAllChecked($event)"
+    ></th>
+    <th *ngFor="let column of columns" [nzColumnKey]="column.kind"
+        [nzShowSort]="column.sort" [nzSortFn]="column.sort!=undefined && column.sort">
+      {{column.name}}
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let row of data">
+    <td *ngIf="enableSelect" [nzChecked]="setOfCheckedId.has(row.id)" (nzCheckedChange)="onItemChecked(row, $event)"></td>
+    <ng-container *ngFor="let column of columns" >
+      <td *ngIf="column.transformer" [innerHTML]="column.transformer.apply(row)|keepSafeHtml"></td>
+      <td *ngIf="!column.transformer">{{row[column.kind]}}</td>
+    </ng-container>
+  </tr>
+  </tbody>
+</nz-table>

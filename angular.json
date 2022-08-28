@@ -154,6 +154,37 @@
           }
         }
       }
+    },
+    "nt.table.grid": {
+      "projectType": "library",
+      "root": "projects/nt.table.grid",
+      "sourceRoot": "projects/nt.table.grid/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/nt.table.grid/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/nt.table.grid/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/nt.table.grid/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/nt.table.grid/src/test.ts",
+            "tsConfig": "projects/nt.table.grid/tsconfig.spec.json",
+            "karmaConfig": "projects/nt.table.grid/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "cli": {

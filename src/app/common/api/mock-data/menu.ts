@@ -24,7 +24,7 @@ export const menus: Menu[][] = [
           }
         },
         {
-          id: 2, name: "custom", pattern: "custom", sort: 2, type: 1, icon: "customer-service",
+          id: 2, name: "custom", pattern: "custom", sort: 2, type: 1, icon: "customer-i18n",
           i18nNames: {
             'zh': '自定义看板',
             'en': 'custom',
@@ -49,7 +49,7 @@ export const menus: Menu[][] = [
           }
         },
         {
-          id: 2, name: "custom", pattern: "custom", sort: 2, type: 1, icon: "customer-service",
+          id: 2, name: "custom", pattern: "custom", sort: 2, type: 1, icon: "customer-i18n",
           i18nNames: {
             'zh': '自定义看板',
             'en': 'custom',

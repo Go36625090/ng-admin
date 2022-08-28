@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {UserService} from "../../service/user.service";
-import {API_SERVICE, APIService} from "../../providers/api";
+import {API_SERVICE, APIService} from "../../common/api";
 
 @Component({
   selector: 'app-about',
@@ -10,7 +10,7 @@ import {API_SERVICE, APIService} from "../../providers/api";
 export class AboutComponent implements OnInit {
   public about: any;
   public curr: any;
-  constructor(@Inject(API_SERVICE) private api: APIService, private userService: UserService) { }
+  constructor(@Inject(API_SERVICE) private api: APIService) { }
 
   ngOnInit(): void {
     this.api.post({method: 'app.info.about'}, null).subscribe()

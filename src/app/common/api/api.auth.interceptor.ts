@@ -5,7 +5,7 @@ import {
 
 import {Observable, tap} from "rxjs";
 import {TokenService} from "../../service/token.service";
-import {LogService} from "../../log/log.service";
+import {LogService} from "../log/log.service";
 import {LOGIN_ENDPOINT} from "../../consts";
 import {API} from "./types";
 
@@ -16,7 +16,7 @@ export class ApiAuthInterceptor implements HttpInterceptor{
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // Get the auth token from the service.
+    // Get the auth token from the i18n.
     const authToken = this.auth.getToken();
     const headers = req.headers;
     if(authToken){

@@ -1,1 +1,8 @@
-<p>custom works!</p>
+<app-table-grid [columns]="columns"
+                (onQueryParamsChangeEvent$)="onQueryParamsChange($event)"
+                [enableSelect]="true"
+                (onSelectItemEvent$)="onItemSelected($event)"
+                (onDeselectItemEvent$)="onItemDeselected($event)"
+                (onSelectAllItemEvent$)="onAllItemSelected($event)"
+>
+</app-table-grid>

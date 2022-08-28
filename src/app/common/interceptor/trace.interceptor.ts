@@ -6,8 +6,8 @@ import {
   HttpInterceptor, HttpResponse, HttpHeaderResponse, HttpSentEvent, HttpProgressEvent, HttpUserEvent
 } from '@angular/common/http';
 import {finalize, Observable, tap} from 'rxjs';
-import {LogService} from "../log/log.service";
 import {Log} from "../log";
+import {LogService} from "../log/log.service";
 
 @Injectable()
 export class TraceInterceptor implements HttpInterceptor {
@@ -22,7 +22,6 @@ export class TraceInterceptor implements HttpInterceptor {
     const started = Date.now();
     let okCode: number;
     let errCode: number = 0;
-    let response: any;
     return next.handle(req)
       .pipe(
         tap(

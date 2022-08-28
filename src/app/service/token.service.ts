@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {CacheService} from "../providers/cache/cache.service";
+import {CacheService} from "../common/cache/cache.service";
 
 
 @Injectable({

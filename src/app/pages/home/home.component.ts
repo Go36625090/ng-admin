@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Log} from "../../log";
+import {Log} from "../../common/log";
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
-import {API_SERVICE, APIService} from "../../providers/api";
+import {API_SERVICE, APIService} from "../../common/api";
 import {UserService} from "../../service/user.service";
-import {LogService} from "../../log/log.service";
+import {LogService} from "../../common/log/log.service";
 import {NzTableQueryParams} from "ng-zorro-antd/table";
 
 @Component({
