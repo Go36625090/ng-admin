@@ -12,11 +12,10 @@ import {NzI18nService} from 'ng-zorro-antd/i18n';
 import {NzIconService} from "ng-zorro-antd/icon";
 import {UserService} from "./service/user.service";
 import {LogService} from "./common/log/log.service";
-import {NavigationEnd, ResolveEnd, ResolveStart, Router} from "@angular/router";
+import {NavigationEnd,  Router} from "@angular/router";
 import {TokenService} from "./service/token.service";
 import {AppContainerDirective} from "./app.container.directive";
 import {AppContainerComponent} from "./app.container.component";
-import {LoginComponent} from "./pages/user/login/login.component";
 import {Urls} from "./consts/urls";
 import {AppBlankComponent} from "./app.blank.component";
 

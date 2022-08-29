@@ -46,9 +46,7 @@ import { AppBlankComponent } from './app.blank.component';
 import {NzPaginationModule} from "ng-zorro-antd/pagination";
 import {NzResultModule} from "ng-zorro-antd/result";
 import {NzTableModule} from "ng-zorro-antd/table";
-import {PipeModule} from "./common/pipe/pipe.module";
 import {REPORTER_PROVIDER} from "./common/reporter";
-
 
 
 @NgModule({
@@ -92,7 +90,6 @@ import {REPORTER_PROVIDER} from "./common/reporter";
     NzPaginationModule,
     NzResultModule,
     NzTableModule,
-    PipeModule,
   ],
   providers: [
     CONFIG_PROVIDER,

@@ -26,7 +26,6 @@ export interface TableGridColumn<T> {
   filter?: NzTableFilterFn<T> | boolean | null
   sort?: boolean
   transformer?: TableGridTransformer
-  transformerKind?: string
 }
 
 export declare interface TableGridTransformer {
@@ -35,5 +34,5 @@ export declare interface TableGridTransformer {
 
 export declare interface TableGridRowOperation {
   name: string
-  onClickEvent(input: any): void
+  onClickEvent: TableGridTransformer
 }

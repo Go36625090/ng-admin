@@ -1,9 +1,11 @@
-import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Inject, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {API_SERVICE, APIService} from "../../../common/api";
 import {UserInfo} from "../../../models/user.info";
-import {TableGridColumn, TableGridRowOperation} from "../../../common/table.grid/models";
+import {TableGridColumn, TableGridRowOperation, TableGridTransformer} from "../../../common/table.grid/models";
 import {TableGridComponent} from "../../../common/table.grid/table.grid.component";
 import {NzTableQueryParams} from "ng-zorro-antd/table";
+import {NzModalComponent} from "ng-zorro-antd/modal";
+import {NgTemplateOutlet} from "@angular/common";
 
 @Component({
   selector: 'app-custom',
@@ -13,31 +15,67 @@ import {NzTableQueryParams} from "ng-zorro-antd/table";
 export class CustomComponent implements OnInit {
   columns: TableGridColumn<any>[];
   operations: TableGridRowOperation[];
-  data: any[];
+
+  @ViewChild('editModal') editModal: NzModalComponent | undefined;
+  @ViewChild('detailModal') detailModal: NzModalComponent | undefined;
+
   @ViewChild(TableGridComponent) table: TableGridComponent<any> | undefined;
+  row: any = {};
   constructor( @Inject(API_SERVICE)private api:APIService) {
-    this.data = [];
+
     this.columns = [
       {name: 'id', kind: 'id',},
       {name: 'name', kind: 'name',sort: true},
-      {name: 'pattern', kind: 'pattern', filter: true}
+      {name: 'pattern', kind: 'pattern', filter: true, transformer:{
+        apply(input: any): any {
+          return '<a href="custom.component.ts">'+input.pattern+'</a>'
+        }
+      }}
     ];
     this.operations = [
       {
         name: '编辑',
-        onClickEvent: this.clickDetail,
+        onClickEvent: {
+          apply: (row: any)=>{
+            this.clickEditor(row)
+          },
+        }
       },
       {
         name: '详情',
-        onClickEvent: this.clickDetail,
+        onClickEvent: {
+          apply: (row: any)=>{
+            this.clickDetail(row)
+          },
+        }
       },
-    ]
+    ];
   }
-  clickDetail(row: any){
-    console.log(row);
+
+  clickDetail(row: any): any{
+    this.row = row;
+    this.detailModal?.open()
   }
+
+  clickEditor(row: any): any{
+    this.row = row;
+    this.editModal?.open()
+  }
+
   ngOnInit(): void {
 
+  }
+  handleOk(): void {
+    console.log('Button ok clicked!');
+    this.detailModal?.close()
+    this.editModal?.close()
+    this.row = undefined;
+  }
+
+  handleCancel(): void {
+    this.detailModal?.close()
+    this.editModal?.close()
+    this.row = undefined;
   }
 
   onQueryParamsChange(params: NzTableQueryParams): void {

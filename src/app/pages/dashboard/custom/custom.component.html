@@ -7,3 +7,20 @@
                 [operations]="operations"
 >
 </app-table-grid>
+
+<nz-modal  #editModal
+           nzTitle="The editor Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <ng-container *nzModalContent>
+    <p>Content one</p>
+    <p>{{row|json}}</p>
+  </ng-container>
+</nz-modal>
+
+<nz-modal  #detailModal
+           nzTitle="The detail Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <ng-container *nzModalContent>
+    <p>Content one</p>
+    <p>{{row|json}}</p>
+    <p>Content two</p>
+  </ng-container>
+</nz-modal>

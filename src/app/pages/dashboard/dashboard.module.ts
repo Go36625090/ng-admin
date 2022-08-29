@@ -7,6 +7,7 @@ import { CustomComponent } from './custom/custom.component';
 import {NzTableModule} from "ng-zorro-antd/table";
 import {TableGridModule} from "../../common/table.grid/table.grid.module";
 import {NzTagModule} from "ng-zorro-antd/tag";
+import {NzModalModule} from "ng-zorro-antd/modal";
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import {NzTagModule} from "ng-zorro-antd/tag";
     NzTableModule,
     TableGridModule,
     NzTagModule,
+    NzModalModule,
   ],
   exports: [
   ]

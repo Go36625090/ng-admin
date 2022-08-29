@@ -40,7 +40,7 @@
     <td *ngIf="operations">
       <div class="operations">
         <span *ngFor="let op of operations">
-          <a (click)="op.onClickEvent(row)">{{op.name}}</a>
+          <a (click)="op.onClickEvent.apply(row)">{{op.name}}</a>
         </span>
       </div>
     </td>
