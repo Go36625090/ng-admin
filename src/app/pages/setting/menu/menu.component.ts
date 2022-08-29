@@ -6,6 +6,7 @@ import {NzTableQueryParams} from "ng-zorro-antd/table";
 import {UserInfo} from "../../../models/user.info";
 import {MenuEditComponent} from "./menu.edit.component";
 import {TableRowOperation} from "../../../common/table.grid/table.row.operation";
+import {Menu} from "../../../models/menu";
 
 @Component({
   selector: 'app-menu',
@@ -15,7 +16,7 @@ import {TableRowOperation} from "../../../common/table.grid/table.row.operation"
 export class MenuComponent implements OnInit {
 
   columns: TableGridColumn<any>[];
-  operations: TableRowOperation[];
+  operations: TableRowOperation<Menu>[];
 
   @ViewChild(TableGridComponent) table: TableGridComponent<any> | undefined;
 
@@ -41,23 +42,9 @@ export class MenuComponent implements OnInit {
             this.clickEditor(row)
           },
         },
-      },
-      // {
-      //   operation: '详情',
-      //   onClickEvent: {
-      //     apply: (row: any)=>{
-      //       this.clickDetail(row)
-      //     },
-      //   }
-      // },
+      }
     ];
   }
-
-  // clickDetail(row: any): any{
-  //   // this.row = row;
-  //   // this.editModal?.show()
-  //   // this.rowDirective?.loadContentComponent(null)
-  // }
 
   clickEditor(row: any): any{
     console.log(row, this.table);

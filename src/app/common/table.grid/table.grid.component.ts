@@ -20,7 +20,7 @@ export class TableGridComponent<T> implements OnInit {
 
   data: any[];
   @Input() columns: TableGridColumn<T>[];
-  @Input() operations: TableRowOperation[] | undefined;
+  @Input() operations: TableRowOperation<T>[] | undefined;
   pagination: Pagination;
   onDataChangeEvent$: EventEmitter<TableData> = new EventEmitter<TableData>();
   @Output() onQueryParamsChangeEvent$: EventEmitter<NzTableQueryParams> = new EventEmitter<NzTableQueryParams>();
@@ -77,7 +77,7 @@ export class TableGridComponent<T> implements OnInit {
     }
   }
 
-  createModal(op: TableRowOperation, data: any){
+  createRowOperationModal(op: TableRowOperation<T>, data: any){
     const modal = this.modal.create({
       nzTitle: op.title,
       nzContent: op.template,
@@ -85,16 +85,22 @@ export class TableGridComponent<T> implements OnInit {
       nzComponentParams: {
         data: data
       },
+
+    });
+    const instance = modal.getContentComponent();
+
+    modal.updateConfig({
       nzFooter: [
         {
           label: $localize `confirm`,
           onClick: componentInstance => {
-            op.onClickEvent.apply(data);
+            op.onClickEvent.apply(instance.result);
             modal.destroy();
           }
         }
       ]
-    });
+    })
+
     modal.afterClose.subscribe(result => modal.destroy());
   }
 
