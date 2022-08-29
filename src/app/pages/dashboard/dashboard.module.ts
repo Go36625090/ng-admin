@@ -8,6 +8,7 @@ import {NzTableModule} from "ng-zorro-antd/table";
 import {TableGridModule} from "../../common/table.grid/table.grid.module";
 import {NzTagModule} from "ng-zorro-antd/tag";
 import {NzModalModule} from "ng-zorro-antd/modal";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {NzModalModule} from "ng-zorro-antd/modal";
     TableGridModule,
     NzTagModule,
     NzModalModule,
+    FormsModule,
   ],
   exports: [
   ]

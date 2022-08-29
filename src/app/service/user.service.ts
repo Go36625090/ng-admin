@@ -1,6 +1,5 @@
 import {Inject, Injectable} from '@angular/core';
 import {TokenService} from "./token.service";
-import {LOGIN_ENDPOINT} from "../consts";
 import {LogService} from "../common/log/log.service";
 import {API_SERVICE, APIService} from "../common/api";
 import {Log} from "../common/log";
@@ -25,7 +24,6 @@ export class UserService {
     @Inject(API_SERVICE) private api: APIService,
     private tokenService: TokenService,
     private cache: CacheService,
-    @Inject(LOGIN_ENDPOINT) private loginUrl: string,
     @Inject(REPORTER) private reporter: Reporter,
     private logging: LogService) {
     this.log = this.logging.bind(this);
@@ -37,7 +35,7 @@ export class UserService {
   }
 
   login(body: any) {
-    this.api.post<UserInfo>({pattern: 'user.account.login'}, body)
+    this.api.post<UserInfo>({pattern: Methods.LOGIN_METHOD}, body)
       .subscribe({
         next: (v: API.response<UserInfo>) => {
           this.user = v.content;
@@ -46,7 +44,7 @@ export class UserService {
           location.replace(Urls.HOME_URL);
         },
         error: (err: { message: any; }) => {
-          this.reporter.write(Level.ERROR, 'user.account.login', err.message);
+          this.reporter.write(Level.ERROR, Methods.LOGIN_METHOD, err.message);
           this.cache.clear();
         }
       })

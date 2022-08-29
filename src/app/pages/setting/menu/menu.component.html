@@ -1,1 +1,10 @@
-<app-table-grid></app-table-grid>
+<app-table-grid [columns]="columns"
+                (onQueryParamsChangeEvent$)="onQueryParamsChange($event)"
+                [enableSelect]="true"
+                (onSelectItemEvent$)="onItemSelected($event)"
+                (onDeselectItemEvent$)="onItemDeselected($event)"
+                (onSelectAllItemEvent$)="onAllItemSelected($event)"
+                [operations]="operations"
+>
+</app-table-grid>
+

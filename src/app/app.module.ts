@@ -26,7 +26,6 @@ import { ContentComponent } from './pages/content/content.component';
 
 import {
   HTTP_INTERCEPTOR_PROVIDERS,
-  LOGIN_URL_PROVIDER
 } from "./app.provider";
 
 import {CONFIG_PROVIDER, NZ_CONFIG_PROVIDER} from "./app.config";
@@ -94,7 +93,6 @@ import {REPORTER_PROVIDER} from "./common/reporter";
   providers: [
     CONFIG_PROVIDER,
     API_SERVICE_PROVIDER,
-    LOGIN_URL_PROVIDER,
     HTTP_INTERCEPTOR_PROVIDERS,
     NZ_CONFIG_PROVIDER,
     LOCALE_PROVIDER,

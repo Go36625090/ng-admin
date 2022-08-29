@@ -30,9 +30,5 @@ export interface TableGridColumn<T> {
 
 export declare interface TableGridTransformer {
   apply(input: any): any;
-}
 
-export declare interface TableGridRowOperation {
-  name: string
-  onClickEvent: TableGridTransformer
 }

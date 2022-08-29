@@ -1,3 +1,3 @@
-enum Method {
-  login = "user.account.login"
+enum Methods {
+  LOGIN_METHOD = "user.account.login"
 }

@@ -10,6 +10,14 @@
           <context context-type="linenumber">28</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="7977761628594328784" datatype="html">
+        <source>confirm</source>
+        <target>确认</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/common/table.grid/table.grid.component.ts</context>
+          <context context-type="linenumber">90</context>
+        </context-group>
+      </trans-unit>
        <trans-unit id="5866254605255506989" datatype="html">
             <source>English</source>
             <target>英语</target>
@@ -132,6 +140,22 @@
           <context context-type="linenumber">15</context>
         </context-group>
         <note priority="1" from="description">some description</note>
+      </trans-unit>
+      <trans-unit id="3325180562659478330" datatype="html">
+        <source>name</source>
+        <target>名称</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/setting/menu/menu.component.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7676249558622794260" datatype="html">
+        <source>pattern</source>
+        <target>路径</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/setting/menu/menu.component.ts</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
       </trans-unit>
     </body>
   </file>

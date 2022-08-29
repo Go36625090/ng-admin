@@ -1,6 +1,15 @@
-import {Component, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewContainerRef
+} from '@angular/core';
 import {NzTableQueryParams} from "ng-zorro-antd/table";
-import {DefaultPagination, Pagination, TableData, TableGridColumn, TableGridRowOperation} from "./models";
+import {DefaultPagination, Pagination, TableData, TableGridColumn} from "./models";
+import {NzModalService} from "ng-zorro-antd/modal";
+import {TableRowOperation} from "./table.row.operation";
 
 @Component({
   selector: 'app-table-grid',
@@ -9,10 +18,9 @@ import {DefaultPagination, Pagination, TableData, TableGridColumn, TableGridRowO
 })
 export class TableGridComponent<T> implements OnInit {
 
-
   data: any[];
   @Input() columns: TableGridColumn<T>[];
-  @Input() operations: TableGridRowOperation[] | undefined;
+  @Input() operations: TableRowOperation[] | undefined;
   pagination: Pagination;
   onDataChangeEvent$: EventEmitter<TableData> = new EventEmitter<TableData>();
   @Output() onQueryParamsChangeEvent$: EventEmitter<NzTableQueryParams> = new EventEmitter<NzTableQueryParams>();
@@ -28,7 +36,7 @@ export class TableGridComponent<T> implements OnInit {
   indeterminate = false;
   setOfCheckedId = new Set<any>();
 
-  constructor() {
+  constructor(private modal: NzModalService, private viewContainerRef: ViewContainerRef) {
     this.data = [];
     this.columns = [];
     this.pagination = DefaultPagination()
@@ -67,6 +75,27 @@ export class TableGridComponent<T> implements OnInit {
       this.onDeselectItemEvent$.emit(item);
       this.setOfCheckedId.delete(item.id);
     }
-
   }
+
+  createModal(op: TableRowOperation, data: any){
+    const modal = this.modal.create({
+      nzTitle: op.title,
+      nzContent: op.template,
+      nzViewContainerRef: this.viewContainerRef,
+      nzComponentParams: {
+        data: data
+      },
+      nzFooter: [
+        {
+          label: $localize `confirm`,
+          onClick: componentInstance => {
+            op.onClickEvent.apply(data);
+            modal.destroy();
+          }
+        }
+      ]
+    });
+    modal.afterClose.subscribe(result => modal.destroy());
+  }
+
 }

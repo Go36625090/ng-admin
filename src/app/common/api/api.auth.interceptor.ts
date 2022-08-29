@@ -6,13 +6,12 @@ import {
 import {Observable, tap} from "rxjs";
 import {TokenService} from "../../service/token.service";
 import {LogService} from "../log/log.service";
-import {LOGIN_ENDPOINT} from "../../consts";
 import {API} from "./types";
+import {Urls} from "../../consts/urls";
 
 @Injectable()
 export class ApiAuthInterceptor implements HttpInterceptor{
-  constructor(private auth: TokenService, private logging: LogService,
-              @Inject(LOGIN_ENDPOINT) private loginUrl: string ) {
+  constructor(private auth: TokenService, private logging: LogService ) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -35,7 +34,7 @@ export class ApiAuthInterceptor implements HttpInterceptor{
               const response: HttpResponse<API.response<any>> = event;
               if (response.status === 401) {
                 this.auth.removeToken();
-                location.replace(this.loginUrl);
+                location.replace(Urls.LOGIN_URL);
               }
             }
             return event;

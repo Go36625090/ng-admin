@@ -40,7 +40,7 @@
     <td *ngIf="operations">
       <div class="operations">
         <span *ngFor="let op of operations">
-          <a (click)="op.onClickEvent.apply(row)">{{op.name}}</a>
+          <a (click)="createModal(op, row)">{{op.title}}</a>
         </span>
       </div>
     </td>
