@@ -1,5 +1,4 @@
 import {NzTableFilterFn} from "ng-zorro-antd/table/src/table.types";
-import {EventEmitter, Output} from "@angular/core";
 
 export interface Pagination {
   size: number
@@ -26,15 +25,15 @@ export interface TableGridColumn<T> {
   hidden?: boolean
   filter?: NzTableFilterFn<T> | boolean | null
   sort?: boolean
-  transformer?: TableGridColumnTransformer
+  transformer?: TableGridTransformer
   transformerKind?: string
 }
 
-export declare interface TableGridColumnTransformer {
+export declare interface TableGridTransformer {
   apply(input: any): any;
 }
 
 export declare interface TableGridRowOperation {
-  onEvent(input: any): any
-  apply(input: any): any
+  name: string
+  onClickEvent(input: any): void
 }

@@ -24,11 +24,13 @@ export class CustomComponent implements OnInit {
     ];
     this.operations = [
       {
-        onEvent: this.clickDetail,
-        apply(input: any): any {
-          return '<a">详情</a>'
-        }
-      }
+        name: '编辑',
+        onClickEvent: this.clickDetail,
+      },
+      {
+        name: '详情',
+        onClickEvent: this.clickDetail,
+      },
     ]
   }
   clickDetail(row: any){
@@ -39,8 +41,6 @@ export class CustomComponent implements OnInit {
   }
 
   onQueryParamsChange(params: NzTableQueryParams): void {
-    console.log(params);
-
     this.api.post<UserInfo>({pattern: 'user.account.login'}, {}).subscribe(
       value => this.table?.onDataChangeEvent$.next({
         content: value.content.menus.flat(),
