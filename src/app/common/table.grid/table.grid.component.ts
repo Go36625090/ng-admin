@@ -1,24 +1,24 @@
 import {
   Component,
   EventEmitter,
-  Input,
+  Input, OnChanges,
   OnInit,
-  Output,
+  Output, SimpleChanges,
   ViewContainerRef
 } from '@angular/core';
 import {NzTableQueryParams} from "ng-zorro-antd/table";
 import {DefaultPagination, Pagination, TableData, TableGridColumn} from "./models";
 import {NzModalService} from "ng-zorro-antd/modal";
-import {TableRowOperation} from "./table.row.operation";
+import {RowOperation, TableRowOperation} from "./table.row.operation";
 
 @Component({
   selector: 'app-table-grid',
   templateUrl: './table.grid.component.html',
   styleUrls: ['./table.grid.component.css'],
 })
-export class TableGridComponent<T> implements OnInit {
+export class TableGridComponent<T> implements OnInit{
 
-  data: any[];
+  data: any[] = [];
   @Input() columns: TableGridColumn<T>[];
   @Input() operations: TableRowOperation<T>[] | undefined;
   pagination: Pagination;
@@ -52,7 +52,7 @@ export class TableGridComponent<T> implements OnInit {
   }
 
   onQueryParamsChange(params: NzTableQueryParams): void {
-    this.loading = true;
+    // this.loading = true;
     this.onQueryParamsChangeEvent$.emit(params);
   }
 
@@ -87,7 +87,7 @@ export class TableGridComponent<T> implements OnInit {
       },
 
     });
-    const instance = modal.getContentComponent();
+    const instance: RowOperation<any> = modal.getContentComponent();
 
     modal.updateConfig({
       nzFooter: [
@@ -103,5 +103,6 @@ export class TableGridComponent<T> implements OnInit {
 
     modal.afterClose.subscribe(result => modal.destroy());
   }
+
 
 }

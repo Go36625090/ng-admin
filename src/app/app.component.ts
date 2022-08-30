@@ -4,7 +4,7 @@ import {
   ApplicationInitStatus,
   Component,
   Inject,
-  OnInit,
+  OnInit, SkipSelf,
   ViewChild
 } from '@angular/core';
 import {ThemeService} from "./service/theme.service";
@@ -18,6 +18,7 @@ import {AppContainerDirective} from "./app.container.directive";
 import {AppContainerComponent} from "./app.container.component";
 import {Urls} from "./consts/urls";
 import {AppBlankComponent} from "./app.blank.component";
+import {RouterService} from "./service/router.service";
 
 @Component({
   selector: 'app-root',
@@ -30,20 +31,18 @@ export class AppComponent implements OnInit, AfterViewInit{
   @ViewChild(AppContainerDirective, {static: true}) appContainerDirective!: AppContainerDirective;
 
   constructor(
-    @Inject(APP_INITIALIZER) public appInit: ApplicationInitStatus,
-    private themeService: ThemeService,
-    private i18n: NzI18nService,
-    private iconService: NzIconService,
-    private userService: UserService,
-    private logging: LogService,
+    private rs: RouterService,
     private tokenService: TokenService,
     public router: Router) {
-    console.log('init app')
+
+    /**
+     * 判断用户是否登录，然后跳转到登录页
+     */
     this.router.events.subscribe(evt => {
       if(evt instanceof NavigationEnd){
-        if(!location.pathname.endsWith(Urls.LOGIN_URL) && !this.tokenService.getToken()){
+        if(!rs.isLoginRouter() && !this.tokenService.getToken()){
           this.loadAppBlankComponent()
-          location.replace(Urls.LOGIN_URL);
+          rs.jumpToLogin();
           return;
         }else {
           if(!this.initialized)
@@ -51,7 +50,6 @@ export class AppComponent implements OnInit, AfterViewInit{
           this.initialized = true;
         }
       }
-
     })
   }
 
@@ -62,18 +60,15 @@ export class AppComponent implements OnInit, AfterViewInit{
   }
 
   loadContentComponent(){
-    console.log('loadContentComponent')
     const viewContainerRef = this.appContainerDirective.viewContainerRef;
     viewContainerRef.clear();
     viewContainerRef.createComponent<AppContainerComponent>(AppContainerComponent);
   }
 
   ngOnInit(): void {
-    console.log('init ngOnInit')
   }
 
   ngAfterViewInit(): void {
-    console.log('init ngAfterViewInit')
   }
 
 

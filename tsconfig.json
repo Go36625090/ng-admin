@@ -18,7 +18,7 @@
     "paths": {
       "nt.table.grid": [
         "dist/nt.table.grid"
-      ]
+      ],
     },
     "importHelpers": true,
     "target": "es2020",

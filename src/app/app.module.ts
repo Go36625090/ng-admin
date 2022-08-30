@@ -30,7 +30,7 @@ import {
 
 import {CONFIG_PROVIDER, NZ_CONFIG_PROVIDER} from "./app.config";
 import {LOCALE_PROVIDER} from "./app.locale";
-import {CommonModule} from "@angular/common";
+import {APP_BASE_HREF, CommonModule} from "@angular/common";
 import {LOG_LEVEL_PROVIDER} from "./common/log";
 import {API_SERVICE_PROVIDER, MockWebApiModule} from "./common/api";
 import { HomeComponent } from './pages/home/home.component';

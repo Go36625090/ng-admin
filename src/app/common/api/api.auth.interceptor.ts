@@ -8,10 +8,11 @@ import {TokenService} from "../../service/token.service";
 import {LogService} from "../log/log.service";
 import {API} from "./types";
 import {Urls} from "../../consts/urls";
+import {RouterService} from "../../service/router.service";
 
 @Injectable()
 export class ApiAuthInterceptor implements HttpInterceptor{
-  constructor(private auth: TokenService, private logging: LogService ) {
+  constructor(private auth: TokenService, private rs: RouterService ) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -34,7 +35,7 @@ export class ApiAuthInterceptor implements HttpInterceptor{
               const response: HttpResponse<API.response<any>> = event;
               if (response.status === 401) {
                 this.auth.removeToken();
-                location.replace(Urls.LOGIN_URL);
+                this.rs.jumpToLogin();
               }
             }
             return event;

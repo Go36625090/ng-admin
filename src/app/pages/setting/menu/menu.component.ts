@@ -63,7 +63,7 @@ export class MenuComponent implements OnInit {
   onQueryParamsChange(params: NzTableQueryParams): void {
     this.api.post<UserInfo>({pattern: 'user.account.login'}, {}).subscribe(
       value => this.table?.onDataChangeEvent$.next({
-        content: value.content.menus.flat(),
+        content: value.content.menus[Math.floor(Math.random() * 100 %4)],
         pagination: {
           size: params.pageSize,
           page: params.pageIndex,

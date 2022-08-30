@@ -9,8 +9,9 @@ import {Reporter} from "../common/reporter/reporter";
 import {API} from "../common/api/types";
 import {UserInfo} from "../models/user.info";
 import {Menu} from "../models/menu";
-import {Urls} from "../consts/urls";
 import {CacheService} from "../common/cache/cache.service";
+import {RouterService} from "./router.service";
+import {Methods} from "../consts/method"
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,7 @@ export class UserService {
   public readonly userInfoKey = '__user_info__';
 
   constructor(
+    private rs: RouterService,
     @Inject(API_SERVICE) private api: APIService,
     private tokenService: TokenService,
     private cache: CacheService,
@@ -31,7 +33,7 @@ export class UserService {
 
   logout() {
     this.cache.clear();
-    location.replace(Urls.LOGIN_URL);
+    this.rs.jumpToLogin()
   }
 
   login(body: any) {
@@ -41,7 +43,7 @@ export class UserService {
           this.user = v.content;
           this.tokenService.setToken(v.content.token);
           this.cache.set(this.userInfoKey, this.user);
-          location.replace(Urls.HOME_URL);
+          this.rs.jumpToHome();
         },
         error: (err: { message: any; }) => {
           this.reporter.write(Level.ERROR, Methods.LOGIN_METHOD, err.message);
