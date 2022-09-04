@@ -13,7 +13,14 @@ import {AppConfig} from "../../app.config";
   deps: [AppConfig]
 })
 export class LogService {
-  constructor(@Inject(LOG_LEVEL)private level: Level) {}
+  production: boolean;
+  constructor(@Inject(LOG_LEVEL)private level: Level) {
+    this.production = environment.production
+    //url打开调试开关、优先级高于打包时候的环境设置
+    if(location.search.indexOf('debug=1') > -1){
+      this.production = false;
+    }
+  }
 
   bind(target: any): Log{
     const log = new LogService(this.level);
@@ -77,32 +84,32 @@ export class LogService {
 
   _info(...data: any[]): any{
     const other_level = this.level == Level.WARN || this.level == Level.ERROR;
-    return environment.production || other_level ? ()=>()=>{}: console.info.bind(console.info, ...data);
+    return this.production || other_level ? ()=>()=>{}: console.info.bind(console.info, ...data);
   }
 
   _error(...data: any[]): any{
-    return environment.production? ()=>()=>{}: console.error.bind(console, ...data);
+    return this.production? ()=>()=>{}: console.error.bind(console, ...data);
   }
 
   _debug(...data: any[]): any{
-    return environment.production ||
+    return this.production ||
             this.level != Level.DEBUG? ()=>()=>{} :
               console.debug.bind(console, ...data);
   }
 
   _trace(...data: any[]): any{
-    return environment.production||
+    return this.production||
             this.level != Level.TRACE? ()=>()=>{} :
               console.trace.bind(console, ...data);
   }
 
   _warn(...data: any[]): any{
-    return environment.production || this.level == Level.ERROR?
+    return this.production || this.level == Level.ERROR?
             ()=>()=>{} : console.warn.bind(console, ...data);
   }
 
   _any(...data: any[]): any{
-    return environment.production? ()=>()=>{} : console.info.bind(console, ...data);
+    return this.production? ()=>()=>{} : console.info.bind(console, ...data);
   }
 }
 

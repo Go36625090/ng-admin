@@ -46,6 +46,9 @@ import {NzPaginationModule} from "ng-zorro-antd/pagination";
 import {NzResultModule} from "ng-zorro-antd/result";
 import {NzTableModule} from "ng-zorro-antd/table";
 import {REPORTER_PROVIDER} from "./common/reporter";
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import {NzMessageModule} from "ng-zorro-antd/message";
 
 
 @NgModule({
@@ -89,6 +92,13 @@ import {REPORTER_PROVIDER} from "./common/reporter";
     NzPaginationModule,
     NzResultModule,
     NzTableModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
+    NzMessageModule
   ],
   providers: [
     CONFIG_PROVIDER,

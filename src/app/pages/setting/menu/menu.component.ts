@@ -7,6 +7,7 @@ import {UserInfo} from "../../../models/user.info";
 import {MenuEditComponent} from "./menu.edit.component";
 import {TableRowOperation} from "../../../common/table.grid/table.row.operation";
 import {Menu} from "../../../models/menu";
+import {Methods} from "../../../consts/method";
 
 @Component({
   selector: 'app-menu',
@@ -61,13 +62,13 @@ export class MenuComponent implements OnInit {
   }
 
   onQueryParamsChange(params: NzTableQueryParams): void {
-    this.api.post<UserInfo>({pattern: 'user.account.login'}, {}).subscribe(
+    this.api.post<Menu[][]>({method: Methods.MENUS}, {}).subscribe(
       value => this.table?.onDataChangeEvent$.next({
-        content: value.content.menus[Math.floor(Math.random() * 100 %4)],
+        content: value.content[Math.floor(Math.random() * 100 %4)],
         pagination: {
           size: params.pageSize,
           page: params.pageIndex,
-          total: value.pagination?.total||value.content.menus.flat().length,
+          total: value.pagination?.total||value.content.flat().length,
         }
       })
     );

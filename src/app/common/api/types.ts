@@ -3,8 +3,6 @@ export namespace API{
   export interface endpoint {
     //方法: user.account.login
     method?: string
-    //路径: /user/account/login
-    pattern?: string
   }
 
   export type params = {

@@ -12,6 +12,7 @@ import {Menu} from "../models/menu";
 import {CacheService} from "../common/cache/cache.service";
 import {RouterService} from "./router.service";
 import {Methods} from "../consts/method"
+import {NzMessageService} from "ng-zorro-antd/message";
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,7 @@ export class UserService {
 
   constructor(
     private rs: RouterService,
+    private message: NzMessageService,
     @Inject(API_SERVICE) private api: APIService,
     private tokenService: TokenService,
     private cache: CacheService,
@@ -37,16 +39,20 @@ export class UserService {
   }
 
   login(body: any) {
-    this.api.post<UserInfo>({pattern: Methods.LOGIN_METHOD}, body)
+    this.api.post<UserInfo>({method: Methods.LOGIN}, body)
       .subscribe({
         next: (v: API.response<UserInfo>) => {
+          if (v.code != 0){
+            this.reporter.write(Level.ERROR, Methods.LOGIN, v.message);
+            return;
+          }
           this.user = v.content;
           this.tokenService.setToken(v.content.token);
           this.cache.set(this.userInfoKey, this.user);
           this.rs.jumpToHome();
         },
         error: (err: { message: any; }) => {
-          this.reporter.write(Level.ERROR, Methods.LOGIN_METHOD, err.message);
+          this.reporter.write(Level.ERROR, Methods.LOGIN, err.message);
           this.cache.clear();
         }
       })

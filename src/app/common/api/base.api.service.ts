@@ -5,12 +5,13 @@ import {APIService} from "./index";
 import {API} from "./types";
 
 import {catchError, map, Observable} from "rxjs";
+import {RouterService} from "../../service/router.service";
 
 export abstract class BaseApiService implements APIService{
 
   protected readonly api: string
 
-  protected constructor(protected http: HttpClient) {
+  protected constructor(protected http: HttpClient, protected rs: RouterService) {
     this.api = environment.api;
   }
 
@@ -24,6 +25,10 @@ export abstract class BaseApiService implements APIService{
   }
 
   private handleError(error: HttpErrorResponse, caught: Observable<any>): Observable<any> {
+    if(error.status == 401){
+      // this.rs.jumpToLogin();
+    }
+
     const message = `Backend returned code ${error.status}, `+ `url was: ${error.url}`;
     const response = {code: 255, message: message};
     return new Observable(subscriber => subscriber.error(response));

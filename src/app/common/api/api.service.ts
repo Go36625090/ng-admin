@@ -3,11 +3,12 @@ import {HttpClient} from "@angular/common/http";
 
 import {API} from "./types";
 import {BaseApiService} from "./base.api.service";
+import {RouterService} from "../../service/router.service";
 
 @Injectable()
 export class ApiService extends BaseApiService{
-  constructor(protected override http: HttpClient) {
-      super(http);
+  constructor(protected override http: HttpClient, protected override rs: RouterService) {
+      super(http, rs);
   }
 
   /**
@@ -15,9 +16,6 @@ export class ApiService extends BaseApiService{
    * @param e
    */
   pathParse(e: API.endpoint): string {
-    if(e.pattern){
-      return this.api + e.pattern;
-    }
     return this.api;
   }
 
@@ -28,8 +26,8 @@ export class ApiService extends BaseApiService{
    */
   bodyParse(e: API.endpoint, body: any): API.request {
     return {
-      data: body,
-      sign: "",
+      data: JSON.stringify(body),
+      sign: "00000000000000000000000000000000",
       sign_type: "MD5",
       timestamp: Math.floor(Date.now()/1000),
       version: "1.0.0",

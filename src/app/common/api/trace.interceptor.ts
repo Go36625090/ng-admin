@@ -26,27 +26,20 @@ export class TraceInterceptor implements HttpInterceptor {
       .pipe(
         tap(
           {
-            next: (value) => {
-              okCode = value instanceof HttpResponse<any> ? value.status : 0;
-              this.log.debug(`${req.method} "${req.urlWithParams}"`, 'response: ', value);
-              this.response = value;
-              return value;
-            },
-            error: err => (errCode = err.status, this.log.error(err))
+            next: (value) => (this.response = value, value),
+            error: err => (this.response = err, err)
           }
         ),
         finalize(() => {
           if(0 == errCode){
             const elapsed = Date.now() - started;
-            const msg = `${req.method} "${req.urlWithParams}" ${okCode} in ${elapsed} ms.`;
-            this.log.info(msg, this.response);
-
+            const msg = `${req.method} "${req.urlWithParams}" in ${elapsed} ms.`;
+            this.log.info(req.headers, this.response, msg);
           }else {
             const elapsed = Date.now() - started;
-            const msg = `${req.method} "${req.urlWithParams}" ${errCode} in ${elapsed} ms.`;
-            this.log.error(msg);
+            const msg = `${req.method} "${req.urlWithParams}" in ${elapsed} ms.`;
+            this.log.error(req.headers, this.response, msg);
           }
-
         })
       );
   }

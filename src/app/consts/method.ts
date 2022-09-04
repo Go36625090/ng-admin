@@ -1,3 +1,4 @@
 export enum Methods {
-  LOGIN_METHOD = "user.account.login"
+  LOGIN = "account.user.login",
+  MENUS = "account.user.menus"
 }

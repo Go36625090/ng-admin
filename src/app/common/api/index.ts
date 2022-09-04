@@ -3,11 +3,11 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {ApiService} from "./api.service";
-import {MockApiService} from "./mock.api.service";
 import {HttpClientInMemoryWebApiModule} from "angular-in-memory-web-api";
-import {InMemoryDataService} from "./in.memory.data.service";
+import {MockDataService} from "./mock.data.service";
 
 import {API} from "./types";
+import {RouterService} from "../../service/router.service";
 
 export interface APIService {
   get<T>(e: API.endpoint, params?: API.params, headers?: HttpHeaders): Observable<API.response<T>>;
@@ -27,13 +27,13 @@ export const API_SERVICE = new InjectionToken<APIService>('API_SERVICE');
 
 export const API_SERVICE_PROVIDER = {
   provide: API_SERVICE,
-  useClass: environment.production ? ApiService : MockApiService,
-  deps: [HttpClient]
+  useClass: ApiService,
+  deps: [HttpClient, RouterService]
 };
 
 export const MockWebApiModule = environment.production ?
   [] : HttpClientInMemoryWebApiModule.forRoot(
-    InMemoryDataService, {
+    MockDataService, {
       dataEncapsulation: true,
       apiBase: environment.api,
       passThruUnknownUrl: true,

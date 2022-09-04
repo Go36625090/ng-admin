@@ -9,11 +9,12 @@ import {
 import {Observable} from "rxjs";
 import {API} from "./types";
 import {menus} from "./mock-data/menu";
+import {Methods} from "../../consts/method";
 
 @Injectable({
   providedIn: 'root'
 })
-export class InMemoryDataService implements InMemoryDbService {
+export class MockDataService implements InMemoryDbService {
 
   constructor() {
   }
@@ -53,18 +54,31 @@ export class InMemoryDataService implements InMemoryDbService {
   }
 
   post(reqInfo: RequestInfo) {
-    let body = reqInfo.utils.getJsonBody(reqInfo.req)
-    const isLoginFail = reqInfo.url == "user.account.login" && (body == null||body.username != 'admin');
-    const response: API.response<any> = {
-      code: 0, content: this.login, message: "", sign: "", timestamp: "", trace_id: ""
+    let body: API.request = reqInfo.utils.getJsonBody(reqInfo.req)
+    let isLoginFail = false;
 
+    const response: API.response<any> = {
+      code: 0, content: undefined, message: "", sign: "", timestamp: "", trace_id: ""
+    }
+
+    switch (body.method){
+      case Methods.LOGIN:
+        let data: {username?: undefined, password?: undefined} = JSON.parse(body.data);
+        isLoginFail =  data.username != 'admin';
+        response.code = isLoginFail? 4001: 0;
+        response.content = isLoginFail? undefined: this.login;
+        response.message = isLoginFail? "username must be admin": '';
+        break;
+      case Methods.MENUS:
+        response.content = this.login.menus;
+        break;
     }
 
     return reqInfo.utils.createResponse$(() => {
       const options: ResponseOptions =
         {
           body: response,
-          status: isLoginFail?STATUS.UNAUTHORIZED: STATUS.OK
+          status: isLoginFail? STATUS.UNAUTHORIZED: STATUS.OK
         }
       return this.finishOptions(options, reqInfo);
     });

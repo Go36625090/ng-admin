@@ -1,5 +1,5 @@
 export enum Urls{
-  HOME_URL = '/home',
-  LOGIN_URL = '/login'
+  HOME_URL = 'home',
+  LOGIN_URL = 'login'
 }
 
