@@ -1,5 +1,4 @@
-import {Inject, Injectable} from '@angular/core';
-import {APP_BASE_HREF} from "@angular/common";
+import {Injectable} from '@angular/core';
 import {Urls} from "../consts/urls";
 
 /**

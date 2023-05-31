@@ -1,11 +1,5 @@
 import {Injectable} from '@angular/core';
-import {
-  getStatusText,
-  InMemoryDbService,
-  RequestInfo,
-  ResponseOptions,
-  STATUS
-} from "angular-in-memory-web-api";
+import {getStatusText, InMemoryDbService, RequestInfo, ResponseOptions, STATUS} from "angular-in-memory-web-api";
 import {Observable} from "rxjs";
 import {API} from "./types";
 import {menus} from "./mock-data/menu";

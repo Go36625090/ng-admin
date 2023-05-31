@@ -2,10 +2,7 @@ import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
 import {UserService} from "../../service/user.service";
 import {UserInfo} from "../../models/user.info";
 import {Menu} from "../../models/menu";
-import {
-ResolveEnd,
-  Router
-} from "@angular/router";
+import {ResolveEnd, Router} from "@angular/router";
 
 @Component({
   selector: 'app-content',

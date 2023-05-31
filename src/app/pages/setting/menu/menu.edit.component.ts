@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {RowOperation, TableRowOperation} from "../../../common/table.grid/table.row.operation";
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {RowOperation} from "../../../common/table.grid/table.row.operation";
+import {UntypedFormBuilder, Validators} from "@angular/forms";
 import {Menu} from "../../../models/menu";
 
 @Component({

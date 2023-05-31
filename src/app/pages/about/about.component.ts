@@ -1,5 +1,4 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {UserService} from "../../service/user.service";
 import {API_SERVICE, APIService} from "../../common/api";
 
 @Component({

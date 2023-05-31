@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
-import { WelcomeRoutingModule } from './welcome-routing.module';
+import {WelcomeRoutingModule} from './welcome-routing.module';
 
-import { WelcomeComponent } from './welcome.component';
+import {WelcomeComponent} from './welcome.component';
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzFormDirective, NzFormModule} from "ng-zorro-antd/form";
 import {NzFormPatchModule} from "ng-zorro-antd/core/form";

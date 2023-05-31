@@ -1,5 +1,5 @@
 import {NZ_CONFIG, NzConfig} from "ng-zorro-antd/core/config";
-import {APP_INITIALIZER, ApplicationInitStatus, Injectable} from "@angular/core";
+import {APP_INITIALIZER, Injectable} from "@angular/core";
 import {environment} from "../environments/environment";
 import {HttpClient} from "@angular/common/http";
 

@@ -1,22 +1,8 @@
-import {
-  AfterViewInit,
-  APP_INITIALIZER,
-  ApplicationInitStatus,
-  Component,
-  Inject,
-  OnInit, SkipSelf,
-  ViewChild
-} from '@angular/core';
-import {ThemeService} from "./service/theme.service";
-import {NzI18nService} from 'ng-zorro-antd/i18n';
-import {NzIconService} from "ng-zorro-antd/icon";
-import {UserService} from "./service/user.service";
-import {LogService} from "./common/log/log.service";
-import {NavigationEnd,  Router} from "@angular/router";
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {NavigationEnd, Router} from "@angular/router";
 import {TokenService} from "./service/token.service";
 import {AppContainerDirective} from "./app.container.directive";
 import {AppContainerComponent} from "./app.container.component";
-import {Urls} from "./consts/urls";
 import {AppBlankComponent} from "./app.blank.component";
 import {RouterService} from "./service/router.service";
 

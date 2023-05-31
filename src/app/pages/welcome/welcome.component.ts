@@ -1,9 +1,10 @@
-import {Component, Inject, Injector, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
-import {APIService, API_SERVICE} from "../../common/api";
+import {API_SERVICE, APIService} from "../../common/api";
 import {LogService} from "../../common/log/log.service";
 import {Log} from "../../common/log";
 import {UserService} from "../../service/user.service";
+
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',

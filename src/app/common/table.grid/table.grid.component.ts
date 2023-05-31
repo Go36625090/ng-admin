@@ -1,11 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input, OnChanges,
-  OnInit,
-  Output, SimpleChanges,
-  ViewContainerRef
-} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewContainerRef} from '@angular/core';
 import {NzTableQueryParams} from "ng-zorro-antd/table";
 import {DefaultPagination, Pagination, TableData, TableGridColumn} from "./models";
 import {NzModalService} from "ng-zorro-antd/modal";

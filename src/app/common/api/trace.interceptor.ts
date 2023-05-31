@@ -1,9 +1,14 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
-  HttpRequest,
-  HttpHandler,
   HttpEvent,
-  HttpInterceptor, HttpResponse, HttpHeaderResponse, HttpSentEvent, HttpProgressEvent, HttpUserEvent
+  HttpHandler,
+  HttpHeaderResponse,
+  HttpInterceptor,
+  HttpProgressEvent,
+  HttpRequest,
+  HttpResponse,
+  HttpSentEvent,
+  HttpUserEvent
 } from '@angular/common/http';
 import {finalize, Observable, tap} from 'rxjs';
 import {Log} from "../log";

@@ -1,6 +1,7 @@
 import {HttpClient} from "@angular/common/http";
 import {AppConfig} from "../../app.config";
 import {Reporter} from "./reporter";
+
 export class HttpReporter implements Reporter{
   constructor(private http: HttpClient, private appConfig: AppConfig) {
   }

@@ -3,7 +3,6 @@ import {TableGridColumn} from "../../../common/table.grid/models";
 import {TableGridComponent} from "../../../common/table.grid/table.grid.component";
 import {API_SERVICE, APIService} from "../../../common/api";
 import {NzTableQueryParams} from "ng-zorro-antd/table";
-import {UserInfo} from "../../../models/user.info";
 import {MenuEditComponent} from "./menu.edit.component";
 import {TableRowOperation} from "../../../common/table.grid/table.row.operation";
 import {Menu} from "../../../models/menu";

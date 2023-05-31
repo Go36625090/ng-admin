@@ -21,33 +21,31 @@ import {AboutComponent} from './pages/about/about.component';
 import {NzDrawerModule} from "ng-zorro-antd/drawer";
 
 import {HeaderComponent} from "./pages/header/header.component";
-import { SiderComponent } from './pages/sider/sider.component';
-import { ContentComponent } from './pages/content/content.component';
+import {SiderComponent} from './pages/sider/sider.component';
+import {ContentComponent} from './pages/content/content.component';
 
-import {
-  HTTP_INTERCEPTOR_PROVIDERS,
-} from "./app.provider";
+import {HTTP_INTERCEPTOR_PROVIDERS,} from "./app.provider";
 
 import {CONFIG_PROVIDER, NZ_CONFIG_PROVIDER} from "./app.config";
 import {LOCALE_PROVIDER} from "./app.locale";
-import {APP_BASE_HREF, CommonModule} from "@angular/common";
+import {CommonModule} from "@angular/common";
 import {LOG_LEVEL_PROVIDER} from "./common/log";
 import {API_SERVICE_PROVIDER, MockWebApiModule} from "./common/api";
-import { HomeComponent } from './pages/home/home.component';
-import { PageNotFoundComponent } from './pages/errors/page.not.found.component';
+import {HomeComponent} from './pages/home/home.component';
+import {PageNotFoundComponent} from './pages/errors/page.not.found.component';
 import {IconModule} from "@ant-design/icons-angular";
 import {LoginComponent} from "./pages/user/login/login.component";
 import {NzInputModule} from "ng-zorro-antd/input";
 import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
-import { AppContainerDirective } from './app.container.directive';
-import { AppContainerComponent } from './app.container.component';
-import { AppBlankComponent } from './app.blank.component';
+import {AppContainerDirective} from './app.container.directive';
+import {AppContainerComponent} from './app.container.component';
+import {AppBlankComponent} from './app.blank.component';
 import {NzPaginationModule} from "ng-zorro-antd/pagination";
 import {NzResultModule} from "ng-zorro-antd/result";
 import {NzTableModule} from "ng-zorro-antd/table";
 import {REPORTER_PROVIDER} from "./common/reporter";
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {environment} from '../environments/environment';
 import {NzMessageModule} from "ng-zorro-antd/message";
 
 
